@@ -19,11 +19,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.bryan_souza.snack1a80c7adc6424c6bb2036f099bdf3a66"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Exemplo básico de aplicativo React Native e Expo - Easy Comp"
+    "description": "Exemplo básico de aplicativo React Native e Expo - Easy Comp",
+    "extra": {
+      "eas": {
+        "projectId": "0cfec21b-f156-4edd-a756-ebaf49908c24"
+      }
+    }
   }
 }
