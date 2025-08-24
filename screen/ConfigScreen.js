@@ -25,6 +25,10 @@ export default function ConfigScreen({ navigation }){
         texto="Voltar"
         onPress={() => navigation.goBack()}
       />
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Desenvolvido por Bryan Souza</Text>
+        <Text style={styles.footerText}>Version: 1.0.0</Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -55,4 +59,15 @@ const getStyles = (theme) => StyleSheet.create({
     marginBottom: 20,
     color: theme === 'light' ? '#000' : '#fff',
   },
+  footer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 12,
+    color: theme === 'light' ? '#000' : '#fff',
+  }
 })

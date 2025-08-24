@@ -74,7 +74,6 @@ export default function HomeScreen({ navigation, route }) {
             onPress={() => navigation.navigate('ClientesTab')}
             style={styles.actionButton}
           />
-
         </View>
 
       </ScrollView>
