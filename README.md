@@ -1,11 +1,76 @@
-# Sample Snack app
+# App de Cadastro - Estudo de React Native com Expo
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+Este é um projeto de estudo desenvolvido para praticar conceitos fundamentais e intermediários de React Native utilizando o ecossistema Expo. O aplicativo consiste em um sistema simples de CRUD (Create, Read) para gerenciar clientes e produtos, com funcionalidades modernas como tema dinâmico e navegação profissional.
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+## ✨ Funcionalidades
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+* **Cadastro de Clientes e Produtos:** Formulários completos com validação de campos.
+* **Máscaras de Input:** Campos de Valor (Moeda), Telefone e CPF formatados automaticamente para melhor experiência do usuário.
+* **Listagem de Dados:** Exibição dos clientes e produtos cadastrados em listas dinâmicas.
+* **Dashboard Inicial:** Tela de início que apresenta estatísticas em tempo real, como número de clientes, produtos e valor total do estoque.
+* **Sistema de Tema (Claro/Escuro):**
+    * Alternância manual de tema (Light/Dark Mode) na tela de configurações.
+    * Detecção e aplicação automática do tema padrão do sistema operacional do celular ao iniciar o app.
+* **Gerenciamento de Estado Global:** Utilização da Context API do React para gerenciar o tema e os dados da aplicação de forma centralizada e reativa.
+* **Navegação Profissional:**
+    * **Navegação por Abas (Tab Navigation):** Para alternar entre as seções principais do app (Início, Produtos, Clientes, Configurações).
+    * **Navegação por Pilha (Stack Navigation):** Aninhada dentro das abas para gerenciar o fluxo de telas (ex: da lista para o formulário).
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+## 🚀 Tecnologias Utilizadas
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+Este projeto foi construído com as seguintes tecnologias:
+
+* **React Native**
+* **Expo**
+* **React Navigation** (`Bottom Tabs` e `Native Stack`)
+* **React Hooks** (`useState`, `useEffect`, `useContext`)
+* **Context API** para gerenciamento de estado
+* **`react-native-mask-input`** para formatação de inputs
+* **`@expo/vector-icons`** para os ícones da interface
+
+## ⚙️ Como Rodar o Projeto
+
+Para executar este projeto localmente, siga os passos abaixo:
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/BryanSouzaeSilva/APP-REACT-EXPO.git](https://github.com/BryanSouzaeSilva/APP-REACT-EXPO.git)
+    ```
+
+2.  **Navegue até a pasta do projeto:**
+    ```bash
+    cd APP-REACT-EXPO
+    ```
+
+3.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+4.  **Inicie o servidor de desenvolvimento do Expo:**
+    ```bash
+    npx expo start
+    ```
+    Após iniciar, leia o QR code com o aplicativo Expo Go no seu celular ou execute em um emulador.
+
+## 📂 Estrutura de Pastas
+
+O projeto está organizado da seguinte forma para manter o código limpo e escalável:
+
+```
+/
+├── assets/           # Imagens e fontes
+├── components/       # Componentes reutilizáveis (ex: BotaoPersonalizado)
+├── context/          # Provedores de Contexto (ex: ThemeContext)
+├── screen/           # Contém todas as telas e navegadores
+│   ├── Clients/      # Telas relacionadas a Clientes (Form e List)
+│   ├── Products/     # Telas relacionadas a Produtos (Form e List)
+│   └── navigators/   # Arquivos de configuração dos StackNavigators
+└── App.js            # Ponto de entrada principal e configuração do TabNavigator
+```
+
+## 👨‍💻 Autor:
+
+Desenvolvido por **Bryan Souza e Silva** como parte do seu aprendizado em desenvolvimento mobile.
+
+---
