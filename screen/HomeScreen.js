@@ -65,13 +65,13 @@ export default function HomeScreen({ navigation, route }) {
         <View style={styles.actionsContainer}>
           <BotaoPersonalizado
             texto="Cadastrar Novo Produto"
-            onPress={() => navigation.navigate('ProdutosTab')}
+            onPress={() => navigation.navigate('ProdutosTab', {screen: 'ProductForm'})}
             style={styles.actionButton}
           />
 
           <BotaoPersonalizado
             texto="Cadastrar Novo Cliente"
-            onPress={() => navigation.navigate('ClientesTab')}
+            onPress={() => navigation.navigate('ClientesTab', {screen: 'ClientForm'})}
             style={styles.actionButton}
           />
         </View>

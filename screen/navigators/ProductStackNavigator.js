@@ -6,20 +6,18 @@ import ProductFormScreen from '../Products/ProductFormScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function ProductStackNavigator({ produtos, onCadastrarProduto }) {
+export default function ProductStackNavigator() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
 
             <Stack.Screen
                 name="ProductList"
                 component={ProductListScreen}
-                initialParams={{ produtos: produtos }}
             />
 
             <Stack.Screen
                 name="ProductForm"
                 component={ProductFormScreen}
-                initialParams={{ onCadastrarProduto: onCadastrarProduto }}
             />
             
         </Stack.Navigator>

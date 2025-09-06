@@ -73,16 +73,25 @@ export default function App() {
             name="HomeTab"
             component={HomeScreen}
             options={{ title: 'Início' }}
-            initialParams={{ produtos: produtos, clientes: clientes }}
           />
 
-          <Tab.Screen name="ProdutosTab" options={{ title: 'Produtos' }}>
-            {() => <ProductStackNavigator produtos={produtos} onCadastrarProduto={handleCadastrarProduto} />}
-          </Tab.Screen>
+          <Tab.Screen 
+            name="ProdutosTab"
+            component={ProductStackNavigator}
+            options={{
+              title: 'Produtos',
+              unmountOnBlur: true
+            }}
+          />
 
-          <Tab.Screen name="ClientesTab" options={{ title: 'Clientes' }}>
-            {() => <ClientStackNavigator clientes={clientes} onCadastrarCliente={handleCadastrarCliente} />}
-          </Tab.Screen>
+          <Tab.Screen 
+            name="ClientesTab"
+            component={ClientStackNavigator}
+            options={{
+              title: 'Clientes',
+              unmountOnBlur: true
+            }}
+          />
 
           <Tab.Screen
             name="ConfiguracaoTab"
