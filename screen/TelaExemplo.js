@@ -1,94 +1,58 @@
-import React, { useState, useEffect, use } from 'react';
-import { NavigationContainer } from '@react-navigation/native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useColorScheme } from 'react-native';
-import { Ionicons } from '@expo/vector-icons/Ionicons';
+  // 1. IMPORTE O ASYNCSTORAGE
+  import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { ThemeContext } from './context/ThemeContext';
+  // --- LÓGICA DE PERSISTÊNCIA DE DADOS ---
 
-import ProductStackNavigator from './screen/navigators/ProductStackNavgator';
-import ClientStackNavigator from './screen/navigators/ClientStackNavigator';
-import ConfigScreen from './screen/ConfigScreen';
-
-import HomeScreen from './screen/HomeScreen';
-import SobreScreen from './screen/SobreScreen';
-
-const Tab = createBottomTabNavigator
-
-export default function App(){
-
-  const colorScheme = useColorScheme();
-
-  const [theme, setTheme] = useState(colorScheme || 'light');
-
+  // 2. EFEITO PARA CARREGAR OS DADOS QUANDO O APP ABRE
   useEffect(() => {
-    setTheme(colorScheme || 'light');
-  }, [colorScheme]);
-  
-  const toggleTheme = () => {
-    setTheme(currentTheme => (currentTheme === 'light' ? 'dark' : 'light'));
-  };
+    const carregarDados = async () => {
+      try {
+        // Carrega produtos
+        const produtosSalvos = await AsyncStorage.getItem('@app_produtos');
+        if (produtosSalvos !== null) {
+          setProdutos(JSON.parse(produtosSalvos));
+        }
+        // Carrega clientes
+        const clientesSalvos = await AsyncStorage.getItem('@app_clientes');
+        if (clientesSalvos !== null) {
+          setClientes(JSON.parse(clientesSalvos));
+        }
+      } catch (e) {
+        console.error("Erro ao carregar dados do AsyncStorage", e);
+      } finally {
+        setIsLoading(false); // Finaliza o carregamento
+      }
+    };
+    carregarDados();
+  }, []); // O array vazio [] garante que isso rode apenas uma vez
 
+  // 3. EFEITO PARA SALVAR OS PRODUTOS QUANDO A LISTA MUDA
+  useEffect(() => {
+    // Não salva nada durante o carregamento inicial para evitar sobrescrever com uma lista vazia
+    if (!isLoading) {
+      const salvarProdutos = async () => {
+        try {
+          const jsonValue = JSON.stringify(produtos);
+          await AsyncStorage.setItem('@app_produtos', jsonValue);
+        } catch (e) {
+          console.error("Erro ao salvar produtos", e);
+        }
+      };
+      salvarProdutos();
+    }
+  }, [produtos, isLoading]); // Roda toda vez que 'produtos' ou 'isLoading' muda
 
-  return(
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <NavigationContainer>
-        <Tab.Navigator initialRouteName="Home"
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-              if (route.name === 'ProdutosTab') {
-                iconName = focused ? 'cube' : 'cube-outline';
-              } else if (route.name === 'ClientesTab') {
-                iconName = focused ? 'people' : 'people-outline';
-              } else if (route.name === 'ConfiguracaoTab') {
-                iconName = focused ? 'settings' : 'settings-outline';
-              }
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarActiveTintColor: theme === 'light' ? '#007AFF' : '#fff',
-            tabBarInactiveTintColor: 'gray',
-            tabBarStyle: {
-              backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E',
-            },
-            headerStyle: {
-              backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E',
-            },
-            headerTintColor: theme === 'light' ? '#000' : '#fff',
-          })}
-        >
-          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{title: 'Home'}}
-          />
-
-          <Tab.Screen
-            name="Sobre"
-            component={SobreScreen}
-            options={{title: 'Sobre'}}
-          />
-
-          <Tab.Screen
-            name="ProdutosTab"
-            component={ProductStackNavigator}
-            options={{title: 'Produtos'}}
-          />
-
-          <Tab.Screen
-            name="ClientesTab"
-            component={ClientStackNavigator}
-            options={{title: 'Clientes'}}
-          />
-
-          <Tab.Screen
-            name="ConfiguracaoTab"
-            component={ConfigScreen}
-            options={{title: 'Configurações'}}
-          />
-
-        </Tab.Navigator>
-      </NavigationContainer>
-    </ThemeContext.Provider>
-  );
-}
+  // 4. EFEITO PARA SALVAR OS CLIENTES QUANDO A LISTA MUDA
+  useEffect(() => {
+    if (!isLoading) {
+      const salvarClientes = async () => {
+        try {
+          const jsonValue = JSON.stringify(clientes);
+          await AsyncStorage.setItem('@app_clientes', jsonValue);
+        } catch (e) {
+          console.error("Erro ao salvar clientes", e);
+        }
+      };
+      salvarClientes();
+    }
+  }, [clientes, isLoading]); // Roda toda vez que 'clientes' ou 'isLoading' muda

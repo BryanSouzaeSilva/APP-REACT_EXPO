@@ -4,6 +4,8 @@ import { useColorScheme } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { ThemeContext } from './context/ThemeContext';
 
 import ProductStackNavigator from './screen/navigators/ProductStackNavigator';
@@ -19,6 +21,55 @@ export default function App() {
   const [theme, setTheme] = useState(colorScheme || 'light');
   const [produtos, setProdutos] = useState([]);
   const [clientes, setClientes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const carregarDados = async () => {
+      try{
+        const produtosSalvos = await AsyncStorage.getItem('@app_produtos');
+        if(produtosSalvos !== null){
+          setProdutos(JSON.parse(produtosSalvos));
+        }
+        const clientesSalvos = await AsyncStorage.getItem('@app_clientes');
+        if(clientesSalvos !== null){
+          setClientes(JSON.parse(clientesSalvos));
+        }
+      } catch (e) {
+        console.error("Erro ao carregar dados do AsyncStorage", e)
+      } finally {
+        setIsLoading(false)
+      }
+    };
+    carregarDados();
+  }, []);
+
+  useEffect(() => {
+    if(!isLoading) {
+      const salvarProdutos = async () => {
+        try {
+          const jsonValue = JSON.stringify(produtos);
+          await AsyncStorage.setItem('@app_produtos', jsonValue);
+        } catch (e) {
+          console.error("Erro ao salvar produtos", e);
+        }
+      }
+    };
+    salvarProdutos();
+  }, [produtos, isLoading]);
+
+  useEffect(() => {
+    if(!isLoading) {
+      const salvarClientes = async () => {
+        try {
+          const jsonValue = JSON.stringify(clientes);
+          await AsyncStorage.setItem('@app_clientes', jsonValue);
+        } catch (e) {
+          console.error("Erro ao salvar clientes", e);
+        }
+      };
+      salvarClientes();
+    }
+  }, [clientes, isLoading]);
 
   useEffect(() => {
     setTheme(colorScheme || 'light');
