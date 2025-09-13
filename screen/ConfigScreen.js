@@ -21,6 +21,10 @@ export default function ConfigScreen({ navigation }){
           onPress={toggleTheme}
         />
       </View>
+        <BotaoPersonalizado
+        texto="Armazenamento Usado"
+        onPress={() => navigation.navigate('StorageInfo')}
+      />
       <View style={styles.footer}>
         <Text style={styles.footerText}>Desenvolvido por Bryan Souza</Text>
         <Text style={styles.footerText}>Version: 1.0.0</Text>

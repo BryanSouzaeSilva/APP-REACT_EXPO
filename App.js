@@ -10,8 +10,9 @@ import { ThemeContext } from './context/ThemeContext';
 
 import ProductStackNavigator from './screen/navigators/ProductStackNavigator';
 import ClientStackNavigator from './screen/navigators/ClientStackNavigator';
-import ConfigScreen from './screen/ConfigScreen';
 import HomeScreen from './screen/HomeScreen';
+
+import ConfigStackNavigator from './screen/navigators/ConfigStackNavigator'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -146,7 +147,7 @@ export default function App() {
 
           <Tab.Screen
             name="ConfiguracaoTab"
-            component={ConfigScreen}
+            component={ConfigStackNavigator} 
             options={{ title: 'Configurações' }}
           />
         </Tab.Navigator>
