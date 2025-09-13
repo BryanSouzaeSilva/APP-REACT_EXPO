@@ -53,8 +53,8 @@ export default function App() {
           console.error("Erro ao salvar produtos", e);
         }
       }
+      salvarProdutos();
     };
-    salvarProdutos();
   }, [produtos, isLoading]);
 
   useEffect(() => {

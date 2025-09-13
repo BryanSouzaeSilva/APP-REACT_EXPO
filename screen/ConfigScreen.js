@@ -21,10 +21,6 @@ export default function ConfigScreen({ navigation }){
           onPress={toggleTheme}
         />
       </View>
-      <BotaoPersonalizado
-        texto="Voltar"
-        onPress={() => navigation.goBack()}
-      />
       <View style={styles.footer}>
         <Text style={styles.footerText}>Desenvolvido por Bryan Souza</Text>
         <Text style={styles.footerText}>Version: 1.0.0</Text>
