@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
+import BotaoDeAcao from '../../components/botaoAcao';
 
 export default function ProductListScreen({ route, navigation }) {
     const { theme, produtos } = useContext(ThemeContext);
@@ -15,11 +16,26 @@ export default function ProductListScreen({ route, navigation }) {
 
     const renderItemProduto = ({ item }) => (
         <View style={styles.itemContainer}>
-            <Text style={styles.itemNome}>{item.nome}</Text>
-            <Text style={styles.itemTexto}>Data de Cadastro: {item.dataCadastro}</Text>
-            <Text style={styles.itemTexto}>Valor: {formatadorDeMoeda.format(item.valor)}</Text>
-            <Text style={styles.itemTexto}>Estoque: {item.estoque}</Text>
-            <Text style={styles.itemTexto}>Descrição: {item.descricao}</Text>
+            <View style={styles.infoContainer}>
+                <Text style={styles.itemNome}>{item.nome}</Text>
+                <Text style={styles.itemTexto}>Data de Cadastro: {item.dataCadastro}</Text>
+                <Text style={styles.itemTexto}>Valor: {formatadorDeMoeda.format(item.valor)}</Text>
+                <Text style={styles.itemTexto}>Estoque: {item.estoque}</Text>
+                <Text style={styles.itemTexto}>Descrição: {item.descricao}</Text>
+            </View>
+
+            <View style={styles.actionsContainer}>
+                <BotaoDeAcao 
+                    iconName="pencil-outline"
+                    color={theme === 'ligth' ? '#007AFF' : '#0A84FF'}
+                    onPress={() => console.log('Editar item:', item.id)}
+                />
+                <BotaoDeAcao 
+                    iconName="trash-outline"
+                    color={theme === 'ligth' ? '#DC3545' : '#FF453A'}
+                    onPress={() => console.log('Excluir item:', item.id)}
+                />
+            </View>
         </View>
     );
 
@@ -70,8 +86,9 @@ const getStyles = (theme) => StyleSheet.create({
         padding: 15,
         borderRadius: 8,
         marginBottom: 10,
-        borderWidth: 1,
-        borderColor: theme === 'light' ? '#eee' : '#444',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     itemNome: {
         fontSize: 18,
@@ -90,5 +107,21 @@ const getStyles = (theme) => StyleSheet.create({
     buttonBottomContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    infoContainer: {
+        flex: 1,
+    },
+    itemNome: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: theme === 'light' ? '#000' : '#fff',
+    },
+    itemTexto: {
+        fontSize: 14,
+        color: theme === 'light' ? '#333' : '#ccc',
+    },
+    actionsContainer: {
+        flexDirection: 'row',
+        gap: 10,
     },
 });

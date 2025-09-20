@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 
+import BotaoDeAcao from '../../components/botaoAcao';
+
 export default function ClientListScreen({ route, navigation }) {
     const { theme, clientes } = useContext(ThemeContext);
     const styles = getStyles(theme);
@@ -11,12 +13,27 @@ export default function ClientListScreen({ route, navigation }) {
 
     const renderItemCliente = ({ item }) => (
         <View style={styles.itemContainer}>
-        <Text style={styles.itemNome}>{item.nome}</Text>
-        <Text style={styles.itemTexto}>CPF: {item.cpf}</Text>
-        <Text style={styles.itemTexto}>Email: {item.email}</Text>
-        <Text style={styles.itemTexto}>Telefone: {item.telefone}</Text>
-        <Text style={styles.itemTexto}>Endereço: {item.endereco}</Text>
-        <Text style={styles.itemTexto}>Data de Cadastro: {item.dataCadastro}</Text>
+          <View style={styles.infoContainer}>
+            <Text style={styles.itemNome}>{item.nome}</Text>
+            <Text style={styles.itemTexto}>CPF: {item.cpf}</Text>
+            <Text style={styles.itemTexto}>Email: {item.email}</Text>
+            <Text style={styles.itemTexto}>Telefone: {item.telefone}</Text>
+            <Text style={styles.itemTexto}>Endereço: {item.endereco}</Text>
+            <Text style={styles.itemTexto}>Data de Cadastro: {item.dataCadastro}</Text>
+          </View>
+
+            <View style={styles.actionsContainer}>
+                <BotaoDeAcao
+                    iconName="pencil"
+                    color={theme === 'light' ? '#007AFF' : '#0A84FF'}
+                    onPress={() => console.log('Editar cliente:', item.id)}
+                />
+                <BotaoDeAcao
+                    iconName="trash-outline"
+                    color={theme === 'light' ? '#DC3545' : '#FF453A'}
+                    onPress={() => console.log('Deletar cliente:', item.id)}
+                />
+            </View>
         </View>
     );
 
@@ -69,13 +86,17 @@ const getStyles = (theme) => StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     marginBottom: 10,
-    borderWidth: 1,
-    borderColor: theme === 'light' ? '#eee' : '#444',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   itemNome: {
     fontSize: 18,
     fontWeight: 'bold',
     color: theme === 'light' ? '#000' : '#fff',
+  },
+  infoContainer: {
+    flex: 1,
   },
   itemTexto: {
     fontSize: 14,
@@ -89,5 +110,9 @@ const getStyles = (theme) => StyleSheet.create({
   buttonBottomContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    gap: 10,
+  },
 });
