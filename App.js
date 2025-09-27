@@ -24,6 +24,7 @@ export default function App() {
   const [theme, setTheme] = useState(colorScheme || 'light');
   const [produtos, setProdutos] = useState([]);
   const [clientes, setClientes] = useState([]);
+  const [logs, setLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notificaion, setNotification] = useState('');
   const notificationTimer = useRef(null);
@@ -102,6 +103,23 @@ export default function App() {
     setClientes(listaAntiga => [...listaAntiga, novoCliente]);
   };
 
+  const addLog = (tipo, dados) => {
+    const novoLog = {
+      timestamp: new Date().toISOString(),
+      tipo: tipo,
+      dados: dados,
+    };
+    setLogs(logsAtuais => [...logsAtuais, novoLog]);
+  }
+
+  useEffect(() => {
+    if(logs.legth > 0) {
+      console.log("--- HISTÓRICO DE LOGS ATUALIZADO ---");
+      console.log(JSON.stringify(logs, null, 2));
+      console.log('------------------------------------');
+    }
+  })
+
   return (
     <SafeAreaProvider>
 
@@ -113,6 +131,8 @@ export default function App() {
         handleCadastrarProduto,
         handleCadastrarCliente,
         showNotification,
+        addLog,
+        logs,
       }}>
         <NavigationContainer>
           <Tab.Navigator

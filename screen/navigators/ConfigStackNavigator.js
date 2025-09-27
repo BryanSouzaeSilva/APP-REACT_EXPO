@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import ConfigScreen from '../ConfigScreen';
 import StorageInfoScreen from '../StorageInfoScreen';
+import LogScreen from '../LogsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,10 @@ export default function ConfigStackNavigator() {
             <Stack.Screen
                 name="StorageInfo"
                 component={StorageInfoScreen}
+            />
+            <Stack.Screen
+                name="LogHistory"
+                component={LogScreen}
             />
         </Stack.Navigator>
     );

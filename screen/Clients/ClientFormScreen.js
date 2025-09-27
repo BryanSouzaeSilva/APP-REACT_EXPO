@@ -7,7 +7,7 @@ import AceitarTermos from '../../components/aceitarTermos';
 
 export default function ClientFormScreen({ navigation }) {
 
-  const { theme, handleCadastrarCliente, showNotification} = useContext(ThemeContext);
+  const { theme, handleCadastrarCliente, showNotification, addLog} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   // const { onCadastrarCliente } = route.params;
@@ -38,6 +38,8 @@ export default function ClientFormScreen({ navigation }) {
       cpf: cpf,
       dataCadastro: new Date().toLocaleDateString(),
     };
+
+    addLog('CADASTRO_CLIENTE', novoCliente);
 
     handleCadastrarCliente(novoCliente);
 

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import BotaoPersonalizado from "../components/botaoPersonalizado";
 
 import { ThemeContext } from '../context/ThemeContext';
@@ -24,6 +25,10 @@ export default function ConfigScreen({ navigation }){
         <BotaoPersonalizado
         texto="Armazenamento Usado"
         onPress={() => navigation.navigate('StorageInfo')}
+      />
+      <BotaoPersonalizado
+        texto="Histórico de Logs"
+        onPress={() => navigation.navigate('LogHistory')}
       />
       <View style={styles.footer}>
         <Text style={styles.footerText}>Desenvolvido por Bryan Souza</Text>

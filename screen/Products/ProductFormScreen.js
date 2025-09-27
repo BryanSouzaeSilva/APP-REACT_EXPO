@@ -7,7 +7,7 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 
 
 export default function ProductFormScreen({ navigation }) {
-  const { theme, handleCadastrarProduto, showNotification } = useContext(ThemeContext);
+  const { theme, handleCadastrarProduto, showNotification, addLog} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   // const { onCadastrarProduto } = route.params;
@@ -32,6 +32,8 @@ export default function ProductFormScreen({ navigation }) {
       descricao: descricao,
       dataCadastro: new Date().toLocaleDateString(),
     };
+
+    addLog('CADASTRO_PRODUTO', novoProduto);
 
     handleCadastrarProduto(novoProduto);
 
