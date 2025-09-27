@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, SafeAreaView, ScrollView } from 'react-native';
+import { Text, StyleSheet,TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 // import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
 
 export default function ProductFormScreen({ navigation }) {
-  const { theme, handleCadastrarProduto } = useContext(ThemeContext);
+  const { theme, handleCadastrarProduto, showNotification } = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   // const { onCadastrarProduto } = route.params;
@@ -18,7 +19,7 @@ export default function ProductFormScreen({ navigation }) {
 
   function handleSubmit() {
     if (!nomeProduto || !valor || !estoque || !descricao) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos');
+      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
       return;
     }
 
@@ -34,7 +35,7 @@ export default function ProductFormScreen({ navigation }) {
 
     handleCadastrarProduto(novoProduto);
 
-    Alert.alert('Sucesso', `Produto ${novoProduto.nome} foi cadastrado!`);
+    showNotification(`Produto "${novoProduto.nome}" foi cadastrado!`);
     
     navigation.goBack();
   }

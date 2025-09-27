@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
-import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
-// import BotaoPersonalizado from '../components/botaoPersonalizado';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import AceitarTermos from '../../components/aceitarTermos';
 
 export default function ClientFormScreen({ navigation }) {
 
-  const { theme, handleCadastrarCliente } = useContext(ThemeContext);
+  const { theme, handleCadastrarCliente, showNotification} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   // const { onCadastrarCliente } = route.params;
@@ -21,7 +21,7 @@ export default function ClientFormScreen({ navigation }) {
 
   function handleSubmit() {
     if (!nome || !telefone || !endereco || !email || !cpf) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
       return;
     }
     if (!isChecked) {
@@ -41,7 +41,7 @@ export default function ClientFormScreen({ navigation }) {
 
     handleCadastrarCliente(novoCliente);
 
-    Alert.alert('Sucesso', `Cliente ${novoCliente.nome} foi cadastrado com sucesso!`);
+    showNotification(`Cliente "${novoCliente.nome}" foi cadastrado!`);
     
     navigation.goBack();
   }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -11,6 +12,7 @@ import { ThemeContext } from './context/ThemeContext';
 import ProductStackNavigator from './screen/navigators/ProductStackNavigator';
 import ClientStackNavigator from './screen/navigators/ClientStackNavigator';
 import HomeScreen from './screen/HomeScreen';
+import Notificacao from './components/Notificacao';
 
 import ConfigStackNavigator from './screen/navigators/ConfigStackNavigator'; 
 
@@ -23,6 +25,18 @@ export default function App() {
   const [produtos, setProdutos] = useState([]);
   const [clientes, setClientes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [notificaion, setNotification] = useState('');
+  const notificationTimer = useRef(null);
+
+  const showNotification = (message) => {
+    if (notificationTimer.current){
+      clearTimeout(notificationTimer.current);
+    }
+    setNotification(message);
+    notificationTimer.current = setTimeout(() => {
+      setNotification('');
+    }, 3000);
+  }
 
   useEffect(() => {
     const carregarDados = async () => {
@@ -89,69 +103,74 @@ export default function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{
-      theme,
-      toggleTheme,
-      produtos,
-      clientes,
-      handleCadastrarProduto,
-      handleCadastrarCliente,
-    }}>
-      <NavigationContainer>
-        <Tab.Navigator
-          initialRouteName="HomeTab"
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-              if (route.name === 'HomeTab') {
-                iconName = focused ? 'home' : 'home-outline';
-              } else if (route.name === 'ProdutosTab') {
-                iconName = focused ? 'cube' : 'cube-outline';
-              } else if (route.name === 'ClientesTab') {
-                iconName = focused ? 'people' : 'people-outline';
-              } else if (route.name === 'ConfiguracaoTab') {
-                iconName = focused ? 'settings' : 'settings-outline';
-              }
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarActiveTintColor: theme === 'light' ? '#007AFF' : '#039BE5',
-            tabBarInactiveTintColor: 'gray',
-            tabBarStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
-            headerStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
-            headerTintColor: theme === 'light' ? '#000' : '#fff',
-          })}
-        >
-          <Tab.Screen
-            name="HomeTab"
-            component={HomeScreen}
-            options={{ title: 'Início' }}
-          />
+    <SafeAreaProvider>
 
-          <Tab.Screen 
-            name="ProdutosTab"
-            component={ProductStackNavigator}
-            options={{
-              title: 'Produtos',
-              unmountOnBlur: true
-            }}
-          />
+      <ThemeContext.Provider value={{
+        theme,
+        toggleTheme,
+        produtos,
+        clientes,
+        handleCadastrarProduto,
+        handleCadastrarCliente,
+        showNotification,
+      }}>
+        <NavigationContainer>
+          <Tab.Navigator
+            initialRouteName="HomeTab"
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+                if (route.name === 'HomeTab') {
+                  iconName = focused ? 'home' : 'home-outline';
+                } else if (route.name === 'ProdutosTab') {
+                  iconName = focused ? 'cube' : 'cube-outline';
+                } else if (route.name === 'ClientesTab') {
+                  iconName = focused ? 'people' : 'people-outline';
+                } else if (route.name === 'ConfiguracaoTab') {
+                  iconName = focused ? 'settings' : 'settings-outline';
+                }
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+              tabBarActiveTintColor: theme === 'light' ? '#007AFF' : '#039BE5',
+              tabBarInactiveTintColor: 'gray',
+              tabBarStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
+              headerStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
+              headerTintColor: theme === 'light' ? '#000' : '#fff',
+            })}
+          >
+            <Tab.Screen
+              name="HomeTab"
+              component={HomeScreen}
+              options={{ title: 'Início' }}
+            />
 
-          <Tab.Screen 
-            name="ClientesTab"
-            component={ClientStackNavigator}
-            options={{
-              title: 'Clientes',
-              unmountOnBlur: true
-            }}
-          />
+            <Tab.Screen 
+              name="ProdutosTab"
+              component={ProductStackNavigator}
+              options={{
+                title: 'Produtos',
+                unmountOnBlur: true
+              }}
+            />
 
-          <Tab.Screen
-            name="ConfiguracaoTab"
-            component={ConfigStackNavigator} 
-            options={{ title: 'Configurações' }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </ThemeContext.Provider>
+            <Tab.Screen 
+              name="ClientesTab"
+              component={ClientStackNavigator}
+              options={{
+                title: 'Clientes',
+                unmountOnBlur: true
+              }}
+            />
+
+            <Tab.Screen
+              name="ConfiguracaoTab"
+              component={ConfigStackNavigator} 
+              options={{ title: 'Configurações' }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+        <Notificacao message={notificaion}/>
+      </ThemeContext.Provider>
+    </SafeAreaProvider>
   );
 }
