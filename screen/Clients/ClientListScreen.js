@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 
@@ -38,7 +39,7 @@ export default function ClientListScreen({ route, navigation }) {
     );
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
             <View style={styles.header}>
                 <Text style={styles.title}>Clientes Cadastrados</Text>
             </View>
@@ -51,7 +52,7 @@ export default function ClientListScreen({ route, navigation }) {
             />
             <View style={styles.buttonBottomContainer}>
               <BotaoPersonalizado
-                texto="Adicionar novo produto"
+                texto="Adicionar novo cliente"
                 onPress={() => navigation.navigate('ClientForm')}
               />
             </View>
@@ -67,10 +68,8 @@ const getStyles = (theme) => StyleSheet.create({
   header: {
     width: '90%',
     alignSelf: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 10,
   },
   title: {
     fontSize: 24,
@@ -110,6 +109,7 @@ const getStyles = (theme) => StyleSheet.create({
   buttonBottomContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   actionsContainer: {
     flexDirection: 'row',

@@ -11,6 +11,7 @@ import { ThemeContext } from './context/ThemeContext';
 
 import ProductStackNavigator from './screen/navigators/ProductStackNavigator';
 import ClientStackNavigator from './screen/navigators/ClientStackNavigator';
+import SupplierStackNavigator from './screen/navigators/SupplierStackNavigator';
 import HomeScreen from './screen/HomeScreen';
 import Notificacao from './components/Notificacao';
 
@@ -24,6 +25,7 @@ export default function App() {
   const [theme, setTheme] = useState(colorScheme || 'light');
   const [produtos, setProdutos] = useState([]);
   const [clientes, setClientes] = useState([]);
+  const [fornecedores, setFornecedores] = useState([]);
   const [logs, setLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notificaion, setNotification] = useState('');
@@ -50,6 +52,10 @@ export default function App() {
         if(clientesSalvos !== null){
           setClientes(JSON.parse(clientesSalvos));
         }
+        const fornecedoresSalvos = await AsyncStorage.getItem('@app_fornecedores');
+        if(fornecedoresSalvos !== null){
+          setFornecedores(JSON.parse(fornecedoresSalvos));
+        }
       } catch (e) {
         console.error("Erro ao carregar dados do AsyncStorage", e)
       } finally {
@@ -61,31 +67,20 @@ export default function App() {
 
   useEffect(() => {
     if(!isLoading) {
-      const salvarProdutos = async () => {
+      const salvarDados = async (key, data) => {
         try {
-          const jsonValue = JSON.stringify(produtos);
-          await AsyncStorage.setItem('@app_produtos', jsonValue);
+          const jsonValue = JSON.stringify(data);
+          await AsyncStorage.setItem(key, jsonValue);
         } catch (e) {
-          console.error("Erro ao salvar produtos", e);
+          console.error(`Erro ao salvar ${key}`, e);
         }
       }
-      salvarProdutos();
+      salvarDados('@app_produtos', produtos);
+      salvarDados('@app_clientes', clientes);
+      salvarDados('@app_fornecedores', fornecedores);
     };
-  }, [produtos, isLoading]);
+  }, [produtos, clientes, fornecedores, isLoading]);
 
-  useEffect(() => {
-    if(!isLoading) {
-      const salvarClientes = async () => {
-        try {
-          const jsonValue = JSON.stringify(clientes);
-          await AsyncStorage.setItem('@app_clientes', jsonValue);
-        } catch (e) {
-          console.error("Erro ao salvar clientes", e);
-        }
-      };
-      salvarClientes();
-    }
-  }, [clientes, isLoading]);
 
   useEffect(() => {
     setTheme(colorScheme || 'light');
@@ -103,6 +98,10 @@ export default function App() {
     setClientes(listaAntiga => [...listaAntiga, novoCliente]);
   };
 
+  const handleCadastrarFornecedor = (novoFornecedor) => {
+    setFornecedores(listaAntiga => [...listaAntiga, novoFornecedor]);
+  };
+
   const addLog = (tipo, dados) => {
     const novoLog = {
       timestamp: new Date().toISOString(),
@@ -113,12 +112,12 @@ export default function App() {
   }
 
   useEffect(() => {
-    if(logs.legth > 0) {
+    if(logs.length > 0) {
       console.log("--- HISTÓRICO DE LOGS ATUALIZADO ---");
-      console.log(JSON.stringify(logs, null, 2));
+      console.log(JSON.stringify(logs[logs.length - 1], null, 2));
       console.log('------------------------------------');
     }
-  })
+  }, [logs])
 
   return (
     <SafeAreaProvider>
@@ -128,8 +127,10 @@ export default function App() {
         toggleTheme,
         produtos,
         clientes,
+        fornecedores,
         handleCadastrarProduto,
         handleCadastrarCliente,
+        handleCadastrarFornecedor,
         showNotification,
         addLog,
         logs,
@@ -146,6 +147,8 @@ export default function App() {
                   iconName = focused ? 'cube' : 'cube-outline';
                 } else if (route.name === 'ClientesTab') {
                   iconName = focused ? 'people' : 'people-outline';
+                } else if (route.name === 'FornecedoresTab') {
+                  iconName = focused ? 'business' : 'business-outline';
                 } else if (route.name === 'ConfiguracaoTab') {
                   iconName = focused ? 'settings' : 'settings-outline';
                 }
@@ -178,6 +181,15 @@ export default function App() {
               component={ClientStackNavigator}
               options={{
                 title: 'Clientes',
+                unmountOnBlur: true
+              }}
+            />
+
+            <Tab.Screen 
+              name="FornecedoresTab"
+              component={SupplierStackNavigator}
+              options={{
+                title: 'Fornecedores',
                 unmountOnBlur: true
               }}
             />

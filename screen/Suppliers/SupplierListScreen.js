@@ -1,39 +1,35 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
 import { View, Text, StyleSheet, FlatList} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
 
-export default function ProductListScreen({ route, navigation }) {
-    const { theme, produtos } = useContext(ThemeContext);
+export default function SupplierListScreen({ navigation }) {
+    const { theme, fornecedores } = useContext(ThemeContext);
     const styles = getStyles(theme);
 
-    const formatadorDeMoeda = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    });
-
-    const renderItemProduto = ({ item }) => (
+    const renderItemFornecedor = ({ item }) => (
         <View style={styles.itemContainer}>
             <View style={styles.infoContainer}>
-                <Text style={styles.itemNome}>{item.nome}</Text>
+                <Text style={styles.itemNome}>{item.nomeFantasia}</Text>
+                <Text style={styles.itemTexto}>Razão Social: {item.razaoSocial}</Text>
+                <Text style={styles.itemTexto}>CNPJ: {item.cnpj}</Text>
+                <Text style={styles.itemTexto}>Endereço: {item.endereco}</Text>
+                <Text style={styles.itemTexto}>Contato: {item.contato}</Text>
                 <Text style={styles.itemTexto}>Data de Cadastro: {item.dataCadastro}</Text>
-                <Text style={styles.itemTexto}>Valor: {formatadorDeMoeda.format(item.valor)}</Text>
-                <Text style={styles.itemTexto}>Estoque: {item.estoque}</Text>
-                <Text style={styles.itemTexto}>Descrição: {item.descricao}</Text>
             </View>
 
             <View style={styles.actionsContainer}>
-                <BotaoDeAcao 
-                    iconName="pencil-outline"
-                    color={theme === 'ligth' ? '#007AFF' : '#0A84FF'}
-                    onPress={() => console.log('Editar item:', item.id)}
+                <BotaoDeAcao
+                    iconName="pencil"
+                    color={theme === 'light' ? '#007AFF' : '#0A84FF'}
+                    onPress={() => console.log('Editar fornecedor:', item.id)}
                 />
-                <BotaoDeAcao 
+                <BotaoDeAcao
                     iconName="trash-outline"
-                    color={theme === 'ligth' ? '#DC3545' : '#FF453A'}
-                    onPress={() => console.log('Excluir item:', item.id)}
+                    color={theme === 'light' ? '#DC3545' : '#FF453A'}
+                    onPress={() => console.log('Deletar fornecedor:', item.id)}
                 />
             </View>
         </View>
@@ -42,19 +38,19 @@ export default function ProductListScreen({ route, navigation }) {
     return (
         <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
             <View style={styles.header}>
-                <Text style={styles.title}>Produtos</Text>
+                <Text style={styles.title}>Fornecedores Cadastrados</Text>
             </View>
             <FlatList
                 style={styles.list}
-                data={produtos}
-                renderItem={renderItemProduto}
+                data={fornecedores}
+                renderItem={renderItemFornecedor}
                 keyExtractor={item => item.id}
-                ListEmptyComponent={<Text style={styles.emptyText}>Nenhum produto cadastrado ainda</Text>}
+                ListEmptyComponent={<Text style={styles.emptyText}>Nenhum fornecedor cadastrado ainda.</Text>}
             />
             <View style={styles.buttonBottomContainer}>
                 <BotaoPersonalizado
-                    texto="Adicionar novo produto"
-                    onPress={() => navigation.navigate('ProductForm')}
+                    texto="Adicionar novo fornecedor"
+                    onPress={() => navigation.navigate('SupplierForm')}
                 />
             </View>
         </SafeAreaView>
@@ -69,6 +65,9 @@ const getStyles = (theme) => StyleSheet.create({
     header: {
         width: '90%',
         alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginVertical: 20,
     },
     title: {
@@ -79,7 +78,6 @@ const getStyles = (theme) => StyleSheet.create({
     list: {
         width: '90%',
         alignSelf: 'center',
-        flex: 1,
     },
     itemContainer: {
         backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
@@ -95,6 +93,9 @@ const getStyles = (theme) => StyleSheet.create({
         fontWeight: 'bold',
         color: theme === 'light' ? '#000' : '#fff',
     },
+    infoContainer: {
+        flex: 1,
+    },
     itemTexto: {
         fontSize: 14,
         color: theme === 'light' ? '#333' : '#ccc',
@@ -107,18 +108,6 @@ const getStyles = (theme) => StyleSheet.create({
     buttonBottomContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    infoContainer: {
-        flex: 1,
-    },
-    itemNome: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: theme === 'light' ? '#000' : '#fff',
-    },
-    itemTexto: {
-        fontSize: 14,
-        color: theme === 'light' ? '#333' : '#ccc',
     },
     actionsContainer: {
         flexDirection: 'row',
