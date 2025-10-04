@@ -16,14 +16,6 @@ Um aplicativo de gerenciamento simples, construído com React Native e Expo, foc
       * **Navegação Fluida:** Arquitetura de navegação profissional com abas e pilhas (`React Navigation`).
       * **Feedback Visual:** Notificações animadas para ações de sucesso.
 
-## 📸 Demonstração
-
-| Dashboard & Tema                                    | Gerenciamento de Clientes                               |
-| --------------------------------------------------- | ------------------------------------------------------- |
-| \<img src="URL\_DO\_SEU\_GIF\_AQUI\_1" width="250"\>         | \<img src="URL\_DO\_SEU\_GIF\_AQUI\_2" width="250"\>            |
-
-*(Substitua `URL_DO_SEU_GIF_AQUI` pelos links de GIFs que você pode gravar da tela do seu app)*
-
 ## 🛠️ Tecnologias Utilizadas
 
   * **Framework:** React Native com Expo
