@@ -1,13 +1,28 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
 
 export default function SupplierListScreen({ navigation }) {
-    const { theme, fornecedores } = useContext(ThemeContext);
+    const { theme, fornecedores, handleDeletarFornecedor } = useContext(ThemeContext);
     const styles = getStyles(theme);
+
+    const handleDelete = (id, nome) => {
+        Alert.alert(
+            "Confirmar Exclusão",
+            `Você tem certeza que deseja excluir o fornecedor "${nome}"?`,
+            [
+                { text: "Cancelar", style: "cancel" },
+                { text: "Excluir", onPress: () => handleDeletarFornecedor(id), style: 'destructive' }
+            ]
+        );
+    };
+
+    const handleEdit = (fornecedorId) => {
+        navigation.navigate('SupplierForm', { fornecedorId });
+    };
 
     const renderItemFornecedor = ({ item }) => (
         <View style={styles.itemContainer}>
@@ -24,12 +39,12 @@ export default function SupplierListScreen({ navigation }) {
                 <BotaoDeAcao
                     iconName="pencil"
                     color={theme === 'light' ? '#007AFF' : '#0A84FF'}
-                    onPress={() => console.log('Editar fornecedor:', item.id)}
+                    onPress={() => handleEdit(item.id)}
                 />
                 <BotaoDeAcao
                     iconName="trash-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
-                    onPress={() => console.log('Deletar fornecedor:', item.id)}
+                    onPress={() => handleDelete(item.id, item.nomeFantasia)}
                 />
             </View>
         </View>
@@ -65,10 +80,8 @@ const getStyles = (theme) => StyleSheet.create({
     header: {
         width: '90%',
         alignSelf: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginVertical: 20,
+        marginTop: 20,
+        marginBottom: 10,
     },
     title: {
         fontSize: 24,
@@ -108,6 +121,7 @@ const getStyles = (theme) => StyleSheet.create({
     buttonBottomContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        paddingVertical: 10,
     },
     actionsContainer: {
         flexDirection: 'row',

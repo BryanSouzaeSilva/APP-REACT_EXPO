@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
-export default function SupplierFormScreen({ navigation }) {
+export default function SupplierFormScreen({ route, navigation }) {
 
-    const { theme, handleCadastrarFornecedor, showNotification, addLog } = useContext(ThemeContext);
+    const { theme, handleCadastrarFornecedor, handleEditarFornecedor, fornecedores, showNotification, addLog } = useContext(ThemeContext);
     const styles = getStyles(theme);
 
     const [nomeFantasia, setNomeFantasia] = useState('');
@@ -15,25 +15,47 @@ export default function SupplierFormScreen({ navigation }) {
     const [endereco, setEndereco] = useState('');
     const [contato, setContato] = useState('');
 
+    const fornecedorId = route.params?.fornecedorId;
+    const isEditing = !!fornecedorId;
+
+    useEffect(() => {
+        if (isEditing) {
+            const fornecedor = fornecedores.find(f => f.id === fornecedorId);
+            if (fornecedor) {
+                setNomeFantasia(fornecedor.nomeFantasia);
+                setRazaoSocial(fornecedor.razaoSocial);
+                setCnpj(fornecedor.cnpj);
+                setEndereco(fornecedor.endereco);
+                setContato(fornecedor.contato);
+            }
+        }
+    }, [fornecedorId, fornecedores]);
+
     function handleSubmit() {
-            if (!nomeFantasia || !razaoSocial || !cnpj || !endereco || !contato) {
-                Alert.alert('Erro', 'Por favor, preencha todos os campos!');
+        if (!nomeFantasia || !razaoSocial || !cnpj || !endereco || !contato) {
+            Alert.alert('Erro', 'Por favor, preencha todos os campos!');
             return;
         }
 
-        const novoFornecedor = {
-            id: Date.now().toString(),
+        const dadosFornecedor = {
+            id: fornecedorId || Date.now().toString(),
             nomeFantasia,
             razaoSocial,
             cnpj,
             endereco,
             contato,
-            dataCadastro: new Date().toLocaleDateString(),
+            dataCadastro: isEditing ? fornecedores.find(f => f.id === fornecedorId).dataCadastro : new Date().toLocaleDateString(),
         };
 
-        addLog('CADASTRO_FORNECEDOR', novoFornecedor);
-        handleCadastrarFornecedor(novoFornecedor);
-        showNotification(`Fornecedor "${novoFornecedor.nomeFantasia}" foi cadastrado!`);
+        if (isEditing) {
+            addLog('EDICAO_FORNECEDOR', dadosFornecedor);
+            handleEditarFornecedor(dadosFornecedor);
+            showNotification(`Fornecedor "${dadosFornecedor.nomeFantasia}" foi atualizado!`);
+        } else {
+            addLog('CADASTRO_FORNECEDOR', dadosFornecedor);
+            handleCadastrarFornecedor(dadosFornecedor);
+            showNotification(`Fornecedor "${dadosFornecedor.nomeFantasia}" foi cadastrado!`);
+        }
         
         navigation.goBack();
     }
@@ -41,7 +63,7 @@ export default function SupplierFormScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.formContainer}>
-                <Text style={styles.title}>Cadastrar Fornecedor</Text>
+                <Text style={styles.title}>{isEditing ? 'Editar Fornecedor' : 'Cadastrar Fornecedor'}</Text>
 
                 <Text style={styles.labels}>Nome Fantasia:</Text>
                 <TextInput
@@ -91,7 +113,7 @@ export default function SupplierFormScreen({ navigation }) {
                 />
 
                 <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit}>
-                    <Text style={{ color: '#fff', fontSize: 16 }}>Cadastrar Fornecedor</Text>
+                    <Text style={{ color: '#fff', fontSize: 16 }}>{isEditing ? 'Salvar Alterações' : 'Cadastrar Fornecedor'}</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>

@@ -1,21 +1,32 @@
-import React, { useState, useContext } from 'react';
-import { Text, StyleSheet,TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
-// import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
-
-export default function ProductFormScreen({ navigation }) {
-  const { theme, handleCadastrarProduto, showNotification, addLog} = useContext(ThemeContext);
+export default function ProductFormScreen({ route, navigation }) {
+  const { theme, handleCadastrarProduto, handleEditarProduto, produtos, showNotification, addLog } = useContext(ThemeContext);
   const styles = getStyles(theme);
-
-  // const { onCadastrarProduto } = route.params;
 
   const [nomeProduto, setNomeProduto] = useState('');
   const [valor, setValor] = useState('');
   const [estoque, setEstoque] = useState('');
   const [descricao, setDescricao] = useState('');
+
+  const produtoId = route.params?.produtoId;
+  const isEditing = !!produtoId;
+
+  useEffect(() => {
+    if (isEditing) {
+      const produto = produtos.find(p => p.id === produtoId);
+      if (produto) {
+        setNomeProduto(produto.nome);
+        setValor((produto.valor * 100).toString());
+        setEstoque(produto.estoque);
+        setDescricao(produto.descricao);
+      }
+    }
+  }, [produtoId, produtos]);
 
   function handleSubmit() {
     if (!nomeProduto || !valor || !estoque || !descricao) {
@@ -24,20 +35,24 @@ export default function ProductFormScreen({ navigation }) {
     }
 
     const valorNumerico = parseFloat(valor) / 100;
-    const novoProduto = {
-      id: Date.now().toString(),
+    const dadosProduto = {
+      id: produtoId || Date.now().toString(),
       nome: nomeProduto,
       valor: valorNumerico,
       estoque: estoque,
       descricao: descricao,
-      dataCadastro: new Date().toLocaleDateString(),
+      dataCadastro: isEditing ? produtos.find(p => p.id === produtoId).dataCadastro : new Date().toLocaleDateString(),
     };
 
-    addLog('CADASTRO_PRODUTO', novoProduto);
-
-    handleCadastrarProduto(novoProduto);
-
-    showNotification(`Produto "${novoProduto.nome}" foi cadastrado!`);
+    if (isEditing) {
+      addLog('EDICAO_PRODUTO', dadosProduto);
+      handleEditarProduto(dadosProduto);
+      showNotification(`Produto "${dadosProduto.nome}" foi atualizado!`);
+    } else {
+      addLog('CADASTRO_PRODUTO', dadosProduto);
+      handleCadastrarProduto(dadosProduto);
+      showNotification(`Produto "${dadosProduto.nome}" foi cadastrado!`);
+    }
     
     navigation.goBack();
   }
@@ -45,7 +60,7 @@ export default function ProductFormScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.formContainer}>
-        <Text style={styles.title}>Cadastrar Produto</Text>
+        <Text style={styles.title}>{isEditing ? 'Editar Produto' : 'Cadastrar Produto'}</Text>
         
         <Text style={styles.labels}>Nome:</Text>
         <TextInput
@@ -84,7 +99,7 @@ export default function ProductFormScreen({ navigation }) {
         />
 
         <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit}>
-          <Text style={{ color: '#fff', fontSize: 16 }}>Cadastrar Item</Text>
+          <Text style={{ color: '#fff', fontSize: 16 }}>{isEditing ? 'Salvar Alterações' : 'Cadastrar Item'}</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

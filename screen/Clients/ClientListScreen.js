@@ -1,16 +1,29 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 
 import BotaoDeAcao from '../../components/botaoAcao';
 
-export default function ClientListScreen({ route, navigation }) {
-    const { theme, clientes } = useContext(ThemeContext);
+export default function ClientListScreen({ navigation }) {
+    const { theme, clientes, handleDeletarCliente } = useContext(ThemeContext);
     const styles = getStyles(theme);
 
-    // const { clientes } = route.params;
+    const handleDelete = (id, nome) => {
+      Alert.alert(
+        "Confirmar Exclusão",
+        `Você tem certeza que deseja excluir o cliente "${nome}"?`,
+        [
+          { text: "Cancelar", style: "cancel" },
+          { text: "Excluir", onPress: () => handleDeletarCliente(id), style: 'destructive' }
+        ]
+      );
+    }
+
+    const handleEdit = (clienteId) => {
+      navigation.navigate('ClientForm', { clienteId });
+    };
 
     const renderItemCliente = ({ item }) => (
         <View style={styles.itemContainer}>
@@ -27,12 +40,12 @@ export default function ClientListScreen({ route, navigation }) {
                 <BotaoDeAcao
                     iconName="pencil"
                     color={theme === 'light' ? '#007AFF' : '#0A84FF'}
-                    onPress={() => console.log('Editar cliente:', item.id)}
+                    onPress={() => handleEdit(item.id)}
                 />
                 <BotaoDeAcao
                     iconName="trash-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
-                    onPress={() => console.log('Deletar cliente:', item.id)}
+                    onPress={() => handleDelete(item.id, item.nome)}
                 />
             </View>
         </View>

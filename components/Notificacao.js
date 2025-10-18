@@ -1,14 +1,16 @@
-import react, { useEffect, useRef, useContext } from "react";
-import { Text, StyleSheet, Animated} from "react-native";
+import React, { useEffect, useRef, useContext } from "react";
+import { Text, StyleSheet, Animated } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ThemeContext } from "../context/ThemeContext";
 import { Ionicons } from '@expo/vector-icons';
 
-export default function Notificacao({ message }) {
-    const { theme } = useContext(ThemeContext);
-    const styles = getStyles(theme);
+export default function Notificacao({ message, type }) {
     const insets = useSafeAreaInsets();
     const translateY = useRef(new Animated.Value(-150)).current;
+
+    const backgroundColor = type === 'delete' ? '#DC3545' : '#28A745';
+    const iconName = type === 'delete' ? 'trash-bin-outline' : 'checkmark-circle';
+
+    const styles = getStyles(backgroundColor);
 
     useEffect(() => {
         if(message) {
@@ -36,19 +38,19 @@ export default function Notificacao({ message }) {
 
     return (
         <Animated.View style={[styles.container, { transform: [{ translateY }] }]}>
-            <Ionicons name="checkmark-circle" size={24} color="white"/>
+            <Ionicons name={iconName} size={24} color="white"/>
             <Text style={styles.text}>{message}</Text>
         </Animated.View>
     );
 }
 
-const getStyles = (theme) => StyleSheet.create({
+const getStyles = (backgroundColor) => StyleSheet.create({
     container: {
         position: 'absolute',
         top: 0,
         left: 20,
         right: 20,
-        backgroundColor: '#28A745',
+        backgroundColor: backgroundColor,
         padding: 15,
         borderRadius: 8,
         flexDirection: 'row',
@@ -58,6 +60,7 @@ const getStyles = (theme) => StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 5,
         elevation: 5,
+        zIndex: 1000,
     },
     text: {
         color: '#fff',
@@ -66,3 +69,4 @@ const getStyles = (theme) => StyleSheet.create({
         marginLeft: 10,
     },
 });
+

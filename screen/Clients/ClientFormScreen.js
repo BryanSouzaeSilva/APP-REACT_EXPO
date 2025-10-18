@@ -1,17 +1,15 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import AceitarTermos from '../../components/aceitarTermos';
 
-export default function ClientFormScreen({ navigation }) {
+export default function ClientFormScreen({ route, navigation }) {
 
-  const { theme, handleCadastrarCliente, showNotification, addLog} = useContext(ThemeContext);
+  const { theme, handleCadastrarCliente, handleEditarCliente, clientes, showNotification, addLog} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
-  // const { onCadastrarCliente } = route.params;
-  
   const [nome, setNome] = useState('');
   const [telefone, setTelefone] = useState('');
   const [endereco, setEndereco] = useState('');
@@ -19,31 +17,52 @@ export default function ClientFormScreen({ navigation }) {
   const [cpf, setCPF] = useState('');
   const [isChecked, setChecked] = useState(false);
 
+  const clienteId = route.params?.clienteId;
+  const isEditing = !!clienteId;
+
+  useEffect(() => {
+    if (isEditing) {
+      const cliente = clientes.find(c => c.id === clienteId);
+      if (cliente) {
+        setNome(cliente.nome);
+        setTelefone(cliente.telefone);
+        setEndereco(cliente.endereco);
+        setEmail(cliente.email);
+        setCPF(cliente.cpf);
+        setChecked(true); // Assume que os termos já foram aceitos
+      }
+    }
+  }, [clienteId, clientes]);
+
   function handleSubmit() {
     if (!nome || !telefone || !endereco || !email || !cpf) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos!');
       return;
     }
-    if (!isChecked) {
+    if (!isChecked && !isEditing) {
       Alert.alert('Erro', 'Você deve aceitar os termos para continuar');
       return;
     }
 
-    const novoCliente = {
-      id: Date.now().toString(),
-      nome: nome,
-      telefone: telefone,
-      endereco: endereco,
-      email: email,
-      cpf: cpf,
-      dataCadastro: new Date().toLocaleDateString(),
+    const dadosCliente = {
+      id: clienteId || Date.now().toString(),
+      nome,
+      telefone,
+      endereco,
+      email,
+      cpf,
+      dataCadastro: isEditing ? clientes.find(c => c.id === clienteId).dataCadastro : new Date().toLocaleDateString(),
     };
 
-    addLog('CADASTRO_CLIENTE', novoCliente);
-
-    handleCadastrarCliente(novoCliente);
-
-    showNotification(`Cliente "${novoCliente.nome}" foi cadastrado!`);
+    if (isEditing) {
+      addLog('EDICAO_CLIENTE', dadosCliente);
+      handleEditarCliente(dadosCliente);
+      showNotification(`Cliente "${dadosCliente.nome}" foi atualizado!`);
+    } else {
+      addLog('CADASTRO_CLIENTE', dadosCliente);
+      handleCadastrarCliente(dadosCliente);
+      showNotification(`Cliente "${dadosCliente.nome}" foi cadastrado!`);
+    }
     
     navigation.goBack();
   }
@@ -51,7 +70,7 @@ export default function ClientFormScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.formContainer}>
-        <Text style={styles.title}>Cadastrar Cliente</Text>
+        <Text style={styles.title}>{isEditing ? 'Editar Cliente' : 'Cadastrar Cliente'}</Text>
 
         <Text style={styles.labels}>Nome:</Text>
         <TextInput
@@ -100,10 +119,10 @@ export default function ClientFormScreen({ navigation }) {
           placeholderTextColor={theme === 'light' ? '#aaa' : '#8e8e93'}
         />
         
-        <AceitarTermos isChecked={isChecked} setChecked={setChecked} />
+        {!isEditing && <AceitarTermos isChecked={isChecked} setChecked={setChecked} />}
 
         <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit}>
-          <Text style={{ color: '#fff', fontSize: 16 }}>Cadastrar Cliente</Text>
+          <Text style={{ color: '#fff', fontSize: 16 }}>{isEditing ? 'Salvar Alterações' : 'Cadastrar Cliente'}</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

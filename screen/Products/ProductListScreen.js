@@ -1,18 +1,33 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
 
-export default function ProductListScreen({ route, navigation }) {
-    const { theme, produtos } = useContext(ThemeContext);
+export default function ProductListScreen({ navigation }) {
+    const { theme, produtos, handleDeletarProduto } = useContext(ThemeContext);
     const styles = getStyles(theme);
 
     const formatadorDeMoeda = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
     });
+
+    const handleDelete = (id, nome) => {
+        Alert.alert(
+            "Confirmar Exclusão",
+            `Você tem certeza que deseja excluir o produto "${nome}"?`,
+            [
+                { text: "Cancelar", style: "cancel" },
+                { text: "Excluir", onPress: () => handleDeletarProduto(id), style: 'destructive' }
+            ]
+        );
+    };
+
+    const handleEdit = (produtoId) => {
+        navigation.navigate('ProductForm', { produtoId });
+    };
 
     const renderItemProduto = ({ item }) => (
         <View style={styles.itemContainer}>
@@ -25,15 +40,16 @@ export default function ProductListScreen({ route, navigation }) {
             </View>
 
             <View style={styles.actionsContainer}>
+                {/* 4. Conectar as funções aos botões */}
                 <BotaoDeAcao 
                     iconName="pencil-outline"
-                    color={theme === 'ligth' ? '#007AFF' : '#0A84FF'}
-                    onPress={() => console.log('Editar item:', item.id)}
+                    color={theme === 'light' ? '#007AFF' : '#0A84FF'}
+                    onPress={() => handleEdit(item.id)}
                 />
                 <BotaoDeAcao 
                     iconName="trash-outline"
-                    color={theme === 'ligth' ? '#DC3545' : '#FF453A'}
-                    onPress={() => console.log('Excluir item:', item.id)}
+                    color={theme === 'light' ? '#DC3545' : '#FF453A'}
+                    onPress={() => handleDelete(item.id, item.nome)}
                 />
             </View>
         </View>
@@ -69,7 +85,8 @@ const getStyles = (theme) => StyleSheet.create({
     header: {
         width: '90%',
         alignSelf: 'center',
-        marginVertical: 20,
+        marginTop: 20,
+        marginBottom: 10,
     },
     title: {
         fontSize: 24,
@@ -90,6 +107,9 @@ const getStyles = (theme) => StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    infoContainer: {
+        flex: 1,
+    },
     itemNome: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -107,18 +127,7 @@ const getStyles = (theme) => StyleSheet.create({
     buttonBottomContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    infoContainer: {
-        flex: 1,
-    },
-    itemNome: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: theme === 'light' ? '#000' : '#fff',
-    },
-    itemTexto: {
-        fontSize: 14,
-        color: theme === 'light' ? '#333' : '#ccc',
+        paddingVertical: 10,
     },
     actionsContainer: {
         flexDirection: 'row',
