@@ -8,10 +8,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ThemeContext } from './context/ThemeContext';
+import { CartProvider } from './context/CartContext';
 
 import ProductStackNavigator from './screen/navigators/ProductStackNavigator';
 import ClientStackNavigator from './screen/navigators/ClientStackNavigator';
 import SupplierStackNavigator from './screen/navigators/SupplierStackNavigator';
+import CartStackNavigator from './screen/navigators/CartStackNavigator';
 
 import HomeScreen from './screen/HomeScreen';
 import Notificacao from './components/Notificacao';
@@ -176,9 +178,10 @@ export default function App() {
         addLog,
         logs,
       }}>
-        <NavigationContainer>
-          <Tab.Navigator
-            initialRouteName="HomeTab"
+        <CartProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              initialRouteName="HomeTab"
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
@@ -190,6 +193,8 @@ export default function App() {
                   iconName = focused ? 'people' : 'people-outline';
                 } else if (route.name === 'FornecedoresTab') {
                   iconName = focused ? 'business' : 'business-outline';
+                } else if (route.name === 'CartTab') {
+                    iconName = focused ? 'cart' : 'cart-outline';
                 } else if (route.name === 'ConfiguracaoTab') {
                   iconName = focused ? 'settings' : 'settings-outline';
                 }
@@ -227,12 +232,19 @@ export default function App() {
             />
 
             <Tab.Screen
+              name="CartTab"
+              component={CartStackNavigator}
+              options={{ title: 'Carrinho', unmountOnBlur: true }}
+            />
+
+            <Tab.Screen
               name="ConfiguracaoTab"
               component={ConfigStackNavigator}
               options={{ title: 'Configurações' }}
             />
           </Tab.Navigator>
         </NavigationContainer>
+        </CartProvider>
         <Notificacao message={notification.message} type={notification.type} />
       </ThemeContext.Provider>
     </SafeAreaProvider>
