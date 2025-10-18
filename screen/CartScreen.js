@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { CartContext } from '../../context/CartContext';
-import { ThemeContext } from '../../context/ThemeContext';
-import BotaoPersonalizado from '../../components/botaoPersonalizado';
-import BotaoDeAcao from '../../components/botaoAcao';
+import { CartContext } from '../context/CartContext';
+import { ThemeContext } from '../context/ThemeContext';
+import BotaoPersonalizado from '../components/botaoPersonalizado';
+import BotaoDeAcao from '../components/botaoAcao';
 
 export default function CartScreen({ navigation }) {
     const { theme } = useContext(ThemeContext);
@@ -49,7 +49,7 @@ export default function CartScreen({ navigation }) {
             </View>
             <View style={styles.actionsContainer}>
                 <BotaoDeAcao
-                    iconName="minus-circle-outline"
+                    iconName="trash-can-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
                     onPress={() => handleRemove(item.id)}
                 />

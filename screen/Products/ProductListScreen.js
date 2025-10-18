@@ -43,7 +43,7 @@ export default function ProductListScreen({ navigation }) {
 
             <View style={styles.actionsContainer}>
                 <BotaoDeAcao
-                    iconName="cart-plus-outline"
+                    iconName="cart-outline"
                     color={theme === 'light' ? '#28A745' : '#34C759'}
                     onPress={() => addToCart(item)}
                 />

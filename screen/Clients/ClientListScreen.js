@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
-import BotaoPersonalizado from '../../components/botaoPersonalizado';
 
+import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
 
 export default function ClientListScreen({ navigation }) {
@@ -43,7 +43,7 @@ export default function ClientListScreen({ navigation }) {
                     onPress={() => handleEdit(item.id)}
                 />
                 <BotaoDeAcao
-                    iconName="trash-outline"
+                    iconName="trash-can-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
                     onPress={() => handleDelete(item.id, item.nome)}
                 />

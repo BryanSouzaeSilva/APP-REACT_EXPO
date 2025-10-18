@@ -42,7 +42,7 @@ export default function SupplierListScreen({ navigation }) {
                     onPress={() => handleEdit(item.id)}
                 />
                 <BotaoDeAcao
-                    iconName="trash-outline"
+                    iconName="trash-can-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
                     onPress={() => handleDelete(item.id, item.nomeFantasia)}
                 />
