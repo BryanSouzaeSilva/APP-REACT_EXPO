@@ -1,6 +1,6 @@
 import react from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function BotaoDeAcao({ iconName, color, onPress }){
     return(
@@ -8,7 +8,7 @@ export default function BotaoDeAcao({ iconName, color, onPress }){
             style={[styles.container, { backgroundColor: color}]}
             onPress={onPress}
         >
-            <Ionicons name={iconName} size={20} color="#ffff" />
+            <MaterialCommunityIcons name={iconName} size={20} color="#ffff" />
         </TouchableOpacity>
     )
 }

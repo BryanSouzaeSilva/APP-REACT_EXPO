@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 import { ThemeContext } from '../../context/ThemeContext';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,6 +8,7 @@ import BotaoDeAcao from '../../components/botaoAcao';
 
 export default function ProductListScreen({ navigation }) {
     const { theme, produtos, handleDeletarProduto } = useContext(ThemeContext);
+    const { addToCart } = useContext(CartContext);
     const styles = getStyles(theme);
 
     const formatadorDeMoeda = new Intl.NumberFormat('pt-BR', {
@@ -40,14 +42,18 @@ export default function ProductListScreen({ navigation }) {
             </View>
 
             <View style={styles.actionsContainer}>
-                {/* 4. Conectar as funções aos botões */}
+                <BotaoDeAcao
+                    iconName="cart-plus-outline"
+                    color={theme === 'light' ? '#28A745' : '#34C759'}
+                    onPress={() => addToCart(item)}
+                />
                 <BotaoDeAcao 
-                    iconName="pencil-outline"
+                    iconName="pencil"
                     color={theme === 'light' ? '#007AFF' : '#0A84FF'}
                     onPress={() => handleEdit(item.id)}
                 />
                 <BotaoDeAcao 
-                    iconName="trash-outline"
+                    iconName="trash-can-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
                     onPress={() => handleDelete(item.id, item.nome)}
                 />
