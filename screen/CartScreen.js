@@ -114,7 +114,7 @@ export default function CartScreen({ navigation }) {
                         items={cartItems}
                         total={getTotalPrice()}
                         onConfirm={() => {
-                            bottomSheetModelRef.current?.dismiss();
+                            bottomSheetModalRef.current?.dismiss();
                             //IR PARA A TELA DE CONFIRMAÇÃO
                         }}
                     />
