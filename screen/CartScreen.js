@@ -1,15 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useCallback, useRef } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+
 import { CartContext } from '../context/CartContext';
 import { ThemeContext } from '../context/ThemeContext';
+
 import BotaoPersonalizado from '../components/botaoPersonalizado';
 import BotaoDeAcao from '../components/botaoAcao';
+import OrderSummary from '../components/OrderSummary';
 
 export default function CartScreen({ navigation }) {
     const { theme } = useContext(ThemeContext);
     const { cartItems, removeFromCart, clearCart, getTotalPrice } = useContext(CartContext);
     const styles = getStyles(theme);
+
+    const bottomSheetModalRef = useRef(null);
+
+    const snapPoints = useMemo(() => ['50%', '85%'], [])
+
+    const handlePresentModalPress = useCallback(() => {
+        if (cartItems.length === 0){
+            Alert.alert("Carrinho Vazio", "Adicione itens ao carrinho antes de continuar.")
+            return;
+        }
+        bottomSheetModalRef.current?.present();
+    }, [cartItems])
 
     const formatadorDeMoeda = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
@@ -58,32 +74,53 @@ export default function CartScreen({ navigation }) {
     );
 
     return (
-        <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Carrinho de Compras</Text>
-            </View>
-            <FlatList
-                style={styles.list}
-                data={cartItems}
-                renderItem={renderItemCarrinho}
-                keyExtractor={item => item.id}
-                ListEmptyComponent={<Text style={styles.emptyText}>Seu carrinho está vazio</Text>}
-            />
-            <View style={styles.footer}>
-                <Text style={styles.totalText}>Total: {formatadorDeMoeda.format(getTotalPrice())}</Text>
-                <BotaoPersonalizado
-                    texto="Finalizar Compra"
-                    onPress={handleCheckout}
+        <BottomSheetModalProvider>
+            <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>Carrinho de Compras</Text>
+                </View>
+                <FlatList
+                    style={styles.list}
+                    data={cartItems}
+                    renderItem={renderItemCarrinho}
+                    keyExtractor={item => item.id}
+                    ListEmptyComponent={<Text style={styles.emptyText}>Seu carrinho está vazio</Text>}
                 />
-                {cartItems.length > 0 && (
-                    <BotaoPersonalizado
+                <View style={styles.footer}>
+                    <Text style={styles.totalText}>Total: {formatadorDeMoeda.format(getTotalPrice())}</Text>
+                    <View style={styles.buttonContainer}>
+                    {cartItems.length > 0 && (
+                        <BotaoPersonalizado
                         texto="Limpar Carrinho"
                         onPress={handleClear}
-                        style={{ backgroundColor: theme === 'light' ? '#DC3545' : '#FF453A', marginTop: 10 }}
+                        style={{ backgroundColor: theme === 'light' ? '#DC3545' : '#FF453A'}}
+                        />
+                    )}
+                    <BotaoPersonalizado
+                        texto="Finalizar Compra"
+                        onPress={handlePresentModalPress}
                     />
-                )}
-            </View>
-        </SafeAreaView>
+                    </View>
+                </View>
+
+                <BottomSheetModal
+                    ref={bottomSheetModalRef}
+                    index={0}
+                    snapPoints={snapPoints}
+                    backgroundStyle={{ backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E'}}
+                    handleIndicatorStyle={{ backgroundColor: theme === 'light' ? '#ccc' : '#555'}}
+                >
+                    <OrderSummary
+                        items={cartItems}
+                        total={getTotalPrice()}
+                        onConfirm={() => {
+                            bottomSheetModelRef.current?.dismiss();
+                            //IR PARA A TELA DE CONFIRMAÇÃO
+                        }}
+                    />
+                </BottomSheetModal>
+            </SafeAreaView>
+        </BottomSheetModalProvider>
     );
 }
 
@@ -151,5 +188,9 @@ const getStyles = (theme) => StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         color: theme === 'light' ? '#000' : '#fff',
-    }
+    },
+    buttonContainer: {
+        flexDirection: 'row',       // Alinha os filhos horizontalmente
+        justifyContent: 'space-evenly', // Distribui o espaço entre eles
+    },
 });

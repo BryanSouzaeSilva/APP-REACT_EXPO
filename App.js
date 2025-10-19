@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -28,6 +29,7 @@ export default function App() {
   const [clientes, setClientes] = useState([]);
   const [fornecedores, setFornecedores] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const [notification, setNotification] = useState({ message: '', type: 'success' });
@@ -157,96 +159,111 @@ export default function App() {
     }
   }, [logs]);
 
+  const handleAddOrder = (orderItems, totalAmount) => {
+    const newOrder = {
+      id: `order-${Date.now().toString()}`, // ID único para o pedido
+      items: orderItems,
+      total: totalAmount,
+      date: new Date().toISOString(),
+    };
+    setOrders(prevOrders => [newOrder, ...prevOrders]);
+    addLog('NOVO_PEDIDO', newOrder);
+  };
+
   return (
-    <SafeAreaProvider>
-      <ThemeContext.Provider value={{
-        theme,
-        toggleTheme,
-        produtos,
-        clientes,
-        fornecedores,
-        handleCadastrarProduto,
-        handleEditarProduto,
-        handleDeletarProduto,
-        handleCadastrarCliente,
-        handleEditarCliente,
-        handleDeletarCliente,
-        handleCadastrarFornecedor,
-        handleEditarFornecedor,
-        handleDeletarFornecedor,
-        showNotification,
-        addLog,
-        logs,
-      }}>
-        <CartProvider>
-          <NavigationContainer>
-            <Tab.Navigator
-              initialRouteName="HomeTab"
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-                if (route.name === 'HomeTab') {
-                  iconName = focused ? 'home' : 'home-outline';
-                } else if (route.name === 'ProdutosTab') {
-                  iconName = focused ? 'cube' : 'cube-outline';
-                } else if (route.name === 'ClientesTab') {
-                  iconName = focused ? 'people' : 'people-outline';
-                } else if (route.name === 'FornecedoresTab') {
-                  iconName = focused ? 'business' : 'business-outline';
-                } else if (route.name === 'CartTab') {
-                    iconName = focused ? 'cart' : 'cart-outline';
-                } else if (route.name === 'ConfiguracaoTab') {
-                  iconName = focused ? 'settings' : 'settings-outline';
-                }
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: theme === 'light' ? '#007AFF' : '#039BE5',
-              tabBarInactiveTintColor: 'gray',
-              tabBarStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
-              headerStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
-              headerTintColor: theme === 'light' ? '#000' : '#fff',
-            })}
-          >
-            <Tab.Screen
-              name="HomeTab"
-              component={HomeScreen}
-              options={{ title: 'Início' }}
-            />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <ThemeContext.Provider value={{
+          theme,
+          toggleTheme,
+          produtos,
+          clientes,
+          fornecedores,
+          handleCadastrarProduto,
+          handleEditarProduto,
+          handleDeletarProduto,
+          handleCadastrarCliente,
+          handleEditarCliente,
+          handleDeletarCliente,
+          handleCadastrarFornecedor,
+          handleEditarFornecedor,
+          handleDeletarFornecedor,
+          showNotification,
+          addLog,
+          logs,
+          orders,
+          handleAddOrder,
+        }}>
+          <CartProvider>
+            <NavigationContainer>
+              <Tab.Navigator
+                initialRouteName="HomeTab"
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+                  if (route.name === 'HomeTab') {
+                    iconName = focused ? 'home' : 'home-outline';
+                  } else if (route.name === 'ProdutosTab') {
+                    iconName = focused ? 'cube' : 'cube-outline';
+                  } else if (route.name === 'ClientesTab') {
+                    iconName = focused ? 'people' : 'people-outline';
+                  } else if (route.name === 'FornecedoresTab') {
+                    iconName = focused ? 'business' : 'business-outline';
+                  } else if (route.name === 'CartTab') {
+                      iconName = focused ? 'cart' : 'cart-outline';
+                  } else if (route.name === 'ConfiguracaoTab') {
+                    iconName = focused ? 'settings' : 'settings-outline';
+                  }
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: theme === 'light' ? '#007AFF' : '#039BE5',
+                tabBarInactiveTintColor: 'gray',
+                tabBarStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
+                headerStyle: { backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E' },
+                headerTintColor: theme === 'light' ? '#000' : '#fff',
+              })}
+            >
+              <Tab.Screen
+                name="HomeTab"
+                component={HomeScreen}
+                options={{ title: 'Início' }}
+              />
 
-            <Tab.Screen
-              name="ProdutosTab"
-              component={ProductStackNavigator}
-              options={{ title: 'Produtos', unmountOnBlur: true }}
-            />
+              <Tab.Screen
+                name="ProdutosTab"
+                component={ProductStackNavigator}
+                options={{ title: 'Produtos', unmountOnBlur: true }}
+              />
 
-            <Tab.Screen
-              name="ClientesTab"
-              component={ClientStackNavigator}
-              options={{ title: 'Clientes', unmountOnBlur: true }}
-            />
+              <Tab.Screen
+                name="ClientesTab"
+                component={ClientStackNavigator}
+                options={{ title: 'Clientes', unmountOnBlur: true }}
+              />
 
-            <Tab.Screen
-              name="FornecedoresTab"
-              component={SupplierStackNavigator}
-              options={{ title: 'Fornecedores', unmountOnBlur: true }}
-            />
+              <Tab.Screen
+                name="FornecedoresTab"
+                component={SupplierStackNavigator}
+                options={{ title: 'Fornecedores', unmountOnBlur: true }}
+              />
 
-            <Tab.Screen
-              name="CartTab"
-              component={CartStackNavigator}
-              options={{ title: 'Carrinho', unmountOnBlur: true }}
-            />
+              <Tab.Screen
+                name="CartTab"
+                component={CartStackNavigator}
+                options={{ title: 'Carrinho', unmountOnBlur: true }}
+              />
 
-            <Tab.Screen
-              name="ConfiguracaoTab"
-              component={ConfigStackNavigator}
-              options={{ title: 'Configurações' }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
-        </CartProvider>
-        <Notificacao message={notification.message} type={notification.type} />
-      </ThemeContext.Provider>
-    </SafeAreaProvider>
+              <Tab.Screen
+                name="ConfiguracaoTab"
+                component={ConfigStackNavigator}
+                options={{ title: 'Configurações' }}
+              />
+            </Tab.Navigator>
+          </NavigationContainer>
+          </CartProvider>
+          <Notificacao message={notification.message} type={notification.type} />
+        </ThemeContext.Provider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
