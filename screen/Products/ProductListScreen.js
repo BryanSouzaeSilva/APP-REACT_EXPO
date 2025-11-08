@@ -7,7 +7,7 @@ import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
 
 export default function ProductListScreen({ navigation }) {
-    const { theme, produtos, handleDeletarProduto } = useContext(ThemeContext);
+    const { theme, produtos, handleDeletarProduto, showNotification } = useContext(ThemeContext);
     const { addToCart } = useContext(CartContext);
     const styles = getStyles(theme);
 
@@ -31,6 +31,11 @@ export default function ProductListScreen({ navigation }) {
         navigation.navigate('ProductForm', { produtoId });
     };
 
+    const handleAddToCart = (produto) => {
+        addToCart(produto);
+        showNotification(`Produto "${produto.nome}" adicionado ao carrinho.`, 'success');
+    }
+
     const renderItemProduto = ({ item }) => (
         <View style={styles.itemContainer}>
             <View style={styles.infoContainer}>
@@ -45,7 +50,7 @@ export default function ProductListScreen({ navigation }) {
                 <BotaoDeAcao
                     iconName="cart-outline"
                     color={theme === 'light' ? '#28A745' : '#34C759'}
-                    onPress={() => addToCart(item)}
+                    onPress={() => handleAddToCart(item)}
                 />
                 <BotaoDeAcao 
                     iconName="pencil"

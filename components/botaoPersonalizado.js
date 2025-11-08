@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-export default function BotaoPersonalizado({ texto, onPress }){
+export default function BotaoPersonalizado({ texto, onPress, style }){
   return(
-    <TouchableOpacity style={styles.botao} onPress={onPress}>
+    <TouchableOpacity style={[styles.botao, style]} onPress={onPress}>
       <Text style={styles.texto}>{texto}</Text>
     </TouchableOpacity>
   );
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     marginVertical: 5,
-    width: 150,
     alignItems: 'center',
   },
   texto: {

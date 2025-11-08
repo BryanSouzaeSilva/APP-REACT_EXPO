@@ -144,6 +144,7 @@ const getStyles = (theme) => StyleSheet.create({
         paddingVertical: 20,
         borderTopWidth: 1,
         borderTopColor: theme === 'light' ? '#ccc' : '#3A3A3C',
+        alignItems: 'stretch',
     },
     totalText: {
         fontSize: 20,
