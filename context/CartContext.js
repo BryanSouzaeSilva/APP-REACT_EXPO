@@ -1,9 +1,40 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCart = async () => {
+      try{
+        const savedCart = await AsyncStorage.getItem('@app_carrinho');
+        if (savedCart) {
+          setCartItems(JSON.parse(savedCart));
+        }
+      } catch (error) {
+        console.error("Erro ao carregar o carrinho:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadCart();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const savedCart = async () => {
+        try {
+          await AsyncStorage.setItem('@app_carrinho', JSON.stringify(cartItems));
+        } catch (error) {
+          console.error('Erro ao salvar o carrinho:', error);
+        }
+      };
+      savedCart();
+    }
+  }, [cartItems, isLoading])
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
