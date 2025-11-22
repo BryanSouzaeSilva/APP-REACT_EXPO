@@ -10,14 +10,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext } from './context/ThemeContext';
 import { CartProvider } from './context/CartContext';
 
-import ProductStackNavigator from './screen/navigators/ProductStackNavigator';
-import ClientStackNavigator from './screen/navigators/ClientStackNavigator';
-import SupplierStackNavigator from './screen/navigators/SupplierStackNavigator';
 import CartStackNavigator from './screen/navigators/CartStackNavigator';
 
 import HomeScreen from './screen/HomeScreen';
 import Notificacao from './components/Notificacao';
-import ConfigStackNavigator from './screen/navigators/ConfigStackNavigator';
+
+import ManagementStackNavigator from './screen/navigators/ManagementStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -214,33 +212,20 @@ export default function App() {
             />
 
             <Tab.Screen
-              name="ProdutosTab"
-              component={ProductStackNavigator}
-              options={{ title: 'Produtos', unmountOnBlur: true }}
-            />
-
-            <Tab.Screen
-              name="ClientesTab"
-              component={ClientStackNavigator}
-              options={{ title: 'Clientes', unmountOnBlur: true }}
-            />
-
-            <Tab.Screen
-              name="FornecedoresTab"
-              component={SupplierStackNavigator}
-              options={{ title: 'Fornecedores', unmountOnBlur: true }}
+              name="GestaoTab"
+              component={ManagementStackNavigator}
+              options={{ 
+                title: 'Gestão',
+                tabBarIcon: ({ focused, color, size }) => (
+                  <Ionicons name={focused ? 'grid' : 'grid-outline'} size={size} color={color} />
+                )
+              }}
             />
 
             <Tab.Screen
               name="CartTab"
               component={CartStackNavigator}
               options={{ title: 'Carrinho', unmountOnBlur: true }}
-            />
-
-            <Tab.Screen
-              name="ConfiguracaoTab"
-              component={ConfigStackNavigator}
-              options={{ title: 'Configurações' }}
             />
           </Tab.Navigator>
         </NavigationContainer>
