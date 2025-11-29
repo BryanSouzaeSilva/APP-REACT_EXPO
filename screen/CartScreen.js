@@ -36,7 +36,7 @@ export default function CartScreen({ navigation }) {
             Alert.alert("Carrinho Vazio", "Adicione itens ao carrinho antes de continuar.");
             return;
         }
-        Alert.alert("Finalizar Compra", "Função de checkout ainda não implementada.");
+        navigation.navigate('Checkout');
     };
 
     const renderItemCarrinho = ({ item }) => (

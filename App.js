@@ -25,6 +25,7 @@ export default function App() {
   const [produtos, setProdutos] = useState([]);
   const [clientes, setClientes] = useState([]);
   const [fornecedores, setFornecedores] = useState([]);
+  const [vendas, setVendas] = useState([]);
   const [logs, setLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -65,6 +66,8 @@ export default function App() {
     if (!isLoading) {
       const salvarDados = async (key, data) => {
         try {
+          const vendasSalvas = await AsyncStorage.getItem('@app_vendas');
+          if (vendasSalvas !== null) setVendas(JSON.parse(vendasSalvas));
           const jsonValue = JSON.stringify(data);
           await AsyncStorage.setItem(key, jsonValue);
         } catch (e) {
@@ -74,6 +77,7 @@ export default function App() {
       salvarDados('@app_produtos', produtos);
       salvarDados('@app_clientes', clientes);
       salvarDados('@app_fornecedores', fornecedores);
+      salvarDados('@app_vendas', vendas)
     }
   }, [produtos, clientes, fornecedores, isLoading]);
 
@@ -138,6 +142,12 @@ export default function App() {
     }
   };
 
+  const handleRegistrarVenda = (novaVenda) => {
+    setVendas(listaAntiga => [...listaAntiga, novaVenda]);
+    showNotification('Venda Realizada com Sucesso!');
+    addLog('VENDA_REALIZADA', {id: novaVenda.id, total: novaVenda.total})
+  }
+
   const addLog = (tipo, dados) => {
     const novoLog = {
       timestamp: new Date().toISOString(),
@@ -163,6 +173,7 @@ export default function App() {
         produtos,
         clientes,
         fornecedores,
+        vendas,
         handleCadastrarProduto,
         handleEditarProduto,
         handleDeletarProduto,
@@ -172,6 +183,7 @@ export default function App() {
         handleCadastrarFornecedor,
         handleEditarFornecedor,
         handleDeletarFornecedor,
+        handleRegistrarVenda,
         showNotification,
         addLog,
         logs,

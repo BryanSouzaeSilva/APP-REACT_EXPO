@@ -7,7 +7,6 @@ import BotaoPersonalizado from '../components/botaoPersonalizado';
 export default function HomeScreen({ navigation, route }) {
   const { theme, produtos, clientes } = useContext(ThemeContext);
   const styles = getStyles(theme);
-  // const { produtos, clientes } = route.params;
 
   const totalProdutos = produtos.length;
   const totalClientes = clientes.length;
@@ -65,14 +64,27 @@ export default function HomeScreen({ navigation, route }) {
 
         <View style={styles.actionsContainer}>
           <BotaoPersonalizado
-            texto="Cadastrar Novo Produto"
-            onPress={() => navigation.navigate('ProdutosTab', {screen: 'ProductForm'})}
+            texto="Cadastrar Produto"
+            onPress={() => navigation.navigate('GestaoTab', {screen: 'ProductForm'})}
             style={styles.actionButton}
           />
 
           <BotaoPersonalizado
-            texto="Cadastrar Novo Cliente"
-            onPress={() => navigation.navigate('ClientesTab', {screen: 'ClientForm'})}
+            texto="Cadastrar Cliente"
+            onPress={() => navigation.navigate('GestaoTab', {screen: 'ClientForm'})}
+            style={styles.actionButton}
+          />
+        </View>
+
+        <View style={styles.actionsContainer}>
+          <BotaoPersonalizado
+            texto="Lista de Produtos"
+            onPress={() => navigation.navigate('GestaoTab', {screen: 'ProductList'})}
+            style={styles.actionButton}
+          />
+          <BotaoPersonalizado
+            texto="Lista de Clientes"
+            onPress={() => navigation.navigate('GestaoTab', {screen: 'ClientList'})}
             style={styles.actionButton}
           />
         </View>
