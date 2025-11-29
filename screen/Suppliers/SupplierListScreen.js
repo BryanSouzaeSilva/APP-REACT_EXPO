@@ -1,13 +1,25 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, FlatList, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function SupplierListScreen({ navigation }) {
     const { theme, fornecedores, handleDeletarFornecedor } = useContext(ThemeContext);
     const styles = getStyles(theme);
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const fornecedoresFiltrados = fornecedores.filter(item => {
+        const textoBusca = searchQuery.toUpperCase();
+        const nome = item.nomeFantasia ? item.nomeFantasia.toUpperCase() : '';
+        const razao = item.razaoSocial ? item.razaoSocial.toUpperCase() : '';
+        const cnpj = item.cnpj ? item.cnpj.replace(/\D/g, '') : '';
+
+        return nome.includes(textoBusca) || razao.includes(textoBusca) || cnpj.includes(textoBusca) || item.cnpj.includes(textoBusca);
+    });
 
     const handleDelete = (id, nome) => {
         Alert.alert(
@@ -55,9 +67,29 @@ export default function SupplierListScreen({ navigation }) {
             <View style={styles.header}>
                 <Text style={styles.title}>Fornecedores Cadastrados</Text>
             </View>
+
+            <View style={styles.searchContainer}>
+                <Ionicons name="search" size={20} color={theme === 'light' ? '#666' : '#aaa'} style={{marginRight: 8}} />
+                <TextInput 
+                    style={styles.searchInput}
+                    placeholder="Buscar fornecedor..."
+                    placeholderTextColor={theme === 'light' ? '#888' : '#aaa'}
+                    value={searchQuery}
+                    onChangeText={setSearchQuery}
+                />
+                {searchQuery.length > 0 && (
+                    <Ionicons 
+                        name="close-circle" 
+                        size={20} 
+                        color={theme === 'light' ? '#666' : '#aaa'} 
+                        onPress={() => setSearchQuery('')}
+                    />
+                )}
+            </View>
+
             <FlatList
                 style={styles.list}
-                data={fornecedores}
+                data={fornecedoresFiltrados}
                 renderItem={renderItemFornecedor}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={<Text style={styles.emptyText}>Nenhum fornecedor cadastrado ainda.</Text>}
@@ -87,6 +119,24 @@ const getStyles = (theme) => StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: theme === 'light' ? '#000' : '#fff',
+    },
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '90%',
+        alignSelf: 'center',
+        backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        height: 45,
+        marginBottom: 15,
+        borderWidth: 1,
+        borderColor: theme === 'light' ? '#ddd' : '#444',
+    },
+    searchInput: {
+        flex: 1,
+        color: theme === 'light' ? '#000' : '#fff',
+        fontSize: 16,
     },
     list: {
         width: '90%',

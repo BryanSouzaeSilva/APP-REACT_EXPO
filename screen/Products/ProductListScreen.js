@@ -1,20 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { ThemeContext } from '../../context/ThemeContext';
-import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ProductListScreen({ navigation }) {
     const { theme, produtos, handleDeletarProduto, showNotification } = useContext(ThemeContext);
     const { addToCart } = useContext(CartContext);
     const styles = getStyles(theme);
 
+    const [searchQuery, setSearchQuery] = useState('');
+
     const formatadorDeMoeda = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
     });
+
+    const produtosFiltrados = produtos.filter(item => {
+        const itemNome = item.nome ? item.nome.toUpperCase() : '';
+        const textoBusca = searchQuery.toUpperCase();
+
+        return itemNome.includes(textoBusca);
+    })
 
     const handleDelete = (id, nome) => {
         Alert.alert(
@@ -71,9 +81,29 @@ export default function ProductListScreen({ navigation }) {
             <View style={styles.header}>
                 <Text style={styles.title}>Produtos</Text>
             </View>
+
+            <View style={styles.searchContainer}>
+                <Ionicons name="search" size={20} color={theme === 'light' ? '#666' : '#aaa'} style={{marginRight: 8}} />
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Buscar produtos..."
+                    placeholderTextColor={theme === 'light' ? '#888' : '#aaa'}
+                    value={searchQuery}
+                    onChangeText={setSearchQuery}
+                />
+                {searchQuery.length > 0 && (
+                    <Ionicons 
+                        name="close-circle" 
+                        size={20} 
+                        color={theme === 'light' ? '#666' : '#aaa'} 
+                        onPress={() => setSearchQuery('')}
+                    />
+                )}
+            </View>
+
             <FlatList
                 style={styles.list}
-                data={produtos}
+                data={produtosFiltrados}
                 renderItem={renderItemProduto}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={<Text style={styles.emptyText}>Nenhum produto cadastrado ainda</Text>}
@@ -103,6 +133,24 @@ const getStyles = (theme) => StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: theme === 'light' ? '#000' : '#fff',
+    },
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '90%',
+        alignSelf: 'center',
+        backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        height: 45,
+        marginBottom: 15,
+        borderWidth: 1,
+        borderColor: theme === 'light' ? '#ddd' : '#444',
+    },
+    searchInput: {
+        flex: 1,
+        color: theme === 'light' ? '#000' : '#fff',
+        fontSize: 16,
     },
     list: {
         width: '90%',

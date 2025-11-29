@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert} from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, FlatList, Alert, TextInput} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
+import { Ionicons } from '@expo/vector-icons';
 
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
@@ -9,6 +10,16 @@ import BotaoDeAcao from '../../components/botaoAcao';
 export default function ClientListScreen({ navigation }) {
     const { theme, clientes, handleDeletarCliente } = useContext(ThemeContext);
     const styles = getStyles(theme);
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const clientesFiltrados = clientes.filter(item => {
+      const textoBusca = searchQuery.toUpperCase();
+      const nome = item.nome ? item.nome.toUpperCase() : '';
+      const cpf = item.cpf ? item.cpf.replace(/\D/g, '') : '';
+
+      return nome.includes(textoBusca) || cpf.includes(textoBusca) || item.cpf.includes(textoBusca);
+    });
 
     const handleDelete = (id, nome) => {
       Alert.alert(
@@ -56,9 +67,29 @@ export default function ClientListScreen({ navigation }) {
             <View style={styles.header}>
                 <Text style={styles.title}>Clientes Cadastrados</Text>
             </View>
+
+            <View style={styles.searchContainer}>
+              <Ionicons name="search" size={20} color={theme === 'light' ? '#666' : '#aaa'} style={{marginRight: 8}} />
+              <TextInput
+                  style={styles.searchInput}
+                  placeholder="Buscar clientes por nome ou CPF..."
+                  placeholderTextColor={theme === 'light' ? '#888' : '#aaa'}
+                  value={searchQuery}
+                  onChangeText={setSearchQuery}
+              />
+              {searchQuery.length > 0 && (
+                    <Ionicons 
+                        name="close-circle" 
+                        size={20} 
+                        color={theme === 'light' ? '#666' : '#aaa'} 
+                        onPress={() => setSearchQuery('')}
+                    />
+                )}
+            </View>
+
             <FlatList
                 style={styles.list}
-                data={clientes}
+                data={clientesFiltrados}
                 renderItem={renderItemCliente}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={<Text style={styles.emptyText}>Nenhum cliente cadastrado ainda.</Text>}
@@ -88,6 +119,24 @@ const getStyles = (theme) => StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: theme === 'light' ? '#000' : '#fff',
+  },
+  searchContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      width: '90%',
+      alignSelf: 'center',
+      backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
+      borderRadius: 8,
+      paddingHorizontal: 10,
+      height: 45,
+      marginBottom: 15,
+      borderWidth: 1,
+      borderColor: theme === 'light' ? '#ddd' : '#444',
+  },
+  searchInput: {
+      flex: 1,
+      color: theme === 'light' ? '#000' : '#fff',
+      fontSize: 16,
   },
   list: {
     width: '90%',
