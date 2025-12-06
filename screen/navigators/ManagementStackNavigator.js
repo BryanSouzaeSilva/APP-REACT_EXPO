@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import ManagementScreen from '../ManagementScreen';
 
+import SalesScreen from '../SalesScreen';
 import ProductListScreen from '../Products/ProductListScreen';
 import ProductFormScreen from '../Products/ProductFormScreen';
 import ClientListScreen from '../Clients/ClientListScreen';
@@ -19,6 +20,8 @@ export default function ManagementStackNavigator() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="ManagementMenu" component={ManagementScreen} />
+
+            <Stack.Screen name="Sales" component={SalesScreen} />
 
             <Stack.Screen name="ProductList" component={ProductListScreen} />
             <Stack.Screen name="ProductForm" component={ProductFormScreen} />

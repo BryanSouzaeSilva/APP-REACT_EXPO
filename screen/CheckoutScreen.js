@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, FlatList, Alert, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -17,6 +17,12 @@ export default function CheckoutScreen({ navigation }) {
     const [clienteSelecionado, setClienteSelecionado] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [formaPagamento, setFormaPagamento] = useState('Dinheiro');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const clientesFiltrados = clientes.filter(item => {
+        const texto = searchQuery.toUpperCase();
+        return item.nome.toUpperCase().includes(texto) || item.cpf.includes(texto);
+    })
 
     const handleFinalizar = () => {
         if (!clienteSelecionado) {
@@ -40,7 +46,6 @@ export default function CheckoutScreen({ navigation }) {
 
         handleRegistrarVenda(novaVenda);
         clearCart();
-        // navigation.navigate('HomeTab');
         navigation.goBack();
     };
 
@@ -112,8 +117,20 @@ export default function CheckoutScreen({ navigation }) {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <Text style={styles.modalTitle}>Selecione o Cliente</Text>
+
+                        <View style={styles.searchBox}>
+                            <Ionicons name="search" size={20} color="#888" style={{marginRight: 8}} />
+                            <TextInput 
+                                style={styles.searchInput}
+                                placeholder="Buscar cliente..."
+                                placeholderTextColor="#aaa"
+                                value={searchQuery}
+                                onChangeText={setSearchQuery}
+                            />
+                        </View>
+
                         <FlatList 
-                            data={clientes}
+                            data={clientesFiltrados}
                             keyExtractor={item => item.id}
                             renderItem={renderClienteItem}
                             style={{ width: '100%' }}
@@ -215,5 +232,19 @@ const getStyles = (theme) => StyleSheet.create({
     },
     clientItemSub: {
         fontSize: 14, color: 'gray',
-    }
+    },
+    searchBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: theme === 'light' ? '#f0f0f0' : '#333',
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        height: 40,
+        marginBottom: 10,
+        width: '100%',
+    },
+    searchInput: {
+        flex: 1,
+        color: theme === 'light' ? '#000' : '#fff',
+    },
 });

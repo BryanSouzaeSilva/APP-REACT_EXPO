@@ -9,59 +9,66 @@ export default function ManagementScreen({ navigation }) {
     const styles = getStyles(theme);
 
     const MenuButton = ({ title, icon, route, color }) => (
-    <TouchableOpacity 
-        style={[styles.card, { borderLeftColor: color }]} 
-        onPress={() => navigation.navigate(route)}
-    >
-        <View style={[styles.iconContainer, { backgroundColor: color }]}>
-            <MaterialCommunityIcons name={icon} size={30} color="#fff" />
-        </View>
-        <View style={styles.textContainer}>
-            <Text style={styles.cardTitle}>{title}</Text>
-            <Text style={styles.cardSubtitle}>Toque para acessar</Text>
-        </View>
-        <MaterialCommunityIcons name="chevron-right" size={24} color={theme === 'light' ? '#ccc' : '#555'} />
-    </TouchableOpacity>
-);
+        <TouchableOpacity 
+            style={[styles.card, { borderLeftColor: color }]} 
+            onPress={() => navigation.navigate(route)}
+        >
+            <View style={[styles.iconContainer, { backgroundColor: color }]}>
+                <MaterialCommunityIcons name={icon} size={30} color="#fff" />
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.cardTitle}>{title}</Text>
+                <Text style={styles.cardSubtitle}>Toque para acessar</Text>
+            </View>
+            <MaterialCommunityIcons name="chevron-right" size={24} color={theme === 'light' ? '#ccc' : '#555'} />
+        </TouchableOpacity>
+    );
 
-return (
-    <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.content}>
-            <Text style={styles.headerTitle}>Menu de Gestão</Text>
-        
-            <MenuButton 
-                title="Produtos" 
-                icon="package-variant-closed" 
-                route="ProductList" 
-                color="#007AFF" 
-            />
+    return (
+        <SafeAreaView style={styles.container}>
+            <ScrollView contentContainerStyle={styles.content}>
+                <Text style={styles.headerTitle}>Menu de Gestão</Text>
             
-            <MenuButton 
-                title="Clientes" 
-                icon="account-group" 
-                route="ClientList" 
-                color="#28A745" 
-            />
-            
-            <MenuButton 
-                title="Fornecedores" 
-                icon="truck-delivery" 
-                route="SupplierList" 
-                color="#FF9500" 
-            />
+                <MenuButton 
+                    title="Nova Venda (PDV)" 
+                    icon="point-of-sale" 
+                    route="Sales" 
+                    color="#AF52DE" 
+                />
 
-            <View style={styles.divider} />
+                <MenuButton 
+                    title="Produtos" 
+                    icon="package-variant-closed" 
+                    route="ProductList" 
+                    color="#007AFF" 
+                />
+                
+                <MenuButton 
+                    title="Clientes" 
+                    icon="account-group" 
+                    route="ClientList" 
+                    color="#28A745" 
+                />
+                
+                <MenuButton 
+                    title="Fornecedores" 
+                    icon="truck-delivery" 
+                    route="SupplierList" 
+                    color="#FF9500" 
+                />
 
-            <MenuButton 
-                title="Configurações" 
-                icon="cog" 
-                route="ConfigDefault" 
-                color="#8E8E93" 
-            />
+                <View style={styles.divider} />
 
-        </ScrollView>
-    </SafeAreaView>
-);
+                <MenuButton 
+                    title="Configurações" 
+                    icon="cog" 
+                    route="ConfigDefault" 
+                    color="#8E8E93" 
+                />
+
+            </ScrollView>
+        </SafeAreaView>
+    );
 }
 
 const getStyles = (theme) => StyleSheet.create({

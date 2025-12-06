@@ -5,7 +5,7 @@ import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
 
 export default function HomeScreen({ navigation, route }) {
-  const { theme, produtos, clientes } = useContext(ThemeContext);
+  const { theme, produtos, clientes, vendas } = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   const totalProdutos = produtos.length;
@@ -89,10 +89,42 @@ export default function HomeScreen({ navigation, route }) {
           />
         </View>
 
+        <BotaoPersonalizado
+            texto="Efetuar Pedido"
+            onPress={() => navigation.navigate('GestaoTab', { screen: 'Sales' })}
+            style={styles.actionButton}
+          />
+
+        <View style={{marginTop: 20}}>
+          <Text style={styles.sectionTitle}>Últimas Vendas</Text>
+
+          {vendas.slice(-3).reverse().map((venda) => ( 
+              <View key={venda.id} style={styles.historyCard}>
+                  <View>
+                      <Text style={styles.historyClient}>{venda.clienteNome}</Text>
+                      <Text style={styles.historyDate}>{new Date(venda.data).toLocaleDateString()}</Text>
+                  </View>
+                  <Text style={styles.historyValue}>
+                      {formatadorDeMoeda.format(venda.total)}
+                  </Text>
+              </View>
+          ))}
+
+          {vendas.length === 0 && <Text style={{color: 'gray', fontStyle: 'italic'}}>Nenhuma venda registrada.</Text>}
+
+          <View style={{height: 20}} />
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
 }
+
+{/* <BotaoDeAcao
+                    iconName="cart-outline"
+                    color={theme === 'light' ? '#28A745' : '#34C759'}
+                    onPress={() => handleAddToCart(item)}
+                /> */}
 
 const getStyles = (theme) => StyleSheet.create({
   container: {
@@ -151,10 +183,35 @@ const getStyles = (theme) => StyleSheet.create({
   },
   actionsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around', // Espaço entre os botões
+    justifyContent: 'space-around',
   },
   actionButton: {
-    flex: 1, // Faz os botões ocuparem o mesmo espaço
+    flex: 1,
     marginHorizontal: 5,
+  },
+  historyCard: {
+    backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderLeftWidth: 4,
+    borderLeftColor: '#28A745'
+  },
+  historyClient: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: theme === 'light' ? '#000' : '#fff',
+  },
+  historyDate: {
+    fontSize: 12,
+    color: 'gray',
+  },
+  historyValue: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#28A745',
   },
 });

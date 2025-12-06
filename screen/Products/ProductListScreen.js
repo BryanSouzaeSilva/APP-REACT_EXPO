@@ -57,11 +57,6 @@ export default function ProductListScreen({ navigation }) {
             </View>
 
             <View style={styles.actionsContainer}>
-                <BotaoDeAcao
-                    iconName="cart-outline"
-                    color={theme === 'light' ? '#28A745' : '#34C759'}
-                    onPress={() => handleAddToCart(item)}
-                />
                 <BotaoDeAcao 
                     iconName="pencil"
                     color={theme === 'light' ? '#007AFF' : '#0A84FF'}

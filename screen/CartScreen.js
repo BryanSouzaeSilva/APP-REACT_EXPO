@@ -16,10 +16,6 @@ export default function CartScreen({ navigation }) {
         currency: 'BRL',
     });
 
-    const handleRemove = (id) => {
-        removeFromCart(id);
-    };
-
     const handleClear = () => {
         Alert.alert(
             "Limpar Carrinho",
@@ -39,6 +35,23 @@ export default function CartScreen({ navigation }) {
         navigation.navigate('Checkout');
     };
 
+    const handleRemove = (id, nome) => {
+        Alert.alert(
+            "Remover Item",
+            `Deseja remover ${nome} do carrinho?`,
+            [
+                { text: "Não", style: "cancel" },
+                { 
+                    text: "Sim", 
+                    style: "destructive",
+                    onPress: () => {
+                        removeFromCart(id);
+                    } 
+                }
+            ]
+        );
+    };
+
     const renderItemCarrinho = ({ item }) => (
         <View style={styles.itemContainer}>
             <View style={styles.infoContainer}>
@@ -51,7 +64,7 @@ export default function CartScreen({ navigation }) {
                 <BotaoDeAcao
                     iconName="trash-can-outline"
                     color={theme === 'light' ? '#DC3545' : '#FF453A'}
-                    onPress={() => handleRemove(item.id)}
+                    onPress={() => handleRemove(item.id, item.nome)}
                 />
             </View>
         </View>
