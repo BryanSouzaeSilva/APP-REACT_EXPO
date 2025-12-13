@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import BotaoPersonalizado from '../../components/botaoPersonalizado';
 import BotaoDeAcao from '../../components/botaoAcao';
+import HeaderPersonalizado from '../../components/headerPersonalizado';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function SupplierListScreen({ navigation }) {
@@ -63,10 +64,11 @@ export default function SupplierListScreen({ navigation }) {
     );
 
     return (
-        <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Fornecedores Cadastrados</Text>
-            </View>
+        <SafeAreaView style={styles.container}>
+            <HeaderPersonalizado 
+                title="Fornecedores"
+                onPressBack={() => navigation.navigate('ManagementMenu')}
+            />
 
             <View style={styles.searchContainer}>
                 <Ionicons name="search" size={20} color={theme === 'light' ? '#666' : '#aaa'} style={{marginRight: 8}} />
@@ -109,12 +111,6 @@ const getStyles = (theme) => StyleSheet.create({
         flex: 1,
         backgroundColor: theme === 'light' ? '#f0f0f0' : '#1C1C1E',
     },
-    header: {
-        width: '90%',
-        alignSelf: 'center',
-        marginTop: 20,
-        marginBottom: 10,
-    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
@@ -128,6 +124,7 @@ const getStyles = (theme) => StyleSheet.create({
         backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
         borderRadius: 8,
         paddingHorizontal: 10,
+        marginTop: 10,
         height: 45,
         marginBottom: 15,
         borderWidth: 1,

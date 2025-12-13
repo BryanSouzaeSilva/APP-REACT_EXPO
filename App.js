@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -220,7 +220,10 @@ export default function App() {
             <Tab.Screen
               name="HomeTab"
               component={HomeScreen}
-              options={{ title: 'Início' }}
+              options={{
+                headerShown: false,
+                title: 'Início'
+              }}
             />
 
             <Tab.Screen
@@ -228,6 +231,7 @@ export default function App() {
               component={ManagementStackNavigator}
               options={{ 
                 title: 'Gestão',
+                headerShown: false,
                 tabBarIcon: ({ focused, color, size }) => (
                   <Ionicons name={focused ? 'grid' : 'grid-outline'} size={size} color={color} />
                 )
@@ -237,7 +241,11 @@ export default function App() {
             <Tab.Screen
               name="CartTab"
               component={CartStackNavigator}
-              options={{ title: 'Carrinho', unmountOnBlur: true }}
+              options={{
+                headerShown: false,
+                title: 'Carrinho',
+                unmountOnBlur: true
+              }}
             />
           </Tab.Navigator>
         </NavigationContainer>

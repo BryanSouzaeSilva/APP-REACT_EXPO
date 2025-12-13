@@ -5,6 +5,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
+import HeaderPersonalizado from '../components/headerPersonalizado';
 
 const formatBytes = (bytes, decimals = 2) => {
   if (bytes === 0) return '0 Bytes';
@@ -50,20 +51,22 @@ export default function StorageInfoScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Uso do Armazenamento</Text>
-      <View style={styles.card}>
-        <Text style={styles.label}>Espaço total utilizado pelo app:</Text>
-        {loading ? (
-          <ActivityIndicator size="large" color={theme === 'light' ? '#007AFF' : '#039BE5'} />
-        ) : (
-          <Text style={styles.sizeText}>{formatBytes(storageSize)}</Text>
-        )}
-        <Text style={styles.infoText}>
-          Este valor representa o espaço ocupado pelas listas de produtos e clientes salvas localmente no seu dispositivo.
-        </Text>
+      <HeaderPersonalizado title="Uso do Armazenamento" />
+      
+      <View style={styles.content}>
+        <View style={styles.card}>
+          <Text style={styles.label}>Espaço total utilizado pelo app:</Text>
+          {loading ? (
+            <ActivityIndicator size="large" color={theme === 'light' ? '#007AFF' : '#039BE5'} />
+          ) : (
+            <Text style={styles.sizeText}>{formatBytes(storageSize)}</Text>
+          )}
+          <Text style={styles.infoText}>
+            Este valor representa o espaço ocupado pelas listas de produtos e clientes salvas localmente no seu dispositivo.
+          </Text>
+        </View>
+        <BotaoPersonalizado texto="Atualizar" onPress={calcularEspacoUsado} />
       </View>
-      <BotaoPersonalizado texto="Atualizar" onPress={calcularEspacoUsado} />
-      <BotaoPersonalizado texto="Voltar" onPress={() => navigation.goBack()} />
     </SafeAreaView>
   );
 }
@@ -71,15 +74,13 @@ export default function StorageInfoScreen({ navigation }) {
 const getStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: theme === 'light' ? '#f0f0f0' : '#1C1C1E',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: theme === 'light' ? '#000' : '#fff',
-    marginBottom: 20,
+  content: {
+    flex: 1,
+    justifyContent: 'center', 
+    alignItems: 'center',
+    paddingTop: 40,
   },
   card: {
     width: '90%',

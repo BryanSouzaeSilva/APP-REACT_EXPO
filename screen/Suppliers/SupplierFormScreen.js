@@ -3,6 +3,7 @@ import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import MaskInput, { Masks } from 'react-native-mask-input';
+import HeaderPersonalizado from '../../components/headerPersonalizado';
 
 export default function SupplierFormScreen({ route, navigation }) {
 
@@ -63,7 +64,7 @@ export default function SupplierFormScreen({ route, navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.formContainer}>
-                <Text style={styles.title}>{isEditing ? 'Editar Fornecedor' : 'Cadastrar Fornecedor'}</Text>
+                <HeaderPersonalizado title={isEditing ? 'Editar Fornecedor' : 'Cadastrar Fornecedor'} />
 
                 <Text style={styles.labels}>Nome Fantasia:</Text>
                 <TextInput

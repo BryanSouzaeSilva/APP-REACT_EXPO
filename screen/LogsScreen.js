@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
+import HeaderPersonalizado from '../components/headerPersonalizado';
 
 export default function LogScreen({ navigation }) {
     const { theme, logs } = useContext(ThemeContext);
@@ -18,19 +19,14 @@ export default function LogScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Histórico de Logs</Text>
-            </View>
+            <HeaderPersonalizado title="Registro de Logs" />
+            
             <FlatList
                 data={[...logs].reverse()}
                 renderItem={renderLogItem}
                 keyExtractor={(item, index) => `${item.timestamp}-${index}`}
                 ListEmptyComponent={<Text style={styles.emptyText}>Nenhum log registrado ainda.</Text>}
                 contentContainerStyle={styles.listContainer}
-            />
-            <BotaoPersonalizado
-                texto="Voltar"
-                onPress={() => navigation.goBack()}
             />
         </SafeAreaView>
     );
@@ -41,10 +37,6 @@ const getStyles = (theme) => StyleSheet.create({
         flex: 1,
         backgroundColor: theme === 'light' ? '#f0f0f0' : '#1C1C1E',
         alignItems: 'center',
-    },
-    header: {
-        width: '90%',
-        marginVertical: 20,
     },
     title: {
         fontSize: 24,

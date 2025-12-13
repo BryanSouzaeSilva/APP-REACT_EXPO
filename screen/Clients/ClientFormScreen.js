@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import MaskInput, { Masks } from 'react-native-mask-input';
 import AceitarTermos from '../../components/aceitarTermos';
+import HeaderPersonalizado from '../../components/headerPersonalizado';
 
 export default function ClientFormScreen({ route, navigation }) {
 
@@ -70,7 +71,7 @@ export default function ClientFormScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.formContainer}>
-        <Text style={styles.title}>{isEditing ? 'Editar Cliente' : 'Cadastrar Cliente'}</Text>
+        <HeaderPersonalizado title={isEditing ? 'Editar Cliente' : 'Cadastrar Cliente'} />
 
         <Text style={styles.labels}>Nome:</Text>
         <TextInput

@@ -46,7 +46,7 @@ export default function CheckoutScreen({ navigation }) {
 
         handleRegistrarVenda(novaVenda);
         clearCart();
-        navigation.goBack();
+        navigation.navigate('HomeTab');
     };
 
     const renderClienteItem = ({ item }) => (

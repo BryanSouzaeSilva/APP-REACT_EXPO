@@ -5,10 +5,11 @@ import { ThemeContext } from '../context/ThemeContext'
 import { CartContext } from '../context/CartContext'
 import { Ionicons } from '@expo/vector-icons'
 import BotaoPersonalizado from '../components/botaoPersonalizado'
+import HeaderPersonalizado from '../components/headerPersonalizado'
 
 export default function SalesScreen({ navigation }) {
     const { theme, produtos, showNotification } = useContext(ThemeContext);
-    const { addToCart } = useContext(CartContext);
+    const { addToCart, cartItems } = useContext(CartContext);
     const styles = getStyles(theme);
 
     const [searchQuery, setSearchQuery] = useState('');
@@ -45,21 +46,37 @@ export default function SalesScreen({ navigation }) {
         setModalVisible(false);
     }
 
-    const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.itemContainer} onPress={() => handleOpenModal(item)}>
-            <View style={{flex: 1}}>
-                <Text style={styles.itemNome}>{item.nome}</Text>
-                <Text style={styles.itemInfo}>Estoque: {item.estoque} | R$ {item.valor.toFixed(2)}</Text>
-            </View>
-            <Ionicons name="add-circle" size={32} color="#28A745" />
-        </TouchableOpacity>
-    );
+    const getCartQuantity = (id) => {
+        const item = cartItems.find(i => i.id === id);
+        return item ? item.quantity : 0;
+    }
+
+    const renderItem = ({ item }) => {
+        const qtdNoCarrinho = getCartQuantity(item.id);
+
+        return (
+            <TouchableOpacity style={styles.itemContainer} onPress={() => handleOpenModal(item)}>
+                <View style={{flex: 1}}>
+                    <Text style={styles.itemNome}>{item.nome}</Text>
+                    <Text style={styles.itemInfo}>Estoque: {item.estoque} | R$ {item.valor.toFixed(2)}</Text>
+                    
+                    {qtdNoCarrinho > 0 && (
+                        <Text style={styles.inCartBadge}>
+                            <Ionicons name="cart" size={14} /> No Carrinho: {qtdNoCarrinho} un
+                        </Text>
+                    )}
+                </View>
+                <Ionicons name="add-circle" size={32} color="#28A745" />
+            </TouchableOpacity>
+        );
+    };
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Nova Venda</Text>
-            </View>
+            <HeaderPersonalizado 
+                title="Nova Venda (PDV)"
+                onPressBack={() => navigation.navigate('ManagementMenu')}
+            />
 
             <View style={styles.searchContainer}>
                 <Ionicons name="search" size={20} color="#888" style={{marginRight: 10}}/>
@@ -85,7 +102,6 @@ export default function SalesScreen({ navigation }) {
                 />
             </View>
 
-            {/* Modal de Quantidade */}
             <Modal visible={modalVisible} transparent animationType="fade">
                 <View style={styles.modalOverlay}>
                     <View style={styles.modalContent}>
@@ -94,7 +110,11 @@ export default function SalesScreen({ navigation }) {
                         
                         <View style={styles.qtyContainer}>
                             <TouchableOpacity onPress={() => setQuantity((prev) => Math.max(1, parseInt(prev || 0) - 1).toString())}>
-                                <Ionicons name="remove-circle-outline" size={40} color={theme === 'light' ? '#000' : '#fff'} />
+                                <Ionicons
+                                    name="remove-circle-outline"
+                                    size={40}
+                                    color={theme === 'light' ? '#000' : '#fff'}
+                                />
                             </TouchableOpacity>
                             <TextInput 
                                 style={styles.qtyInput}
@@ -127,9 +147,6 @@ const getStyles = (theme) => StyleSheet.create({
         flex: 1,
         backgroundColor: theme === 'light' ? '#f0f0f0' : '#1C1C1E'
     },
-    header: {
-        padding: 20
-    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
@@ -142,6 +159,7 @@ const getStyles = (theme) => StyleSheet.create({
         marginHorizontal: 20,
         borderRadius: 8,
         paddingHorizontal: 10,
+        marginTop: 10,
         height: 45,
         marginBottom: 10
     },
@@ -194,6 +212,12 @@ const getStyles = (theme) => StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 20
+    },
+    inCartBadge: {
+        color: '#28A745',
+        fontWeight: 'bold',
+        fontSize: 12,
+        marginTop: 4,
     },
     qtyInput: { 
         fontSize: 24,

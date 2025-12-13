@@ -3,6 +3,7 @@ import { Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView } from
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../../context/ThemeContext';
 import MaskInput, { Masks } from 'react-native-mask-input';
+import HeaderPersonalizado from '../../components/headerPersonalizado';
 
 export default function ProductFormScreen({ route, navigation }) {
   const { theme, handleCadastrarProduto, handleEditarProduto, produtos, showNotification, addLog } = useContext(ThemeContext);
@@ -60,8 +61,7 @@ export default function ProductFormScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.formContainer}>
-        <Text style={styles.title}>{isEditing ? 'Editar Produto' : 'Cadastrar Produto'}</Text>
-        
+        <HeaderPersonalizado title={isEditing ? 'Editar Produto' : 'Cadastrar Produto'} />        
         <Text style={styles.labels}>Nome:</Text>
         <TextInput
           style={styles.inputs}

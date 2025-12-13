@@ -5,6 +5,7 @@ import { CartContext } from '../context/CartContext';
 import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
 import BotaoDeAcao from '../components/botaoAcao';
+import HeaderPersonalizado from '../components/headerPersonalizado';
 
 export default function CartScreen({ navigation }) {
     const { theme } = useContext(ThemeContext);
@@ -71,10 +72,12 @@ export default function CartScreen({ navigation }) {
     );
 
     return (
-        <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
-            <View style={styles.header}>
-                <Text style={styles.title}>Carrinho de Compras</Text>
-            </View>
+        <SafeAreaView style={styles.container}>
+            <HeaderPersonalizado 
+                title="Carrinho"
+                onPressBack={() => navigation.navigate('HomeTab')}
+            />
+
             <FlatList
                 style={styles.list}
                 data={cartItems}
@@ -104,12 +107,6 @@ const getStyles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: theme === 'light' ? '#f0f0f0' : '#1C1C1E',
-    },
-    header: {
-        width: '90%',
-        alignSelf: 'center',
-        marginTop: 20,
-        marginBottom: 10,
     },
     title: {
         fontSize: 24,
