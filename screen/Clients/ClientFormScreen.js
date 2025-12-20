@@ -30,7 +30,7 @@ export default function ClientFormScreen({ route, navigation }) {
         setEndereco(cliente.endereco);
         setEmail(cliente.email);
         setCPF(cliente.cpf);
-        setChecked(true); // Assume que os termos já foram aceitos
+        setChecked(true);
       }
     }
   }, [clienteId, clientes]);
@@ -65,8 +65,14 @@ export default function ClientFormScreen({ route, navigation }) {
       showNotification(`Cliente "${dadosCliente.nome}" foi cadastrado!`);
     }
     
-    navigation.goBack();
+    if (route.params?.origem === 'Checkout') {
+      navigation.navigate('CartTab', { screen: 'Checkout' })
+    } else {
+      navigation.goBack();
+    }
   }
+
+  
 
   return (
     <SafeAreaView style={styles.container}>

@@ -7,6 +7,9 @@ import { ThemeContext } from '../context/ThemeContext';
 import { CartContext } from '../context/CartContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
 
+import * as Print from 'expo-print';
+import * as Sharing from 'expo-sharing';
+
 export default function CheckoutScreen({ navigation }) {
     const { theme, clientes, handleRegistrarVenda } = useContext(ThemeContext);
     const { cartItems, getTotalPrice, clearCart } = useContext(CartContext);
@@ -46,8 +49,110 @@ export default function CheckoutScreen({ navigation }) {
 
         handleRegistrarVenda(novaVenda);
         clearCart();
-        navigation.navigate('HomeTab');
+
+        Alert.alert(
+            "Venda Concluída!",
+            "Deseja gerar um comprovante PDF?",
+            [
+                {
+                    text: "Não",
+                    onPress: () => navigation.navigate('HomeTab'),
+                    style: "cancel"
+                },
+                {
+                    text: "Sim",
+                    onPress: () => gerarPDF(novaVenda)
+                }
+            ]
+        )
+
+        navigation.goBack();
     };
+
+    const handleCriarCliente = () => {
+        setModalVisible(false);
+        navigation.navigate('GestaoTab', {
+            screen: 'ClientForm',
+            params: { origem: 'Checkout' }
+        })
+    }
+
+    const gerarHtmlRecibo = (venda) => {
+        const itensHtml = venda.itens.map(item => `
+            <tr>
+                <td>${item.quantity}x</td>
+                <td>${item.nome}</td>
+            <td style="text-align: right;">R$ ${(item.valor * item.quantity).toFixed(2)}</td>
+            </tr>
+        `).join('');
+
+        return `
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+                <style>
+                    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 20px; }
+                    .header { text-align: center; margin-bottom: 20px; }
+                    .title { font-size: 24px; font-weight: bold; }
+                    .subtitle { font-size: 14px; color: #555; }
+                    .divider { border-bottom: 1px dashed #ccc; margin: 10px 0; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+                    th { text-align: left; }
+                    td { padding: 5px 0; }
+                    .total { font-size: 18px; font-weight: bold; text-align: right; margin-top: 20px; }
+                    .footer { text-align: center; margin-top: 40px; font-size: 12px; color: #888; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <div class="title">Seu App de Vendas</div>
+                    <div class="subtitle">Comprovante de Venda</div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <p><strong>Cliente:</strong> ${venda.clienteNome}</p>
+                <p><strong>Data:</strong> ${new Date(venda.data).toLocaleString('pt-BR')}</p>
+                <p><strong>Pagamento:</strong> ${venda.pagamento}</p>
+
+                <div class="divider"></div>
+
+                <table>
+                    ${itensHtml}
+                </table>
+
+                <div class="divider"></div>
+
+                <div class="total">
+                    Total: R$ ${venda.total.toFixed(2)}
+                </div>
+
+                <div class="footer">
+                    Obrigado pela preferência!
+                </div>
+            </body>
+            </html>
+        `;
+    }
+
+    const gerarPDF = async (venda) => {
+        try {
+        const html = gerarHtmlRecibo(venda);
+
+        const { uri } = await Print.printToFileAsync({
+            html: html,
+            base64: false
+        });
+
+        await Sharing.shareAsync(uri);
+
+        navigation.navigate('HomeTab')
+        } catch (error) {
+        Alert.alert("Erro", "Não foi possível gerar o PDF.")
+        console.error(error);
+        navigation.navigate('HomeTab')
+        }
+    }
 
     const renderClienteItem = ({ item }) => (
         <TouchableOpacity 
@@ -134,8 +239,26 @@ export default function CheckoutScreen({ navigation }) {
                             keyExtractor={item => item.id}
                             renderItem={renderClienteItem}
                             style={{ width: '100%' }}
+                            ListEmptyComponent={
+                                <Text style={{textAlign: 'center', color: '#888', marginTop: 20}}>
+                                    Nenhum cliente encontrado
+                                </Text>
+                            }
                         />
-                        <BotaoPersonalizado texto="Cancelar" onPress={() => setModalVisible(false)} />
+
+                        <View style={{flexDirection: 'row'}}>
+                            <BotaoPersonalizado 
+                                texto="Novo Cliente"
+                                onPress={handleCriarCliente}
+                                style={{ backgroundColor: '#28A745', marginRight: 20}}
+                            />
+
+                            <BotaoPersonalizado
+                                texto="Cancelar"
+                                onPress={() => setModalVisible(false)}
+                            />
+                        </View>
+
                     </View>
                 </View>
             </Modal>
@@ -153,85 +276,124 @@ const getStyles = (theme) => StyleSheet.create({
         padding: 20 
     },
     title: {
-        fontSize: 28, fontWeight: 'bold', marginBottom: 20,
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 20,
         color: theme === 'light' ? '#000' : '#fff',
     },
     sectionTitle: {
-        fontSize: 18, fontWeight: '600', marginTop: 15, marginBottom: 10,
+        fontSize: 18,
+        fontWeight: '600',
+        marginTop: 15,
+        marginBottom: 10,
         color: theme === 'light' ? '#333' : '#ccc',
     },
     selector: {
+        padding: 15,
+        borderRadius: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: theme === 'light' ? '#ddd' : '#444',
         backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
-        padding: 15, borderRadius: 8,
-        flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-        borderWidth: 1, borderColor: theme === 'light' ? '#ddd' : '#444',
     },
     selectorText: {
-        fontSize: 16, color: theme === 'light' ? '#000' : '#fff',
+        fontSize: 16,
+        color: theme === 'light' ? '#000' : '#fff',
     },
     card: {
+        padding: 15,
+        borderRadius: 8,
         backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
-        padding: 15, borderRadius: 8,
     },
     row: {
-        flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 5,
     },
     rowText: {
         color: theme === 'light' ? '#555' : '#aaa',
     },
     totalRow: {
-        marginTop: 10, paddingTop: 10,
-        borderTopWidth: 1, borderTopColor: theme === 'light' ? '#eee' : '#444',
+        marginTop: 10,
+        paddingTop: 10,
+        borderTopWidth: 1,
+        borderTopColor: theme === 'light' ? '#eee' : '#444',
     },
     totalLabel: {
-        fontSize: 18, fontWeight: 'bold', color: theme === 'light' ? '#000' : '#fff',
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: theme === 'light' ? '#000' : '#fff',
     },
     totalValue: {
-        fontSize: 18, fontWeight: 'bold', color: '#28A745',
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#28A745',
     },
     paymentContainer: {
-        flexDirection: 'row', justifyContent: 'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     paymentOption: {
-        flex: 1, alignItems: 'center', padding: 10, marginHorizontal: 4,
-        borderRadius: 8, borderWidth: 1,
+        flex: 1,
+        alignItems: 'center',
+        padding: 10,
+        marginHorizontal: 4,
+        borderRadius: 8,
+        borderWidth: 1,
         borderColor: theme === 'light' ? '#ccc' : '#555',
         backgroundColor: theme === 'light' ? '#fff' : '#2C2C2E',
     },
     paymentOptionSelected: {
-        backgroundColor: '#007AFF', borderColor: '#007AFF',
+        backgroundColor: '#007AFF',
+        borderColor: '#007AFF',
     },
     paymentText: {
         color: theme === 'light' ? '#000' : '#fff',
     },
     paymentTextSelected: {
-        color: '#fff', fontWeight: 'bold',
+        color: '#fff',
+        fontWeight: 'bold',
     },
     footerBtn: {
-        marginTop: 30, alignItems: 'center',
+        marginTop: 30,
+        alignItems: 'center',
     },
     modalContainer: {
-        flex: 1, justifyContent: 'center', alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.5)',
     },
     modalContent: {
-        width: '90%', height: '60%', backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E',
-        borderRadius: 10, padding: 20, alignItems: 'center',
+        width: '90%',
+        height: '70%',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+        backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E',
     },
     modalTitle: {
-        fontSize: 20, fontWeight: 'bold', marginBottom: 15,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 15,
         color: theme === 'light' ? '#000' : '#fff',
     },
     clientItem: {
-        padding: 15, borderBottomWidth: 1,
-        borderBottomColor: theme === 'light' ? '#eee' : '#333',
+        padding: 15,
+        borderBottomWidth: 1,
         width: '100%',
+        borderBottomColor: theme === 'light' ? '#eee' : '#333',
     },
     clientItemText: {
-        fontSize: 16, fontWeight: 'bold', color: theme === 'light' ? '#000' : '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: theme === 'light' ? '#000' : '#fff',
     },
     clientItemSub: {
-        fontSize: 14, color: 'gray',
+        fontSize: 14,
+        color: 'gray',
     },
     searchBox: {
         flexDirection: 'row',
