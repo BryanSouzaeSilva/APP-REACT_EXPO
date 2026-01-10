@@ -80,9 +80,9 @@ export default function CheckoutScreen({ navigation }) {
     const gerarHtmlRecibo = (venda) => {
         const itensHtml = venda.itens.map(item => `
             <tr>
-                <td>${item.quantity}x</td>
-                <td>${item.nome}</td>
-            <td style="text-align: right;">R$ ${(item.valor * item.quantity).toFixed(2)}</td>
+                <td style="padding: 5px 0;">${item.quantity}x</td>
+                <td style="padding: 5px 0;">${item.nome}</td>
+                <td style="text-align: right; padding: 5px 0;">R$ ${(item.valor * item.quantity).toFixed(2)}</td>
             </tr>
         `).join('');
 
@@ -97,8 +97,11 @@ export default function CheckoutScreen({ navigation }) {
                     .subtitle { font-size: 14px; color: #555; }
                     .divider { border-bottom: 1px dashed #ccc; margin: 10px 0; }
                     table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-                    th { text-align: left; }
-                    td { padding: 5px 0; }
+                    
+                    th { text-align: left; border-bottom: 2px solid #333; padding-bottom: 5px; font-size: 14px; text-transform: uppercase; }
+                    
+                    td { font-size: 14px; border-bottom: 1px solid #eee; }
+                    
                     .total { font-size: 18px; font-weight: bold; text-align: right; margin-top: 20px; }
                     .footer { text-align: center; margin-top: 40px; font-size: 12px; color: #888; }
                 </style>
@@ -118,6 +121,12 @@ export default function CheckoutScreen({ navigation }) {
                 <div class="divider"></div>
 
                 <table>
+                    <tr>
+                        <th style="width: 15%;">Qtd</th>
+                        <th style="width: 60%;">Produto</th>
+                        <th style="text-align: right; width: 25%;">Valor</th>
+                    </tr>
+                    
                     ${itensHtml}
                 </table>
 
@@ -133,7 +142,7 @@ export default function CheckoutScreen({ navigation }) {
             </body>
             </html>
         `;
-    }
+    };
 
     const gerarPDF = async (venda) => {
         try {
