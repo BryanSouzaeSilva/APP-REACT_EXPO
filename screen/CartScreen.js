@@ -82,7 +82,7 @@ export default function CartScreen({ navigation }) {
                 style={styles.list}
                 data={cartItems}
                 renderItem={renderItemCarrinho}
-                keyExtractor={item => item.id}
+                keyExtractor={item => String(item.id)}
                 ListEmptyComponent={<Text style={styles.emptyText}>Seu carrinho está vazio</Text>}
             />
             <View style={styles.footer}>

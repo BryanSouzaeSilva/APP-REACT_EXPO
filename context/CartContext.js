@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { 
+  getCarrinho, 
+  addItemCarrinho, 
+  removeItemCarrinho, 
+  clearCarrinhoDB 
+} from '../banco_de_dados/database/service';
 
 export const CartContext = createContext();
 
@@ -9,13 +14,18 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const loadCart = async () => {
-      try{
-        const savedCart = await AsyncStorage.getItem('@app_carrinho');
-        if (savedCart) {
-          setCartItems(JSON.parse(savedCart));
-        }
+      try {
+        const itensDoBanco = await getCarrinho();
+        
+        const itensFormatados = itensDoBanco.map(item => ({
+            ...item,
+            id: item.produtoId,
+            dbId: item.id
+        }));
+
+        setCartItems(itensFormatados);
       } catch (error) {
-        console.error("Erro ao carregar o carrinho:", error);
+        console.error("Erro ao carregar carrinho:", error);
       } finally {
         setIsLoading(false);
       }
@@ -23,48 +33,41 @@ export const CartProvider = ({ children }) => {
     loadCart();
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      const savedCart = async () => {
-        try {
-          await AsyncStorage.setItem('@app_carrinho', JSON.stringify(cartItems));
-        } catch (error) {
-          console.error('Erro ao salvar o carrinho:', error);
-        }
-      };
-      savedCart();
-    }
-  }, [cartItems, isLoading])
-
-  const addToCart = (product) => {
+  const addToCart = (product, qtdParaAdicionar = 1) => {
     setCartItems((prevItems) => {
       const itemInCart = prevItems.find((item) => item.id === product.id);
+      
       if (itemInCart) {
         return prevItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + qtdParaAdicionar } : item
         );
       }
-      return [...prevItems, { ...product, quantity: 1 }];
+      
+      return [...prevItems, { ...product, quantity: qtdParaAdicionar }];
     });
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.reduce((acc, item) => {
-        if (item.id === productId) {
-          if (item.quantity > 1) {
-            acc.push({ ...item, quantity: item.quantity - 1 });
-          }
-        } else {
-          acc.push(item);
-        }
-        return acc;
-      }, [])
-    );
+  const removeFromCart = async (productId) => {
+    try {
+        await removeItemCarrinho(productId);
+        
+        const itensAtualizados = await getCarrinho();
+        setCartItems(itensAtualizados.map(item => ({
+            ...item, 
+            id: item.produtoId 
+        })));
+    } catch (error) {
+        console.error("Erro ao remover do carrinho:", error);
+    }
   };
 
-  const clearCart = () => {
-    setCartItems([]);
+  const clearCart = async () => {
+    try {
+        await clearCarrinhoDB();
+        setCartItems([]);
+    } catch (error) {
+        console.error("Erro ao limpar carrinho:", error);
+    }
   };
 
   const getTotalPrice = () => {
@@ -79,6 +82,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         clearCart,
         getTotalPrice,
+        isLoading
       }}
     >
       {children}

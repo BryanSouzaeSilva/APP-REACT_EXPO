@@ -34,13 +34,11 @@ export default function SalesScreen({ navigation }) {
             return;
         }
         if (qtd > selectedProduct.estoque) {
-            Alert.alert("Estoque insulficiente", `Só temos ${selectedProduct.estoque} unidades`)
+            Alert.alert("Estoque insuficiente", `Só temos ${selectedProduct.estoque} unidades`)
             return;
         }
 
-        for (let i = 0; i < qtd; i++) {
-            addToCart(selectedProduct);
-        }
+        addToCart(selectedProduct, qtd);
 
         showNotification(`${qtd}x ${selectedProduct.nome} adicionado(s)!`);
         setModalVisible(false);

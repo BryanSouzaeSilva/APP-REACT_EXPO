@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
-import { initDB } from '../banco_de_dados/database/db'; 
+import { initDB } from '../banco_de_dados/database/db_loja'; 
+import db from '../banco_de_dados/database/db_loja';
 
 import { 
     getProdutos,
@@ -16,8 +17,14 @@ import {
 
     getVendas,
     addVenda,
+
     getLogs,
-    addLogDB
+    addLogDB,
+
+    getFornecedores,
+    addFornecedor,
+    updateFornecedor,
+    deleteFornecedor
 } from '../banco_de_dados/database/service'; 
 
 export const ThemeContext = createContext();
@@ -30,6 +37,7 @@ export const ThemeProvider = ({ children }) => {
     const [clientes, setClientes] = useState([]);
     const [vendas, setVendas] = useState([]);
     const [logs, setLogs] = useState([]);
+    const [fornecedores, setFornecedores] = useState([]);
     
     const [isLoading, setIsLoading] = useState(true);
     const [notification, setNotification] = useState({ message: '', type: 'success' });
@@ -38,19 +46,30 @@ export const ThemeProvider = ({ children }) => {
         const carregarDados = async () => {
             try {
                 await initDB(); 
-                
+
                 const p = await getProdutos();
                 const c = await getClientes();
-                const v = await getVendas();
+                
+                let v = [];
+                try {
+                    v = await getVendas();
+                } catch (errVenda) {
+                    console.error("Erro ao carregar vendas:", errVenda);
+                    v = [];
+                }
+
                 const l = await getLogs();
+                
+                const f = await getFornecedores(); 
 
                 setProdutos(p);
                 setClientes(c);
                 setVendas(v);
                 setLogs(l);
+                setFornecedores(f); 
 
             } catch (error) {
-                console.error("Erro ao carregar banco de dados:", error);
+                console.error("Erro fatal ao carregar banco de dados:", error);
             } finally {
                 setIsLoading(false);
             }
@@ -147,6 +166,30 @@ export const ThemeProvider = ({ children }) => {
         } catch (e) { console.error("Erro ao registrar venda:", e); }
     };
 
+    const handleCadastrarFornecedor = async (novoFornecedor) => {
+        try {
+            const id = await addFornecedor(novoFornecedor);
+            setFornecedores(prev => [...prev, { ...novoFornecedor, id }]);
+            showNotification('Fornecedor cadastrado!');
+        } catch (e) { console.error(e); }
+    };
+
+    const handleEditarFornecedor = async (fornecedorEditado) => {
+        try {
+            await updateFornecedor(fornecedorEditado.id, fornecedorEditado);
+            setFornecedores(prev => prev.map(f => f.id === fornecedorEditado.id ? fornecedorEditado : f));
+            showNotification('Fornecedor atualizado!');
+        } catch (e) { console.error(e); }
+    };
+
+    const handleDeletarFornecedor = async (id) => {
+        try {
+            await deleteFornecedor(id);
+            setFornecedores(prev => prev.filter(f => f.id !== id));
+            showNotification('Fornecedor excluído!', 'delete');
+        } catch (e) { console.error(e); }
+    };
+
 
     const addLog = async (tipo, dados) => {
         try {
@@ -187,6 +230,11 @@ export const ThemeProvider = ({ children }) => {
             handleRegistrarVenda,
             logs, 
             addLog,
+
+            fornecedores,
+            handleCadastrarFornecedor,
+            handleEditarFornecedor,
+            handleDeletarFornecedor,
             
             notification, 
             showNotification
