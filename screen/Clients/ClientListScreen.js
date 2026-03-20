@@ -15,11 +15,22 @@ export default function ClientListScreen({ navigation }) {
     const [searchQuery, setSearchQuery] = useState('');
 
     const clientesFiltrados = clientes.filter(item => {
-      const textoBusca = searchQuery.toUpperCase();
+      const textoBusca = searchQuery.trim().toUpperCase();
+      
       const nome = item.nome ? item.nome.toUpperCase() : '';
-      const cpf = item.cpf ? item.cpf.replace(/\D/g, '') : '';
+      const cpfOriginal = item.cpf ? item.cpf.toUpperCase() : '';
+      const cpfLimpo = item.cpf ? item.cpf.replace(/\D/g, '') : '';
 
-      return nome.includes(textoBusca) || cpf.includes(textoBusca) || item.cpf.includes(textoBusca);
+      let nomeMatch = false;
+      if (textoBusca.length <= 3) {
+          nomeMatch = nome.startsWith(textoBusca);
+      } else {
+          nomeMatch = nome.includes(textoBusca);
+      }
+
+      const cpfMatch = cpfOriginal.includes(textoBusca) || cpfLimpo.includes(textoBusca);
+
+      return nomeMatch || cpfMatch;
     });
 
     const handleDelete = (id, nome) => {

@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, FlatList, Button, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
 
+import mockClientes from './mockClientes.json';
+
 export default function HomeScreen({ navigation, route }) {
-  const { theme, produtos, clientes, vendas } = useContext(ThemeContext);
+  const { theme, produtos, clientes, vendas, handleCadastrarCliente } = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   const [modalvisible, setModalVisible] = useState(false);
@@ -28,6 +30,18 @@ export default function HomeScreen({ navigation, route }) {
     return (
       <Text>Carregando...</Text>)
   }
+
+  const injetarClientesFalsos = async () => {
+        try {
+            for (const cliente of mockClientes) {
+                await handleCadastrarCliente(cliente); 
+            }
+            Alert.alert("Sucesso!", "100 clientes foram cadastrados no banco de dados.");
+        } catch (e) {
+            console.error("Erro ao injetar clientes:", e);
+            Alert.alert("Erro", "Ocorreu um erro ao cadastrar os clientes.");
+        }
+    };
 
   const dataDeHoje = new Date().toLocaleDateString('pt-BR',
     { day: '2-digit',
@@ -196,6 +210,14 @@ export default function HomeScreen({ navigation, route }) {
             </View>
           </Modal>
 
+          <View style={{ padding: 20, marginTop: 20 }}>
+                <Button 
+                    title="🤖 Injetar 100 Clientes (Teste)" 
+                    color="#FF3B30"
+                    onPress={injetarClientesFalsos} 
+                />
+            </View>
+
     </SafeAreaView>
   );
 }
@@ -299,7 +321,7 @@ const getStyles = (theme) => StyleSheet.create({
       backgroundColor: theme === 'light' ? '#fff' : '#1C1C1E',
       borderRadius: 12,
       padding: 20,
-      maxHeight: '80%', // Limita altura para não estourar a tela
+      maxHeight: '80%',
   },
   modalHeader: {
       flexDirection: 'row',
