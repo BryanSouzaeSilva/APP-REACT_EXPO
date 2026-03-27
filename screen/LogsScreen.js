@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemeContext } from '../context/ThemeContext';
-import BotaoPersonalizado from '../components/botaoPersonalizado';
 import HeaderPersonalizado from '../components/headerPersonalizado';
 
 export default function LogScreen({ navigation }) {

@@ -80,7 +80,7 @@ export default function CheckoutScreen({ navigation }) {
     const gerarHtmlRecibo = (venda) => {
         const itensHtml = venda.itens.map(item => `
             <tr>
-                <td style="padding: 5px 0;">${item.quantity}x</td>
+                <td style="padding: 5px 0;">${item.quantity} un</td>
                 <td style="padding: 5px 0;">${item.nome}</td>
                 <td style="text-align: right; padding: 5px 0;">R$ ${(item.valor * item.quantity).toFixed(2)}</td>
             </tr>
@@ -115,8 +115,8 @@ export default function CheckoutScreen({ navigation }) {
                 <div class="divider"></div>
                 
                 <p><strong>Cliente:</strong> ${venda.clienteNome}</p>
-                <p><strong>Data:</strong> ${new Date(venda.data).toLocaleString('pt-BR')}</p>
-                <p><strong>Pagamento:</strong> ${venda.pagamento}</p>
+                <p><strong>Data da Venda:</strong> ${new Date(venda.data).toLocaleString('pt-BR')}</p>
+                <p><strong>Forma de Pagamento:</strong> ${venda.pagamento}</p>
 
                 <div class="divider"></div>
 

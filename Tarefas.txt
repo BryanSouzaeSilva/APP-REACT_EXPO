@@ -1,0 +1,5 @@
+1º - Edição de Venda
+2º - Criação de telas (Para editar vendas)
+    /- Na teoria teria que ter 2 botões, editar itens e editar venda:
+        -Editar itens seria para adicionar novos itens
+        -Editar venda daria pra editar a forma de pagamento e emitir novamente o comprovante

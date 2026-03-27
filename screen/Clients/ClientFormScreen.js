@@ -37,11 +37,11 @@ export default function ClientFormScreen({ route, navigation }) {
 
   function handleSubmit() {
     if (!nome || !telefone || !endereco || !email || !cpf) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
+      Alert.alert('Atenção!', 'Por favor, preencha todos os campos!');
       return;
     }
     if (!isChecked && !isEditing) {
-      Alert.alert('Erro', 'Você deve aceitar os termos para continuar');
+      Alert.alert('Atenção!', 'Por favor, aceite os termos para continuar');
       return;
     }
 

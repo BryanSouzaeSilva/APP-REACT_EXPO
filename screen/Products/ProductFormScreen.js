@@ -31,7 +31,7 @@ export default function ProductFormScreen({ route, navigation }) {
 
   function handleSubmit() {
     if (!nomeProduto || !valor || !estoque || !descricao) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
+      Alert.alert('Antenção!', 'Por favor, preencha todos os campos!');
       return;
     }
 

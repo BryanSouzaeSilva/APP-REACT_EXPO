@@ -34,7 +34,7 @@ export default function SupplierFormScreen({ route, navigation }) {
 
     function handleSubmit() {
         if (!nomeFantasia || !razaoSocial || !cnpj || !endereco || !contato) {
-            Alert.alert('Erro', 'Por favor, preencha todos os campos!');
+            Alert.alert('Atenção!', 'Por favor, preencha todos os campos!');
             return;
         }
 
