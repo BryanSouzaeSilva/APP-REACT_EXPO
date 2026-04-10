@@ -13,6 +13,7 @@ import SupplierFormScreen from '../Suppliers/SupplierFormScreen';
 import ConfigScreen from '../ConfigScreen';
 import StorageInfoScreen from '../StorageInfoScreen';
 import LogScreen from '../LogsScreen';
+import EditSaleScreen from '../EditSaleScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,8 @@ export default function ManagementStackNavigator() {
             <Stack.Screen name="ManagementMenu" component={ManagementScreen} />
 
             <Stack.Screen name="Sales" component={SalesScreen} />
+
+            <Stack.Screen name="EditSaleScreen" component={EditSaleScreen} />
 
             <Stack.Screen name="ProductList" component={ProductListScreen} />
             <Stack.Screen name="ProductForm" component={ProductFormScreen} />

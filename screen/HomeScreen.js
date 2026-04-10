@@ -4,14 +4,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
-
+import BotaoDeAcao from '../components/botaoAcao';
+import { gerarPDF } from '../utils/pdfUtils';
 import mockClientes from './mockClientes.json';
 
 export default function HomeScreen({ navigation, route }) {
   const { theme, produtos, clientes, vendas, handleCadastrarCliente } = useContext(ThemeContext);
   const styles = getStyles(theme);
 
-  const [modalvisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [vendaSelecionada, setVendaSelecionada] = useState(null);
 
   const totalProdutos = produtos.length;
@@ -147,7 +148,7 @@ export default function HomeScreen({ navigation, route }) {
 
       </ScrollView>
 
-          <Modal visible={modalvisible} animationType="slide" transparent={true}>
+          <Modal visible={modalVisible} animationType="slide" transparent={true}>
             <View style={styles.modalOverlay}>
               <View style={styles.modalContent}>
                 {vendaSelecionada && (
@@ -178,7 +179,7 @@ export default function HomeScreen({ navigation, route }) {
                     <FlatList 
                       data={vendaSelecionada.itens}
                       keyExtractor={(item, index) => index.toString()}
-                      style={{maxWeight: 200, marginVertical: 10}}
+                      style={{maxHeight: 200, marginVertical: 10}}
                       renderItem={({item}) => (
                         <View style={styles.infoRow}>
                           <Text style={styles.itemText}>
@@ -197,11 +198,31 @@ export default function HomeScreen({ navigation, route }) {
                       <Text style={styles.totalValue}>{formatadorDeMoeda.format(vendaSelecionada.total)}</Text>
                     </View>
 
-                    <BotaoPersonalizado 
-                      texto="Fechar"
-                      onPress={() => setModalVisible(false)}
-                      style={{marginTop: 15, width: '100%'}}
-                    />
+                    <View style={styles.buttonsContainer}>
+                      <BotaoPersonalizado 
+                        texto="Reimprimir Comprovante"
+                        onPress={() => gerarPDF(vendaSelecionada)}
+                        style={{marginTop: 15, width: '85%'}}
+                      />
+                      <BotaoDeAcao
+                          iconName="pencil"
+                          color={theme === 'light' ? '#007AFF' : '#0A84FF'}
+                          style={{marginTop: 10}}
+                          onPress={() => {
+                              setModalVisible(false); // Fecha a telinha da view
+                              navigation.navigate('GestaoTab', { 
+                                  screen: 'EditSaleScreen', // Nome que você registrar no StackNavigator
+                                  params: { venda: vendaSelecionada } // Enviando o pacote inteiro para a tela de edição
+                              });
+                          }}
+                        />
+                    </View>
+
+                      <BotaoPersonalizado 
+                        texto="Fechar"
+                        onPress={() => setModalVisible(false)}
+                        style={{marginTop: 15, width: '100%'}}
+                      />
 
                   </>
                 )}
@@ -374,6 +395,13 @@ const getStyles = (theme) => StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+  },
+  buttonsContainer: {
+    marginTop: 15,
+    paddingTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   totalLabel: {
       fontSize: 18,

@@ -166,6 +166,14 @@ export const ThemeProvider = ({ children }) => {
         } catch (e) { console.error("Erro ao registrar venda:", e); }
     };
 
+    const handleAtualizarVenda = (vendaEditada) => {
+        const novasVendas = vendas.map((venda) => 
+            venda.id === vendaEditada.id ? vendaEditada: venda
+        );
+
+        setVendas(novasVendas);
+    }
+
     const handleCadastrarFornecedor = async (novoFornecedor) => {
         try {
             const id = await addFornecedor(novoFornecedor);
@@ -228,6 +236,7 @@ export const ThemeProvider = ({ children }) => {
             
             vendas, 
             handleRegistrarVenda,
+            handleAtualizarVenda,
             logs, 
             addLog,
 
