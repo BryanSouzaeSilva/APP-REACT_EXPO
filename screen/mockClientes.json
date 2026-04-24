@@ -1,1418 +1,352 @@
 [
     {
-        "nome": "Wesley Lima Vieira",
-        "cpf": "520.534.325-66",
-        "telefone": "(67) 91668-7277",
-        "endereco": "Rua XV de Novembro, 788 - Santo Antônio, Curitiba"
+        "id": 51,
+        "nome": "Manteiga com Sal - 200g",
+        "valor": 12.80,
+        "estoque": 45,
+        "descricao": "Manteiga de primeira qualidade, produzida com creme de leite fresco."
     },
     {
-        "nome": "Ana Beatriz Silva",
-        "cpf": "123.456.789-00",
-        "telefone": "(11) 98765-4321",
-        "endereco": "Avenida Paulista, 1000 - Bela Vista, São Paulo"
+        "id": 52,
+        "nome": "Margarina com Sal - 500g",
+        "valor": 7.50,
+        "estoque": 60,
+        "descricao": "Margarina cremosa ideal para pães, bolos e culinária em geral."
     },
     {
-        "nome": "Carlos Eduardo Santos",
-        "cpf": "234.567.890-11",
-        "telefone": "(21) 99887-7665",
-        "endereco": "Rua Barata Ribeiro, 150 - Copacabana, Rio de Janeiro"
+        "id": 53,
+        "nome": "Requeijão Cremoso - 200g",
+        "valor": 9.90,
+        "estoque": 38,
+        "descricao": "Requeijão clássico de textura suave e sabor leve."
     },
     {
-        "nome": "Mariana Oliveira Costa",
-        "cpf": "345.678.901-22",
-        "telefone": "(31) 97766-5544",
-        "endereco": "Rua da Bahia, 300 - Centro, Belo Horizonte"
+        "id": 54,
+        "nome": "Queijo Muçarela Fatiado - 200g",
+        "valor": 14.50,
+        "estoque": 25,
+        "descricao": "Fatias finas e uniformes, perfeitas para lanches e pizzas."
     },
     {
-        "nome": "Ricardo Pereira Lima",
-        "cpf": "456.789.012-33",
-        "telefone": "(41) 96655-4433",
-        "endereco": "Rua das Flores, 45 - Batel, Curitiba"
+        "id": 55,
+        "nome": "Presunto Cozido Fatiado - 200g",
+        "valor": 11.20,
+        "estoque": 22,
+        "descricao": "Presunto de alta qualidade com baixo teor de gordura."
     },
     {
-        "nome": "Juliana Martins Rocha",
-        "cpf": "567.890.123-44",
-        "telefone": "(51) 95544-3322",
-        "endereco": "Avenida Ipiranga, 1200 - Praia de Belas, Porto Alegre"
+        "id": 56,
+        "nome": "Iogurte Natural - 170g",
+        "valor": 3.80,
+        "estoque": 50,
+        "descricao": "Iogurte integral sem adição de açúcares ou conservantes."
     },
     {
-        "nome": "Felipe Augusto Souza",
-        "cpf": "678.901.234-55",
-        "telefone": "(61) 94433-2211",
-        "endereco": "W3 Sul, Quadra 502 - Asa Sul, Brasília"
+        "id": 57,
+        "nome": "Suco de Uva Integral - 1.5L",
+        "valor": 16.90,
+        "estoque": 18,
+        "descricao": "Suco 100% fruta, sem conservantes e sem adição de água."
     },
     {
-        "nome": "Fernanda Alcantara",
-        "cpf": "789.012.345-66",
-        "telefone": "(71) 93322-1100",
-        "endereco": "Rua Chile, 10 - Pelourinho, Salvador"
+        "id": 58,
+        "nome": "Refrigerante de Cola - 2L",
+        "valor": 9.50,
+        "estoque": 85,
+        "descricao": "Bebida gaseificada refrescante, sabor original."
     },
     {
-        "nome": "Gabriel Barbosa Mota",
-        "cpf": "890.123.456-77",
-        "telefone": "(81) 92211-0099",
-        "endereco": "Rua do Sol, 500 - Boa Vista, Recife"
+        "id": 59,
+        "nome": "Água Mineral sem Gás - 500ml",
+        "valor": 2.50,
+        "estoque": 200,
+        "descricao": "Água mineral natural captada diretamente da fonte."
     },
     {
-        "nome": "Amanda Correia Farias",
-        "cpf": "901.234.567-88",
-        "telefone": "(85) 91100-9988",
-        "endereco": "Avenida Beira Mar, 2500 - Meireles, Fortaleza"
+        "id": 60,
+        "nome": "Água Tônica - 350ml",
+        "valor": 4.80,
+        "estoque": 40,
+        "descricao": "Bebida gaseificada com quinino, ideal para drinks ou consumo puro."
     },
     {
-        "nome": "Tiago Mendes Neves",
-        "cpf": "012.345.678-99",
-        "telefone": "(91) 90099-8877",
-        "endereco": "Avenida Nazaré, 80 - Nazaré, Belém"
+        "id": 61,
+        "nome": "Cerveja Pilsen - 350ml (Lata)",
+        "valor": 4.20,
+        "estoque": 144,
+        "descricao": "Cerveja clara, leve e refrescante com amargor equilibrado."
     },
     {
-        "nome": "Camila Cavalcanti",
-        "cpf": "112.233.445-55",
-        "telefone": "(62) 98877-6655",
-        "endereco": "Rua 84, 20 - Setor Sul, Goiânia"
+        "id": 62,
+        "nome": "Vinho Tinto Seco - 750ml",
+        "valor": 32.00,
+        "estoque": 12,
+        "descricao": "Vinho nacional de mesa, encorpado e de aroma persistente."
     },
     {
-        "nome": "Roberto Carlos Braga",
-        "cpf": "223.344.556-66",
-        "telefone": "(27) 97766-5544",
-        "endereco": "Rua das Palmeiras, 100 - Praia do Canto, Vitória"
+        "id": 63,
+        "nome": "Sal Refinado - 1kg",
+        "valor": 3.50,
+        "estoque": 70,
+        "descricao": "Sal de cozinha iodado, essencial para temperar todos os tipos de pratos."
     },
     {
-        "nome": "Larissa Manoela",
-        "cpf": "334.455.667-77",
-        "telefone": "(48) 96655-4433",
-        "endereco": "Rua Felipe Schmidt, 50 - Centro, Florianópolis"
+        "id": 64,
+        "nome": "Vinagre de Álcool - 750ml",
+        "valor": 2.90,
+        "estoque": 35,
+        "descricao": "Vinagre neutro, ideal para saladas, conservas e limpeza doméstica."
     },
     {
-        "nome": "Lucas Lucco",
-        "cpf": "445.566.778-88",
-        "telefone": "(34) 95544-3322",
-        "endereco": "Avenida Rondon Pacheco, 3000 - Santa Mônica, Uberlândia"
+        "id": 65,
+        "nome": "Maionese Tradicional - 500g",
+        "valor": 8.90,
+        "estoque": 42,
+        "descricao": "Maionese cremosa feita com ovos de galinha caipira."
     },
     {
-        "nome": "Bruna Marquezine",
-        "cpf": "556.677.889-99",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Avenida das Américas, 5000 - Barra da Tijuca, Rio de Janeiro"
+        "id": 66,
+        "nome": "Ketchup Tradicional - 380g",
+        "valor": 7.20,
+        "estoque": 50,
+        "descricao": "Molho de tomate tipo ketchup com tempero especial."
     },
     {
-        "nome": "Neymar da Silva Santos",
-        "cpf": "667.788.990-00",
-        "telefone": "(13) 93322-1100",
-        "endereco": "Rua Princesa Isabel, 77 - Vila Belmiro, Santos"
+        "id": 67,
+        "nome": "Mostarda Amarela - 190g",
+        "valor": 5.50,
+        "estoque": 30,
+        "descricao": "Mostarda cremosa de sabor picante e levemente ácido."
     },
     {
-        "nome": "Anitta Machado",
-        "cpf": "778.899.001-11",
-        "telefone": "(21) 92211-0099",
-        "endereco": "Rua Honório, 123 - Honório Gurgel, Rio de Janeiro"
+        "id": 68,
+        "nome": "Farinha de Trigo Especial - 1kg",
+        "valor": 5.90,
+        "estoque": 55,
+        "descricao": "Farinha tipo 1, ideal para pães, bolos e massas em geral."
     },
     {
-        "nome": "Gusttavo Lima",
-        "cpf": "889.900.112-22",
-        "telefone": "(62) 91100-9988",
-        "endereco": "Rodovia GO-020, KM 15 - Alphaville, Goiânia"
+        "id": 69,
+        "nome": "Farinha de Milho Flocada - 500g",
+        "valor": 4.50,
+        "estoque": 28,
+        "descricao": "Flocos de milho pré-cozidos para cuscuz e farofas."
     },
     {
-        "nome": "Ivete Sangalo",
-        "cpf": "990.011.223-33",
-        "telefone": "(71) 90099-8877",
-        "endereco": "Rua da Paciência, 45 - Rio Vermelho, Salvador"
+        "id": 70,
+        "nome": "Fermento em Pó Químico - 100g",
+        "valor": 6.30,
+        "estoque": 40,
+        "descricao": "Fermento de ação rápida para bolos e tortas."
     },
     {
-        "nome": "Luan Santana",
-        "cpf": "101.112.233-44",
-        "telefone": "(67) 98877-6655",
-        "endereco": "Rua Afonso Pena, 200 - Centro, Campo Grande"
+        "id": 71,
+        "nome": "Milho de Pipoca - 500g",
+        "valor": 5.80,
+        "estoque": 35,
+        "descricao": "Grãos selecionados para pipocas grandes e crocantes."
     },
     {
-        "nome": "Marília Mendonça",
-        "cpf": "202.223.344-55",
-        "telefone": "(62) 97766-5544",
-        "endereco": "Rua 9, 100 - Setor Oeste, Goiânia"
+        "id": 72,
+        "nome": "Chocolate Amargo 70% - 90g",
+        "valor": 10.50,
+        "estoque": 25,
+        "descricao": "Barra de chocolate com alto teor de cacau e baixo açúcar."
     },
     {
-        "nome": "Jorge Aragão",
-        "cpf": "303.334.455-66",
-        "telefone": "(21) 96655-4433",
-        "endereco": "Rua Riachuelo, 15 - Santa Teresa, Rio de Janeiro"
+        "id": 73,
+        "nome": "Caixa de Bombons Variados - 250g",
+        "valor": 15.90,
+        "estoque": 60,
+        "descricao": "Seleção dos melhores chocolates da marca em diversos sabores."
     },
     {
-        "nome": "Zeca Pagodinho",
-        "cpf": "404.445.566-77",
-        "telefone": "(21) 95544-3322",
-        "endereco": "Rua Goulart, 10 - Xerém, Duque de Caxias"
+        "id": 74,
+        "nome": "Gelatina sabor Morango - 20g",
+        "valor": 1.90,
+        "estoque": 100,
+        "descricao": "Sobremesa fácil de preparar, refrescante e saborosa."
     },
     {
-        "nome": "Alcione Nazaré",
-        "cpf": "505.556.677-88",
-        "telefone": "(98) 94433-2211",
-        "endereco": "Rua Grande, 200 - Centro, São Luís"
+        "id": 75,
+        "nome": "Pipoca para Micro-ondas Manteiga - 100g",
+        "valor": 3.50,
+        "estoque": 80,
+        "descricao": "Pipoca prática com sabor intenso de manteiga de cinema."
     },
     {
-        "nome": "Paola Oliveira",
-        "cpf": "606.667.788-99",
-        "telefone": "(11) 93322-1100",
-        "endereco": "Rua Oscar Freire, 800 - Jardins, São Paulo"
+        "id": 76,
+        "nome": "Batata Chips Salgada - 140g",
+        "valor": 8.90,
+        "estoque": 45,
+        "descricao": "Batatas cortadas finamente, fritas e levemente salgadas."
     },
     {
-        "nome": "Rodrigo Hilbert",
-        "cpf": "707.778.899-00",
-        "telefone": "(47) 92211-0099",
-        "endereco": "Rua XV de Novembro, 10 - Centro, Joinville"
+        "id": 77,
+        "nome": "Amendoim Torrado e Salgado - 150g",
+        "valor": 6.50,
+        "estoque": 50,
+        "descricao": "Petisco crocante, ideal para acompanhar bebidas geladas."
     },
     {
-        "nome": "Gisele Bündchen",
-        "cpf": "808.889.900-11",
-        "telefone": "(51) 91100-9988",
-        "endereco": "Rua da Independência, 5 - Horizontina, Rio Grande do Sul"
+        "id": 78,
+        "nome": "Sabão em Barra Glicerinado (5 un)",
+        "valor": 12.50,
+        "estoque": 30,
+        "descricao": "Sabão neutro multiuso para roupas e louças delicadas."
     },
     {
-        "nome": "Vagner Love",
-        "cpf": "909.990.011-22",
-        "telefone": "(21) 90099-8877",
-        "endereco": "Avenida Ayrton Senna, 2000 - Barra da Tijuca, Rio de Janeiro"
+        "id": 79,
+        "nome": "Amaciante de Roupas - 2L",
+        "valor": 18.90,
+        "estoque": 24,
+        "descricao": "Deixa as roupas macias e com perfume prolongado por dias."
     },
     {
-        "nome": "Marta Silva",
-        "cpf": "010.111.222-33",
-        "telefone": "(82) 98877-6655",
-        "endereco": "Avenida Fernandes Lima, 50 - Farol, Maceió"
+        "id": 80,
+        "nome": "Desinfetante de Pinho - 500ml",
+        "valor": 5.40,
+        "estoque": 48,
+        "descricao": "Elimina 99% das bactérias e deixa um aroma de limpeza no ambiente."
     },
     {
-        "nome": "Pelé Nascimento",
-        "cpf": "121.222.333-44",
-        "telefone": "(13) 97766-5544",
-        "endereco": "Canal 1, 150 - Vila Belmiro, Santos"
+        "id": 81,
+        "nome": "Água Sanitária - 1L",
+        "valor": 4.20,
+        "estoque": 60,
+        "descricao": "Poderoso alvejante e desinfetante para limpeza pesada."
     },
     {
-        "nome": "Ayrton Senna",
-        "cpf": "232.333.444-55",
-        "telefone": "(11) 96655-4433",
-        "endereco": "Rua Pedroso Alvarenga, 100 - Itaim Bibi, São Paulo"
+        "id": 82,
+        "nome": "Limpador Multiuso - 500ml",
+        "valor": 5.90,
+        "estoque": 40,
+        "descricao": "Ideal para superfícies laváveis, remove gordura com facilidade."
     },
     {
-        "nome": "Renato Russo",
-        "cpf": "343.444.555-66",
-        "telefone": "(61) 95544-3322",
-        "endereco": "SQN 303, Bloco A - Asa Norte, Brasília"
+        "id": 83,
+        "nome": "Inseticida Aerossol - 300ml",
+        "valor": 15.50,
+        "estoque": 15,
+        "descricao": "Eficaz contra moscas, mosquitos e baratas, sem cheiro residual."
     },
     {
-        "nome": "Cazuza Agenor",
-        "cpf": "454.555.666-77",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Rua Lopes Quintas, 20 - Jardim Botânico, Rio de Janeiro"
+        "id": 84,
+        "nome": "Saco de Lixo 50L (10 unidades)",
+        "valor": 8.90,
+        "estoque": 100,
+        "descricao": "Sacos reforçados com fundo antivazamento para resíduos domésticos."
     },
     {
-        "nome": "Elis Regina",
-        "cpf": "565.666.777-88",
-        "telefone": "(51) 93322-1100",
-        "endereco": "Rua da Ladeira, 50 - Centro Histórico, Porto Alegre"
+        "id": 85,
+        "nome": "Ração para Cães Adultos Carne - 1kg",
+        "valor": 19.50,
+        "estoque": 30,
+        "descricao": "Alimento completo e balanceado para cães de todas as raças."
     },
     {
-        "nome": "Raul Seixas",
-        "cpf": "676.777.888-99",
-        "telefone": "(71) 92211-0099",
-        "endereco": "Ladeira da Barra, 100 - Barra, Salvador"
+        "id": 86,
+        "nome": "Ração para Gatos Castrados Peixe - 1kg",
+        "valor": 22.90,
+        "estoque": 25,
+        "descricao": "Ajuda no controle de peso e na saúde do trato urinário."
     },
     {
-        "nome": "Chico Buarque",
-        "cpf": "787.888.999-00",
-        "telefone": "(21) 91100-9988",
-        "endereco": "Avenida Delfim Moreira, 100 - Leblon, Rio de Janeiro"
+        "id": 87,
+        "nome": "Areia Sanitária para Gatos - 4kg",
+        "valor": 14.80,
+        "estoque": 40,
+        "descricao": "Alta absorção de líquidos e odores, não forma poeira."
     },
     {
-        "nome": "Caetano Veloso",
-        "cpf": "898.999.000-11",
-        "telefone": "(71) 90099-8877",
-        "endereco": "Rua de Santo Antônio Além do Carmo, 1 - Centro, Salvador"
+        "id": 88,
+        "nome": "Fralda Descartável Tam G (20 un)",
+        "valor": 34.90,
+        "estoque": 15,
+        "descricao": "Fralda com barreiras antivazamento e toque de algodão."
     },
     {
-        "nome": "Gilberto Gil",
-        "cpf": "909.000.111-22",
-        "telefone": "(71) 98877-6655",
-        "endereco": "Rua Fonte do Boi, 15 - Rio Vermelho, Salvador"
+        "id": 89,
+        "nome": "Lenços Umedecidos Infantis (50 un)",
+        "valor": 9.90,
+        "estoque": 60,
+        "descricao": "Limpeza suave com extrato de aloe vera e sem álcool."
     },
     {
-        "nome": "Milton Nascimento",
-        "cpf": "010.111.222-33",
-        "telefone": "(31) 97766-5544",
-        "endereco": "Rua Sapucaí, 50 - Santa Tereza, Belo Horizonte"
+        "id": 90,
+        "nome": "Escova de Dentes Macia",
+        "valor": 12.50,
+        "estoque": 45,
+        "descricao": "Cerdas macias com pontas arredondadas para proteção da gengiva."
     },
     {
-        "nome": "Djavan Caetano",
-        "cpf": "121.232.343-44",
-        "telefone": "(82) 96655-4433",
-        "endereco": "Praia de Pajuçara, 10 - Pajuçara, Maceió"
+        "id": 91,
+        "nome": "Fio Dental Menta - 50m",
+        "valor": 7.90,
+        "estoque": 55,
+        "descricao": "Fio resistente que desliza facilmente entre os dentes."
     },
     {
-        "nome": "Tim Maia",
-        "cpf": "232.343.454-55",
-        "telefone": "(21) 95544-3322",
-        "endereco": "Rua do Matoso, 100 - Tijuca, Rio de Janeiro"
+        "id": 92,
+        "nome": "Desodorante Antitranspirante - 150ml",
+        "valor": 13.90,
+        "estoque": 40,
+        "descricao": "Proteção 48h contra o suor e mau odor, fragrância neutra."
     },
     {
-        "nome": "Jorge Ben Jor",
-        "cpf": "343.454.565-66",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Avenida Vieira Souto, 50 - Ipanema, Rio de Janeiro"
+        "id": 93,
+        "nome": "Condicionador Hidratante - 400ml",
+        "valor": 16.50,
+        "estoque": 20,
+        "descricao": "Desembaraça e hidrata profundamente os fios secos."
     },
     {
-        "nome": "Seu Jorge",
-        "cpf": "454.565.676-77",
-        "telefone": "(21) 93322-1100",
-        "endereco": "Rua do Catete, 10 - Catete, Rio de Janeiro"
+        "id": 94,
+        "nome": "Absorvente com Abas (8 un)",
+        "valor": 5.20,
+        "estoque": 80,
+        "descricao": "Cobertura seca com canais de fluxo para maior segurança."
     },
     {
-        "nome": "Péricles Faria",
-        "cpf": "565.676.787-88",
-        "telefone": "(11) 92211-0099",
-        "endereco": "Rua Marechal Deodoro, 1000 - Centro, São Bernardo do Campo"
+        "id": 95,
+        "nome": "Papel Alumínio - 45cm x 4m",
+        "valor": 6.80,
+        "estoque": 50,
+        "descricao": "Ideal para assados e conservação de alimentos na geladeira."
     },
     {
-        "nome": "Thiaguinho André",
-        "cpf": "676.787.898-99",
-        "telefone": "(11) 91100-9988",
-        "endereco": "Avenida Brigadeiro Faria Lima, 2000 - Pinheiros, São Paulo"
+        "id": 96,
+        "nome": "Filme de PVC - 30cm x 15m",
+        "valor": 5.50,
+        "estoque": 45,
+        "descricao": "Plástico aderente para proteção e vedação de vasilhas e alimentos."
     },
     {
-        "nome": "Iza Pesadão",
-        "cpf": "787.898.909-00",
-        "telefone": "(21) 90099-8877",
-        "endereco": "Rua Jardim Botânico, 500 - Jardim Botânico, Rio de Janeiro"
+        "id": 97,
+        "nome": "Guardanapo de Papel Folha Simples (50 un)",
+        "valor": 2.90,
+        "estoque": 120,
+        "descricao": "Papel absorvente para uso diário em refeições rápidas."
     },
     {
-        "nome": "Ludmilla Oliveira",
-        "cpf": "898.909.010-11",
-        "telefone": "(21) 98877-6655",
-        "endereco": "Rua São Clemente, 100 - Botafogo, Rio de Janeiro"
+        "id": 98,
+        "nome": "Filtro de Papel para Café (30 un)",
+        "valor": 4.50,
+        "estoque": 70,
+        "descricao": "Filtros de papel compatíveis com porta-filtros tamanho 102."
     },
     {
-        "nome": "Luísa Sonza",
-        "cpf": "909.010.121-22",
-        "telefone": "(51) 97766-5544",
-        "endereco": "Rua da República, 10 - Cidade Baixa, Porto Alegre"
+        "id": 99,
+        "nome": "Palito de Dente (100 un)",
+        "valor": 1.50,
+        "estoque": 150,
+        "descricao": "Palitos de madeira de reflorestamento, pontas resistentes."
     },
     {
-        "nome": "Pabllo Vittar",
-        "cpf": "010.121.232-33",
-        "telefone": "(98) 96655-4433",
-        "endereco": "Avenida Litorânea, 5 - Calhau, São Luís"
-    },
-    {
-        "nome": "Glória Groove",
-        "cpf": "121.232.343-44",
-        "telefone": "(11) 95544-3322",
-        "endereco": "Rua da Consolação, 2000 - Consolação, São Paulo"
-    },
-    {
-        "nome": "Liniker Barros",
-        "cpf": "232.343.454-55",
-        "telefone": "(16) 94433-2211",
-        "endereco": "Rua Nove de Julho, 10 - Centro, Araraquara"
-    },
-    {
-        "nome": "Duda Beat",
-        "cpf": "343.454.565-66",
-        "telefone": "(81) 93322-1100",
-        "endereco": "Rua da Aurora, 100 - Santo Amaro, Recife"
-    },
-    {
-        "nome": "Maria Bethânia",
-        "cpf": "454.565.676-77",
-        "telefone": "(71) 92211-0099",
-        "endereco": "Rua da Graça, 5 - Graça, Salvador"
-    },
-    {
-        "nome": "Gal Costa",
-        "cpf": "565.676.787-88",
-        "telefone": "(71) 91100-9988",
-        "endereco": "Avenida Oceânica, 20 - Ondina, Salvador"
-    },
-    {
-        "nome": "Ney Matogrosso",
-        "cpf": "676.787.898-99",
-        "telefone": "(67) 90099-8877",
-        "endereco": "Rua Barão do Rio Branco, 10 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Erasmo Carlos",
-        "cpf": "787.898.909-00",
-        "telefone": "(21) 98877-6655",
-        "endereco": "Rua Conde de Bonfim, 50 - Tijuca, Rio de Janeiro"
-    },
-    {
-        "nome": "Wanderléa Antunes",
-        "cpf": "898.909.010-11",
-        "telefone": "(31) 97766-5544",
-        "endereco": "Rua Curitiba, 10 - Centro, Belo Horizonte"
-    },
-    {
-        "nome": "Fábio Jr.",
-        "cpf": "909.010.121-22",
-        "telefone": "(11) 96655-4433",
-        "endereco": "Rua Estados Unidos, 50 - Jardim América, São Paulo"
-    },
-    {
-        "nome": "Fiuk Kart",
-        "cpf": "010.121.232-33",
-        "telefone": "(11) 95544-3322",
-        "endereco": "Rua Augusta, 100 - Consolação, São Paulo"
-    },
-    {
-        "nome": "Cleo Pires",
-        "cpf": "121.232.343-44",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Rua Visconde de Pirajá, 50 - Ipanema, Rio de Janeiro"
-    },
-    {
-        "nome": "Glória Pires",
-        "cpf": "232.343.454-55",
-        "telefone": "(21) 93322-1100",
-        "endereco": "Rua Pacheco Leão, 100 - Jardim Botânico, Rio de Janeiro"
-    },
-    {
-        "nome": "Antônio Fagundes",
-        "cpf": "343.454.565-66",
-        "telefone": "(11) 92211-0099",
-        "endereco": "Rua Amauri, 5 - Itaim Bibi, São Paulo"
-    },
-    {
-        "nome": "Fernanda Montenegro",
-        "cpf": "454.565.676-77",
-        "telefone": "(21) 91100-9988",
-        "endereco": "Rua Dona Mariana, 10 - Botafogo, Rio de Janeiro"
-    },
-    {
-        "nome": "Paulo Gustavo",
-        "cpf": "565.676.787-88",
-        "telefone": "(21) 90099-8877",
-        "endereco": "Rua Moreira César, 50 - Icaraí, Niterói"
-    },
-    {
-        "nome": "Tatá Werneck",
-        "cpf": "676.787.898-99",
-        "telefone": "(21) 98877-6655",
-        "endereco": "Estrada da Gávea, 10 - São Conrado, Rio de Janeiro"
-    },
-    {
-        "nome": "Fábio Porchat",
-        "cpf": "787.898.909-00",
-        "telefone": "(21) 97766-5544",
-        "endereco": "Rua General Polidoro, 20 - Botafogo, Rio de Janeiro"
-    },
-    {
-        "nome": "Gregório Duvivier",
-        "cpf": "898.909.010-11",
-        "telefone": "(21) 96655-4433",
-        "endereco": "Rua Cosme Velho, 5 - Cosme Velho, Rio de Janeiro"
-    },
-    {
-        "nome": "Marcelo Adnet",
-        "cpf": "909.010.121-22",
-        "telefone": "(21) 95544-3322",
-        "endereco": "Rua Humaitá, 100 - Humaitá, Rio de Janeiro"
-    },
-    {
-        "nome": "Eduardo Sterblitch",
-        "cpf": "010.121.232-33",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Rua Voluntários da Pátria, 10 - Botafogo, Rio de Janeiro"
-    },
-    {
-        "nome": "Tirullipa Junior",
-        "cpf": "121.232.343-44",
-        "telefone": "(85) 93322-1100",
-        "endereco": "Rua Monsenhor Tabosa, 50 - Praia de Iracema, Fortaleza"
-    },
-    {
-        "nome": "Whindersson Nunes",
-        "cpf": "232.343.454-55",
-        "telefone": "(86) 92211-0099",
-        "endereco": "Rua Coelho Rodrigues, 10 - Centro, Teresina"
-    },
-    {
-        "nome": "Carlinhos Maia",
-        "cpf": "343.454.565-66",
-        "telefone": "(82) 91100-9988",
-        "endereco": "Rua da Vila, 1 - Penedo, Alagoas"
-    },
-    {
-        "nome": "Gkay Silva",
-        "cpf": "454.565.676-77",
-        "telefone": "(83) 90099-8877",
-        "endereco": "Rua Solon de Lucena, 5 - João Pessoa, Paraíba"
-    },
-    {
-        "nome": "Felipe Neto",
-        "cpf": "565.676.787-88",
-        "telefone": "(21) 98877-6655",
-        "endereco": "Avenida das Américas, 100 - Barra da Tijuca, Rio de Janeiro"
-    },
-    {
-        "nome": "Luccas Neto",
-        "cpf": "676.787.898-99",
-        "telefone": "(21) 97766-5544",
-        "endereco": "Rua Prudente de Moraes, 50 - Ipanema, Rio de Janeiro"
-    },
-    {
-        "nome": "Casimiro Miguel",
-        "cpf": "787.898.909-00",
-        "telefone": "(21) 96655-4433",
-        "endereco": "Rua Belisário Augusto, 10 - Icaraí, Niterói"
-    },
-    {
-        "nome": "Gaules Borba",
-        "cpf": "898.909.010-11",
-        "telefone": "(11) 95544-3322",
-        "endereco": "Avenida Interlagos, 500 - Interlagos, São Paulo"
-    },
-    {
-        "nome": "Alok Petrillo",
-        "cpf": "909.010.121-22",
-        "telefone": "(61) 94433-2211",
-        "endereco": "Lago Sul, SHIS QL 10 - Brasília"
-    },
-    {
-        "nome": "Vintage Culture",
-        "cpf": "010.121.232-33",
-        "telefone": "(67) 93322-1100",
-        "endereco": "Rua 14 de Julho, 100 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Zinho Oliveira",
-        "cpf": "121.232.343-44",
-        "telefone": "(21) 92211-0099",
-        "endereco": "Rua Eurico Rabelo, 1 - Maracanã, Rio de Janeiro"
-    },
-    {
-        "nome": "Romário Faria",
-        "cpf": "232.343.454-55",
-        "telefone": "(21) 91100-9988",
-        "endereco": "Avenida Lúcio Costa, 50 - Barra da Tijuca, Rio de Janeiro"
-    },
-    {
-        "nome": "Ronaldo Fenômeno",
-        "cpf": "343.454.565-66",
-        "telefone": "(11) 90099-8877",
-        "endereco": "Rua Groenlândia, 10 - Jardim Europa, São Paulo"
-    },
-    {
-        "nome": "Ronaldinho Gaúcho",
-        "cpf": "454.565.676-77",
-        "telefone": "(51) 98877-6655",
-        "endereco": "Rua Padre Cacique, 5 - Praia de Belas, Porto Alegre"
-    },
-    {
-        "nome": "Kaká Leite",
-        "cpf": "565.676.787-88",
-        "telefone": "(11) 97766-5544",
-        "endereco": "Avenida Giovanni Gronchi, 100 - Morumbi, São Paulo"
-    },
-    {
-        "nome": "Adriano Imperador",
-        "cpf": "676.787.898-99",
-        "telefone": "(21) 96655-4433",
-        "endereco": "Vila Cruzeiro, 1 - Penha, Rio de Janeiro"
-    },
-    {
-        "nome": "Gabriel Barbosa",
-        "cpf": "787.898.909-00",
-        "telefone": "(21) 95544-3322",
-        "endereco": "Rua General Severiano, 10 - Botafogo, Rio de Janeiro"
-    },
-    {
-        "nome": "Everton Ribeiro",
-        "cpf": "898.909.010-11",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Avenida Borges de Medeiros, 5 - Lagoa, Rio de Janeiro"
-    },
-    {
-        "nome": "Arrascaeta Giorgian",
-        "cpf": "909.010.121-22",
-        "telefone": "(21) 93322-1100",
-        "endereco": "Rua Jardim Botânico, 10 - Jardim Botânico, Rio de Janeiro"
-    },
-    {
-        "nome": "Bruno Henrique",
-        "cpf": "010.121.232-33",
-        "telefone": "(21) 92211-0099",
-        "endereco": "Rua Cosme Velho, 100 - Cosme Velho, Rio de Janeiro"
-    },
-    {
-        "nome": "Filipe Luís",
-        "cpf": "121.232.343-44",
-        "telefone": "(47) 91100-9988",
-        "endereco": "Rua Jaraguá, 5 - Centro, Jaraguá do Sul"
-    },
-    {
-        "nome": "Diego Ribas",
-        "cpf": "232.343.454-55",
-        "telefone": "(16) 90099-8877",
-        "endereco": "Avenida 9 de Julho, 10 - Ribeirão Preto"
-    },
-    {
-        "nome": "Rogério Ceni",
-        "cpf": "343.454.565-66",
-        "telefone": "(11) 98877-6655",
-        "endereco": "Praça Roberto Gomes Pedrosa, 1 - Morumbi, São Paulo"
-    },
-    {
-        "nome": "Cássio Ramos",
-        "cpf": "454.565.676-77",
-        "telefone": "(11) 97766-5544",
-        "endereco": "Avenida Miguel Estéfano, 10 - Água Funda, São Paulo"
-    },
-    {
-        "nome": "Dudu Rodrigues",
-        "cpf": "565.676.787-88",
-        "telefone": "(11) 96655-4433",
-        "endereco": "Rua Palestra Itália, 1 - Barra Funda, São Paulo"
-    },
-    {
-        "nome": "Hulk Paraíba",
-        "cpf": "676.787.898-99",
-        "telefone": "(31) 95544-3322",
-        "endereco": "Rua dos Guajajaras, 10 - Centro, Belo Horizonte"
-    },
-    {
-        "nome": "Fred Guedes",
-        "cpf": "787.898.909-00",
-        "telefone": "(21) 94433-2211",
-        "endereco": "Rua Álvaro Chaves, 1 - Laranjeiras, Rio de Janeiro"
-    },
-    {
-        "nome": "Germán Cano",
-        "cpf": "898.909.010-11",
-        "telefone": "(21) 93322-1100",
-        "endereco": "Avenida Niemeyer, 10 - São Conrado, Rio de Janeiro"
-    },
-    {
-        "nome": "Enner Valencia",
-        "cpf": "909.010.121-22",
-        "telefone": "(51) 92211-0099",
-        "endereco": "Avenida Beira Rio, 1 - Praia de Belas, Porto Alegre"
-    },
-    {
-        "nome": "Luis Suárez",
-        "cpf": "010.121.232-33",
-        "telefone": "(51) 91100-9988",
-        "endereco": "Arena do Grêmio, 1 - Humaitá, Porto Alegre"
-    },
-    {
-        "nome": "Wesley Souza Fernandes",
-        "cpf": "314.159.265-35",
-        "telefone": "(31) 92233-4455",
-        "endereco": "Rua da Paz, 12 - Savassi, Belo Horizonte"
-    },
-    {
-        "nome": "Ana Beatriz Oliveira",
-        "cpf": "271.828.182-84",
-        "telefone": "(21) 93344-5566",
-        "endereco": "Rua das Laranjeiras, 400 - Laranjeiras, Rio de Janeiro"
-    },
-    {
-        "nome": "Carlos Eduardo Ferreira",
-        "cpf": "161.803.398-87",
-        "telefone": "(11) 94455-6677",
-        "endereco": "Avenida Brigadeiro Faria Lima, 1500 - Pinheiros, São Paulo"
-    },
-    {
-        "nome": "Mariana Oliveira Silva",
-        "cpf": "141.421.356-23",
-        "telefone": "(41) 95566-7788",
-        "endereco": "Rua Sete de Setembro, 200 - Centro, Curitiba"
-    },
-    {
-        "nome": "Ricardo Pereira Santos",
-        "cpf": "173.205.080-75",
-        "telefone": "(51) 96677-8899",
-        "endereco": "Rua dos Andradas, 50 - Centro Histórico, Porto Alegre"
-    },
-    {
-        "nome": "Juliana Martins Alves",
-        "cpf": "223.606.797-74",
-        "telefone": "(61) 97788-9900",
-        "endereco": "SQS 105, Bloco C - Asa Sul, Brasília"
-    },
-    {
-        "nome": "Felipe Augusto Lima",
-        "cpf": "244.948.974-27",
-        "telefone": "(71) 98899-0011",
-        "endereco": "Rua da Paciência, 10 - Rio Vermelho, Salvador"
-    },
-    {
-        "nome": "Fernanda Alcantara Souza",
-        "cpf": "264.575.131-10",
-        "telefone": "(81) 99900-1122",
-        "endereco": "Avenida Boa Viagem, 300 - Boa Viagem, Recife"
-    },
-    {
-        "nome": "Gabriel Barbosa Rodrigues",
-        "cpf": "282.842.712-47",
-        "telefone": "(85) 91122-3344",
-        "endereco": "Rua Dragão do Mar, 50 - Praia de Iracema, Fortaleza"
-    },
-    {
-        "nome": "Amanda Correia Martins",
-        "cpf": "316.227.766-01",
-        "telefone": "(91) 92233-4455",
-        "endereco": "Travessa Dom Romualdo de Seixas, 100 - Umarizal, Belém"
-    },
-    {
-        "nome": "Wesley Lima Santos",
-        "cpf": "331.662.479-03",
-        "telefone": "(62) 93344-5566",
-        "endereco": "Avenida T-63, 50 - Setor Bueno, Goiânia"
-    },
-    {
-        "nome": "Ana Beatriz Souza",
-        "cpf": "346.410.161-51",
-        "telefone": "(27) 94455-6677",
-        "endereco": "Rua João da Cruz, 20 - Praia do Canto, Vitória"
-    },
-    {
-        "nome": "Carlos Eduardo Lima",
-        "cpf": "360.555.127-54",
-        "telefone": "(48) 95566-7788",
-        "endereco": "Avenida Beira Mar Norte, 100 - Centro, Florianópolis"
-    },
-    {
-        "nome": "Mariana Oliveira Rodrigues",
-        "cpf": "374.165.738-67",
-        "telefone": "(34) 96677-8899",
-        "endereco": "Rua Olegário Maciel, 30 - Centro, Uberlândia"
-    },
-    {
-        "nome": "Ricardo Pereira Costa",
-        "cpf": "387.298.334-62",
-        "telefone": "(13) 97788-9900",
-        "endereco": "Avenida Ana Costa, 500 - Gonzaga, Santos"
-    },
-    {
-        "nome": "Juliana Martins Silva",
-        "cpf": "400.000.000-01",
-        "telefone": "(11) 98899-0011",
-        "endereco": "Rua Augusta, 1500 - Consolação, São Paulo"
-    },
-    {
-        "nome": "Wesley Ferreira Lima",
-        "cpf": "412.345.678-01",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua da Abolição, 100 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Carvalho",
-        "cpf": "523.456.789-02",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Rua da Consolação, 500 - Cerqueira César, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Ribeiro",
-        "cpf": "634.567.890-03",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Rio Branco, 10 - Centro, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Gomes",
-        "cpf": "745.678.901-04",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Avenida Afonso Pena, 1000 - Centro, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Almeida",
-        "cpf": "856.789.012-05",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Rua 24 Horas, 5 - Centro, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Costa",
-        "cpf": "967.890.123-06",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Rua Padre Chagas, 50 - Moinhos de Vento, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Ferreira",
-        "cpf": "078.901.234-07",
-        "telefone": "(61) 92222-1111",
-        "endereco": "Setor Comercial Sul, Quadra 1 - Asa Sul, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Lima",
-        "cpf": "189.012.345-08",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Rua da Misericórdia, 1 - Centro, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Silva",
-        "cpf": "290.123.456-09",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Cais do Apolo, 10 - Recife Antigo, Recife"
-    },
-    {
-        "nome": "Amanda Correia Souza",
-        "cpf": "301.234.567-10",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Avenida Santos Dumont, 100 - Aldeota, Fortaleza"
-    },
-    {
-        "nome": "Tiago Mendes Santos",
-        "cpf": "412.345.678-11",
-        "telefone": "(91) 98888-7777",
-        "endereco": "Rua da Paz, 50 - Centro, Belém"
-    },
-    {
-        "nome": "Camila Cavalcanti Lima",
-        "cpf": "523.456.789-12",
-        "telefone": "(62) 97777-6666",
-        "endereco": "Avenida República do Líbano, 10 - Setor Oeste, Goiânia"
-    },
-    {
-        "nome": "Roberto Carlos Ferreira",
-        "cpf": "634.567.890-13",
-        "telefone": "(27) 96666-5555",
-        "endereco": "Avenida Dante Michelini, 100 - Jardim da Penha, Vitória"
-    },
-    {
-        "nome": "Larissa Manoela Souza",
-        "cpf": "745.678.901-14",
-        "telefone": "(48) 95555-4444",
-        "endereco": "Rua Bocaiúva, 10 - Centro, Florianópolis"
-    },
-    {
-        "nome": "Lucas Lucco Silva",
-        "cpf": "856.789.012-15",
-        "telefone": "(34) 94444-3333",
-        "endereco": "Rua Santos Dumont, 50 - Centro, Uberlândia"
-    },
-    {
-        "nome": "Bruna Marquezine Costa",
-        "cpf": "967.890.123-16",
-        "telefone": "(21) 93333-2222",
-        "endereco": "Avenida Ayrton Senna, 1000 - Jacarepaguá, Rio de Janeiro"
-    },
-    {
-        "nome": "Neymar da Silva Lima",
-        "cpf": "078.901.234-17",
-        "telefone": "(13) 92222-1111",
-        "endereco": "Avenida Vicente de Carvalho, 10 - Boqueirão, Santos"
-    },
-    {
-        "nome": "Anitta Machado Silva",
-        "cpf": "189.012.345-18",
-        "telefone": "(21) 91111-0000",
-        "endereco": "Rua das Marrecas, 1 - Lapa, Rio de Janeiro"
-    },
-    {
-        "nome": "Gusttavo Lima Santos",
-        "cpf": "290.123.456-19",
-        "telefone": "(62) 90000-9999",
-        "endereco": "Rodovia GO-040, KM 5 - Goiânia"
-    },
-    {
-        "nome": "Ivete Sangalo Pereira",
-        "cpf": "301.234.567-20",
-        "telefone": "(71) 99999-8888",
-        "endereco": "Avenida Sete de Setembro, 50 - Barra, Salvador"
-    },
-    {
-        "nome": "Wesley Lima Souza",
-        "cpf": "412.345.678-21",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua Bahia, 200 - Jardim dos Estados, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Martins",
-        "cpf": "523.456.789-22",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Rua da Glória, 100 - Liberdade, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Gomes",
-        "cpf": "634.567.890-23",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Atlântica, 500 - Copacabana, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Ribeiro",
-        "cpf": "745.678.901-24",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Rua Fernandes Tourinho, 50 - Savassi, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Santos",
-        "cpf": "856.789.012-25",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Rua Itupava, 1000 - Alto da XV, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Lima",
-        "cpf": "967.890.123-26",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Avenida Goethe, 10 - Rio Branco, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Costa",
-        "cpf": "078.901.234-27",
-        "telefone": "(61) 92222-1111",
-        "endereco": "CLN 202, Bloco B - Asa Norte, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Silva",
-        "cpf": "189.012.345-28",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Largo do Pelourinho, 1 - Centro Histórico, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Santos",
-        "cpf": "290.123.456-29",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua da Moeda, 5 - Bairro Recifense, Recife"
-    },
-    {
-        "nome": "Amanda Correia Lima",
-        "cpf": "301.234.567-30",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Rua Pereira Valente, 10 - Meireles, Fortaleza"
-    },
-    {
-        "nome": "Wesley Souza Lima",
-        "cpf": "412.345.678-31",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Avenida Eduardo Elias Zahran, 10 - TV Morena, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Rodrigues",
-        "cpf": "523.456.789-32",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Rua dos Pinheiros, 100 - Pinheiros, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Souza",
-        "cpf": "634.567.890-33",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Rua Voluntários da Pátria, 500 - Botafogo, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Ferreira",
-        "cpf": "745.678.901-34",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Rua Pium-í, 10 - Cruzeiro, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Silva",
-        "cpf": "856.789.012-35",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Avenida Batel, 100 - Batel, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Santos",
-        "cpf": "967.890.123-36",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Avenida Nilo Peçanha, 1000 - Três Figueiras, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Rodrigues",
-        "cpf": "078.901.234-37",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SHTN Trecho 1 - Vila Planalto, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Gomes",
-        "cpf": "189.012.345-38",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Rua Marquês de Leão, 10 - Barra, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Lima",
-        "cpf": "290.123.456-39",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua do Bom Jesus, 1 - Bairro do Recife, Recife"
-    },
-    {
-        "nome": "Amanda Correia Silva",
-        "cpf": "301.234.567-40",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Avenida Monsenhor Tabosa, 1000 - Meireles, Fortaleza"
-    },
-    {
-        "nome": "Wesley Silva Ferreira",
-        "cpf": "412.345.678-41",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua 25 de Dezembro, 5 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Lima",
-        "cpf": "523.456.789-42",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Alameda Santos, 1000 - Jardim Paulista, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Costa",
-        "cpf": "634.567.890-43",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida das Américas, 1000 - Barra da Tijuca, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Lima",
-        "cpf": "745.678.901-44",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Avenida do Contorno, 5000 - Funcionários, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Gomes",
-        "cpf": "856.789.012-45",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Rua Comendador Araújo, 10 - Centro, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Souza",
-        "cpf": "967.890.123-46",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Avenida Protásio Alves, 100 - Petrópolis, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Martins",
-        "cpf": "078.901.234-47",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SHIS QI 5 - Lago Sul, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Santos",
-        "cpf": "189.012.345-48",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Rua Direita da Piedade, 10 - Centro, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Ferreira",
-        "cpf": "290.123.456-49",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua da Guia, 5 - Bairro do Recife, Recife"
-    },
-    {
-        "nome": "Amanda Correia Costa",
-        "cpf": "301.234.567-50",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Rua Ana Bilhar, 10 - Varjota, Fortaleza"
-    },
-    {
-        "nome": "Wesley Lima Santos",
-        "cpf": "412.345.678-51",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua Marechal Cândido Mariano Rondon, 50 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Ferreira",
-        "cpf": "523.456.789-52",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Rua Haddock Lobo, 10 - Cerqueira César, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Lima",
-        "cpf": "634.567.890-53",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Vieira Souto, 100 - Ipanema, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Santos",
-        "cpf": "745.678.901-54",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Rua da Bahia, 50 - Centro, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Lima",
-        "cpf": "856.789.012-55",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Rua Bispo Dom José, 100 - Batel, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Rodrigues",
-        "cpf": "967.890.123-56",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Avenida Independência, 10 - Centro, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Lima",
-        "cpf": "078.901.234-57",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SCLS 402 - Asa Sul, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Rodrigues",
-        "cpf": "189.012.345-58",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Rua de São Bento, 1 - Centro, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Gomes",
-        "cpf": "290.123.456-59",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua da Alfândega, 10 - Bairro do Recife, Recife"
-    },
-    {
-        "nome": "Amanda Correia Ferreira",
-        "cpf": "301.234.567-60",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Rua Barbosa de Freitas, 10 - Aldeota, Fortaleza"
-    },
-    {
-        "nome": "Wesley Souza Santos",
-        "cpf": "412.345.678-61",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua 13 de Maio, 10 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Gomes",
-        "cpf": "523.456.789-62",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Rua Bento Freitas, 100 - República, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Rodrigues",
-        "cpf": "634.567.890-63",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Delfim Moreira, 50 - Leblon, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Souza",
-        "cpf": "745.678.901-64",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Rua Sergipe, 10 - Funcionários, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Martins",
-        "cpf": "856.789.012-65",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Rua Brigadeiro Franco, 100 - Centro, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Ferreira",
-        "cpf": "967.890.123-66",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Rua Ramiro Barcelos, 50 - Independência, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Santos",
-        "cpf": "078.901.234-67",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SHIN QI 1 - Lago Norte, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Costa",
-        "cpf": "189.012.345-68",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Rua Chile, 5 - Centro, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Costa",
-        "cpf": "290.123.456-69",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua do Observatório, 1 - Bairro do Recife, Recife"
-    },
-    {
-        "nome": "Amanda Correia Rodrigues",
-        "cpf": "301.234.567-70",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Avenida Dom Luís, 500 - Aldeota, Fortaleza"
-    },
-    {
-        "nome": "Wesley Lima Rodrigues",
-        "cpf": "412.345.678-71",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua Dom Aquino, 100 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Lima",
-        "cpf": "523.456.789-72",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Rua da Mooca, 1000 - Mooca, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Ferreira",
-        "cpf": "634.567.890-73",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Infante Dom Henrique, 1 - Flamengo, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Martins",
-        "cpf": "745.678.901-74",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Rua Cláudio Manoel, 50 - Savassi, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Souza",
-        "cpf": "856.789.012-75",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Avenida Marechal Floriano Peixoto, 10 - Centro, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Gomes",
-        "cpf": "967.890.123-76",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Avenida Carlos Gomes, 500 - Auxiliadora, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Silva",
-        "cpf": "078.901.234-77",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SCS Quadra 4 - Asa Sul, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Ferreira",
-        "cpf": "189.012.345-78",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Largo de São Francisco, 1 - Centro, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Martins",
-        "cpf": "290.123.456-79",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua de São Jorge, 10 - Bairro do Recife, Recife"
-    },
-    {
-        "nome": "Amanda Correia Lima",
-        "cpf": "301.234.567-80",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Rua Canuto de Aguiar, 5 - Meireles, Fortaleza"
-    },
-    {
-        "nome": "Wesley Souza Ferreira",
-        "cpf": "412.345.678-81",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua Rui Barbosa, 10 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Costa",
-        "cpf": "523.456.789-82",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Avenida Rangel Pestana, 100 - Brás, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Martins",
-        "cpf": "634.567.890-83",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Epitácio Pessoa, 50 - Lagoa, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Rodrigues",
-        "cpf": "745.678.901-84",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Avenida Cristóvão Colombo, 10 - Savassi, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Costa",
-        "cpf": "856.789.012-85",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Rua General Carneiro, 50 - Centro, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Costa",
-        "cpf": "967.890.123-86",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Rua 24 de Outubro, 10 - Moinhos de Vento, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Gomes",
-        "cpf": "078.901.234-87",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SCN Quadra 2 - Asa Norte, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Lima",
-        "cpf": "189.012.345-88",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Avenida Lafayete Coutinho, 1 - Comércio, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Rodrigues",
-        "cpf": "290.123.456-89",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Rua Marquês de Olinda, 5 - Bairro Recifense, Recife"
-    },
-    {
-        "nome": "Amanda Correia Santos",
-        "cpf": "301.234.567-90",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Rua Silva Jatahy, 10 - Meireles, Fortaleza"
-    },
-    {
-        "nome": "Wesley Lima Costa",
-        "cpf": "412.345.678-91",
-        "telefone": "(67) 98888-7777",
-        "endereco": "Rua Padre João Crippa, 100 - Centro, Campo Grande"
-    },
-    {
-        "nome": "Ana Beatriz Silva",
-        "cpf": "523.456.789-92",
-        "telefone": "(11) 97777-6666",
-        "endereco": "Avenida Brigadeiro Luís Antônio, 500 - Bela Vista, São Paulo"
-    },
-    {
-        "nome": "Carlos Eduardo Lima",
-        "cpf": "634.567.890-93",
-        "telefone": "(21) 96666-5555",
-        "endereco": "Avenida Niemeyer, 100 - São Conrado, Rio de Janeiro"
-    },
-    {
-        "nome": "Mariana Oliveira Costa",
-        "cpf": "745.678.901-94",
-        "telefone": "(31) 95555-4444",
-        "endereco": "Rua Timbiras, 10 - Centro, Belo Horizonte"
-    },
-    {
-        "nome": "Ricardo Pereira Santos",
-        "cpf": "856.789.012-95",
-        "telefone": "(41) 94444-3333",
-        "endereco": "Avenida Visconde de Guarapuava, 1000 - Centro, Curitiba"
-    },
-    {
-        "nome": "Juliana Martins Lima",
-        "cpf": "967.890.123-96",
-        "telefone": "(51) 93333-2222",
-        "endereco": "Avenida Borges de Medeiros, 1 - Centro, Porto Alegre"
-    },
-    {
-        "nome": "Felipe Augusto Costa",
-        "cpf": "078.901.234-97",
-        "telefone": "(61) 92222-1111",
-        "endereco": "SRTVN Quadra 701 - Asa Norte, Brasília"
-    },
-    {
-        "nome": "Fernanda Alcantara Silva",
-        "cpf": "189.012.345-98",
-        "telefone": "(71) 91111-0000",
-        "endereco": "Rua do Passo, 1 - Santo Antônio Além do Carmo, Salvador"
-    },
-    {
-        "nome": "Gabriel Barbosa Santos",
-        "cpf": "290.123.456-99",
-        "telefone": "(81) 90000-9999",
-        "endereco": "Avenida Rio Branco, 5 - Bairro do Recife, Recife"
-    },
-    {
-        "nome": "Amanda Correia Lima",
-        "cpf": "301.234.567-00",
-        "telefone": "(85) 99999-8888",
-        "endereco": "Rua Frei Mansueto, 10 - Meireles, Fortaleza"
-    },
-    {
-        "nome": "João Pedro Santos",
-        "cpf": "412.123.456-11",
-        "telefone": "(11) 91234-5678",
-        "endereco": "Rua Haddock Lobo, 10 - Jardins, São Paulo"
-    },
-    {
-        "nome": "Maria Eduarda Oliveira",
-        "cpf": "523.234.567-22",
-        "telefone": "(21) 92345-6789",
-        "endereco": "Avenida Atlântica, 100 - Copacabana, Rio de Janeiro"
-    },
-    {
-        "nome": "Pedro Henrique Silva",
-        "cpf": "634.345.678-33",
-        "telefone": "(31) 93456-7890",
-        "endereco": "Rua da Bahia, 1500 - Savassi, Belo Horizonte"
-    },
-    {
-        "nome": "Beatriz Martins Ferreira",
-        "cpf": "745.456.789-44",
-        "telefone": "(41) 94567-8901",
-        "endereco": "Rua XV de Novembro, 200 - Centro, Curitiba"
-    },
-    {
-        "nome": "Lucas Gabriel Souza",
-        "cpf": "856.567.890-55",
-        "telefone": "(51) 95678-9012",
-        "endereco": "Rua da República, 10 - Cidade Baixa, Porto Alegre"
-    },
-    {
-        "nome": "Julia Carvalho Lima",
-        "cpf": "967.678.901-66",
-        "telefone": "(61) 96789-0123",
-        "endereco": "Eixão Sul, Quadra 100 - Brasília"
-    },
-    {
-        "nome": "Gabriel Ribeiro Costa",
-        "cpf": "121.789.012-77",
-        "telefone": "(71) 97890-1234",
-        "endereco": "Avenida Oceânica, 50 - Ondina, Salvador"
-    },
-    {
-        "nome": "Larissa Fernandes Alves",
-        "cpf": "232.890.123-88",
-        "telefone": "(81) 98901-2345",
-        "endereco": "Rua da Aurora, 10 - Recife Antigo, Recife"
-    },
-    {
-        "nome": "Rafael Augusto Pereira",
-        "cpf": "343.901.234-99",
-        "telefone": "(85) 99012-3456",
-        "endereco": "Avenida Beira Mar, 10 - Meireles, Fortaleza"
-    },
-    {
-        "nome": "Sofia Mendes Rocha",
-        "cpf": "454.012.345-00",
-        "telefone": "(19) 90123-4567",
-        "endereco": "Rua Barão de Itapura, 100 - Guanabara, Campinas"
-    },
-    {
-        "nome": "Guilherme Santos Lima",
-        "cpf": "565.123.456-12",
-        "telefone": "(62) 91234-5678",
-        "endereco": "Rua 9, 10 - Setor Oeste, Goiânia"
-    },
-    {
-        "nome": "Manuela Oliveira Silva",
-        "cpf": "676.234.567-23",
-        "telefone": "(27) 92345-6789",
-        "endereco": "Rua das Palmeiras, 5 - Vitória"
-    },
-    {
-        "nome": "Enzo Gabriel Ferreira",
-        "cpf": "787.345.678-34",
-        "telefone": "(48) 93456-7890",
-        "endereco": "Rua Felipe Schmidt, 1 - Florianópolis"
-    },
-    {
-        "nome": "Alice Martins Souza",
-        "cpf": "898.456.789-45",
-        "telefone": "(12) 94567-8901",
-        "endereco": "Avenida Nove de Julho, 10 - São José dos Campos"
-    },
-    {
-        "nome": "Matheus Carvalho Lima",
-        "cpf": "909.567.890-56",
-        "telefone": "(34) 95678-9012",
-        "endereco": "Rua Santos Dumont, 1 - Uberlândia"
-    },
-    {
-        "nome": "Laura Ribeiro Costa",
-        "cpf": "010.678.901-67",
-        "telefone": "(16) 96789-0123",
-        "endereco": "Avenida Independência, 10 - Ribeirão Preto"
-    },
-    {
-        "nome": "Nicolas Fernandes Alves",
-        "cpf": "121.789.012-78",
-        "telefone": "(13) 97890-1234",
-        "endereco": "Rua Marechal Deodoro, 1 - Santos"
-    },
-    {
-        "nome": "Heloísa Augusto Pereira",
-        "cpf": "232.890.123-89",
-        "telefone": "(92) 98901-2345",
-        "endereco": "Avenida Djalma Batista, 1 - Manaus"
-    },
-    {
-        "nome": "Arthur Mendes Rocha",
-        "cpf": "343.901.234-90",
-        "telefone": "(98) 99012-3456",
-        "endereco": "Rua Grande, 1 - São Luís"
-    },
-    {
-        "nome": "Isabella Santos Lima",
-        "cpf": "454.012.345-01",
-        "telefone": "(82) 90123-4567",
-        "endereco": "Avenida Fernandes Lima, 1 - Maceió"
+        "id": 100,
+        "nome": "Esponja de Cozinha Multiuso (unidade)",
+        "valor": 1.20,
+        "estoque": 200,
+        "descricao": "Lado verde para limpeza pesada e lado amarelo para superfícies delicadas."
     }
 ]

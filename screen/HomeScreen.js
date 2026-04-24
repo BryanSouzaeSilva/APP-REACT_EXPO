@@ -6,10 +6,10 @@ import { ThemeContext } from '../context/ThemeContext';
 import BotaoPersonalizado from '../components/botaoPersonalizado';
 import BotaoDeAcao from '../components/botaoAcao';
 import { gerarPDF } from '../utils/pdfUtils';
-import mockClientes from './mockClientes.json';
+import mockProdutos from './mockClientes.json';
 
 export default function HomeScreen({ navigation, route }) {
-  const { theme, produtos, clientes, vendas, handleCadastrarCliente } = useContext(ThemeContext);
+  const { theme, produtos, clientes, vendas, handleCadastrarProduto } = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,17 +32,25 @@ export default function HomeScreen({ navigation, route }) {
       <Text>Carregando...</Text>)
   }
 
-  const injetarClientesFalsos = async () => {
-        try {
-            for (const cliente of mockClientes) {
-                await handleCadastrarCliente(cliente); 
-            }
-            Alert.alert("Sucesso!", "100 clientes foram cadastrados no banco de dados.");
-        } catch (e) {
-            console.error("Erro ao injetar clientes:", e);
-            Alert.alert("Erro", "Ocorreu um erro ao cadastrar os clientes.");
+  const injetarProdutosFalsos = async () => {
+    try {
+        // Supondo que você importou o JSON como 'mockProdutos'
+        for (const produto of mockProdutos) {
+            // Ajuste o nome da função de cadastro de acordo com o seu ThemeContext/Service
+            // Passamos os dados: nome, estoque, valor e descrição
+            await handleCadastrarProduto({
+                nome: produto.nome,
+                estoque: produto.estoque,
+                valor: produto.valor,
+                descricao: produto.descricao
+            }); 
         }
-    };
+        Alert.alert("Sucesso!", `${mockProdutos.length} produtos foram cadastrados com sucesso.`);
+    } catch (e) {
+        console.error("Erro ao injetar produtos:", e);
+        Alert.alert("Erro", "Ocorreu um erro ao cadastrar os produtos de teste.");
+    }
+};
 
   const dataDeHoje = new Date().toLocaleDateString('pt-BR',
     { day: '2-digit',
@@ -200,22 +208,33 @@ export default function HomeScreen({ navigation, route }) {
 
                     <View style={styles.buttonsContainer}>
                       <BotaoPersonalizado 
-                        texto="Reimprimir Comprovante"
+                        texto="Reimprimir"
                         onPress={() => gerarPDF(vendaSelecionada)}
-                        style={{marginTop: 15, width: '85%'}}
+                        style={{marginTop: 15, width: '49%'}}
                       />
-                      <BotaoDeAcao
+                      <BotaoPersonalizado 
+                        texto="Editar Venda"
+                        onPress={() => {
+                              setModalVisible(false);
+                              navigation.navigate('GestaoTab', { 
+                                  screen: 'EditSaleScreen',
+                                  params: { venda: vendaSelecionada }
+                              });
+                          }}
+                        style={{marginTop: 15, width: '49%'}}
+                      />
+                      {/* <BotaoDeAcao
                           iconName="pencil"
                           color={theme === 'light' ? '#007AFF' : '#0A84FF'}
                           style={{marginTop: 10}}
                           onPress={() => {
-                              setModalVisible(false); // Fecha a telinha da view
+                              setModalVisible(false);
                               navigation.navigate('GestaoTab', { 
-                                  screen: 'EditSaleScreen', // Nome que você registrar no StackNavigator
-                                  params: { venda: vendaSelecionada } // Enviando o pacote inteiro para a tela de edição
+                                  screen: 'EditSaleScreen',
+                                  params: { venda: vendaSelecionada }
                               });
                           }}
-                        />
+                        /> */}
                     </View>
 
                       <BotaoPersonalizado 
@@ -231,13 +250,13 @@ export default function HomeScreen({ navigation, route }) {
             </View>
           </Modal>
 
-          <View style={{ padding: 20, marginTop: 20 }}>
-                <Button 
-                    title="🤖 Injetar 100 Clientes (Teste)" 
-                    color="#FF3B30"
-                    onPress={injetarClientesFalsos} 
-                />
-            </View>
+          {/* <View style={{ padding: 20, marginTop: 20 }}>
+            <Button 
+                title="🤖 Injetar Produtos" 
+                color="#FF3B30"
+                onPress={injetarProdutosFalsos} 
+            />
+          </View> */}
 
     </SafeAreaView>
   );
